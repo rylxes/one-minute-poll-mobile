@@ -1,0 +1,50 @@
+<app-header></app-header>
+
+<ion-content class="left-sidebar">
+
+
+  <div class="add-new">
+    <a class="btn-new add-new-poll" [routerLink]="['/add-new']">
+      <span class="plus"><i class="las la-plus"></i></span>
+      <span class="high"><i class="las la-poll"></i></span>
+    </a>
+  </div>
+
+  <div class="all-elements">
+    <div class="snap-drawers">
+
+      <!--Search wrap -->
+      <app-search></app-search>
+
+
+
+      <div id="content" class="snap-content">
+
+
+        <div class="content">
+          <div class="header-clear"></div>
+          <!--Page content goes here, fixed elements go above the all elements class-->
+
+          <div class="container">
+            <h2>Help Center</h2>
+          </div>
+
+          <div class="decoration"></div>
+          <div class="container">
+            <p>Help contents coming soon.</p>
+          </div>
+
+          <div class="bottom-fix"></div>
+          <!-- End of entire page content-->
+        </div>
+      </div>
+
+      <app-footer [pageName]=page></app-footer>
+
+
+    </div>
+    <!-- <a href="#" class="back-to-top-badge"><i class="las la-caret-up"></i>Back to top</a> -->
+  </div>
+
+
+</ion-content>

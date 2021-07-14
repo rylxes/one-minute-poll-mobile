@@ -1,0 +1,164 @@
+<app-header></app-header>
+
+<ion-content class="left-sidebar">
+
+
+  <div class="add-new">
+    <a class="btn-new add-new-poll" [routerLink]="['/add-new']">
+      <span class="plus"><i class="las la-plus"></i></span>
+      <span class="high"><i class="las la-poll"></i></span>
+    </a>
+  </div>
+
+  <div class="all-elements">
+    <div class="snap-drawers">
+
+      <!--Search wrap -->
+
+      <app-search></app-search>
+
+
+
+      <div id="content" class="snap-content">
+        <div class="content">
+          <div class="header-clear"></div>
+          <!--Page content goes here, fixed elements go above the all elements class-->
+
+
+          <div class="container">
+            <h4>My Polls</h4>
+            <div class="decoration"></div>
+            <div class="recent-poll-wrap">
+
+              <div class="recent-polls">
+                <div class="item grid">
+                  <div class="grid-top">
+                    <div class="image-holder">
+                      <img src="assets/uploads/test/nigeria-rename.jpg" />
+                    </div>
+                    <div class="contents">
+                      <h4><a  [routerLink]="['/view-poll']" title="View Poll">Which state is richer?
+                        <span>There are 36 States in Nigeria, which do you think is richer?</span></a>
+                      </h4>
+
+                    </div>
+                  </div>
+                  <div class="summary">
+                    <div class="votes"><i class="las la-poll"></i> <span>577</span></div>
+                    <div class="results">
+                      <span title="Lagos" class="options"><em>A</em> 75%</span>
+                      <span title="Edo" class="options"><em>B</em> 3%</span>
+                      <span title="Ogun" class="options"><em>C</em> 14%</span>
+                      <span title="Oyo" class="options"><em>D</em> 8%</span>
+                    </div>
+                  </div>
+                  <div class="grid-bottom">
+                    <div class="user-wrap">
+                      <i class="las la-user"></i> Audrey
+                    </div>
+                    <div class="share-wrap" title="Share">
+                      <em class="share show-submenu"></em>
+                      <ul class="submenu share-routes">
+                        <li><a href="https://facebook.com/#"><i class="lab la-facebook"></i><span>Facebook</span></a></li>
+                        <li><a href="https://instagram.com/#"><i class="lab la-instagram"></i><span>Instagram</span></a></li>
+                        <li><a href="https://twitter.com/#"><i class="lab la-twitter"></i><span>Twitter</span></a></li>
+                        <li><a href="https://whatsapp.com/#"><i class="lab la-whatsapp"></i><span>WhatsAspp</span></a></li>
+                        <li><a href="mailto:myemail@myemail.com"><i class="las la-envelope"></i><span>Email</span></a></li>
+                        <li><a href="#"><i class="las la-copy"></i><span>Copy poll link</span></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="item grid">
+                  <div class="grid-top">
+                    <div class="image-holder">
+                      <img src="assets/images/bola_ahmed_tinubu_2023.jpg" />
+                    </div>
+                    <div class="contents">
+                      <h4><a [routerLink]="['/view-poll']" title="View Poll">Will Tinubu run in 2023?
+                        <span>Senator Bola Ahmed Tinubu is considered to be interested in 2023 Presidential Elections, do yo think he'll contest?</span></a>
+                      </h4>
+                    </div>
+                  </div>
+                  <div class="summary">
+                    <div class="votes"><i class="las la-poll"></i> <span>22,576</span></div>
+                    <div class="results">
+                      <span class="options agree"><i class="report yes"> Yes </i> 81%</span>
+                      <span class="options disagree"><i class="report no"> No </i> 19%</span>
+                    </div>
+                  </div>
+                  <div class="grid-bottom">
+                    <div class="user-wrap">
+                      <i class="las la-user"></i> Audrey
+                    </div>
+                    <div class="share-wrap" title="Share">
+                      <em class="share show-submenu"></em>
+                      <ul class="submenu share-routes">
+                        <li><a href="https://facebook.com/#"><i class="lab la-facebook"></i><span>Facebook</span></a></li>
+                        <li><a href="https://instagram.com/#"><i class="lab la-instagram"></i><span>Instagram</span></a></li>
+                        <li><a href="https://twitter.com/#"><i class="lab la-twitter"></i><span>Twitter</span></a></li>
+                        <li><a href="https://whatsapp.com/#"><i class="lab la-whatsapp"></i><span>WhatsAspp</span></a></li>
+                        <li><a href="mailto:myemail@myemail.com"><i class="las la-envelope"></i><span>Email</span></a></li>
+                        <li><a href="#"><i class="las la-copy"></i><span>Copy poll link</span></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="item grid">
+                  <div class="grid-top">
+                    <div class="image-holder">
+                      <img src="assets/images/cameroon-vs-nigeria.jpg" />
+                    </div>
+                    <div class="contents">
+                      <h4><a [routerLink]="['/view-poll']" title="View Poll">Super Eagles vs Cameroun?
+                        <span>Super Eagles of Nigeria played a two-legged friendly against Cameroun, what do you make of their performance? </span></a>
+                      </h4>
+                    </div>
+                  </div>
+                  <div class="summary">
+                    <div class="votes"><i class="las la-poll"></i> <span>1,281</span></div>
+                    <div class="results">
+                      <span title="Below Average" class="options"><em>A</em> 15%</span>
+                      <span title="Average" class="options"><em>B</em> 33%</span>
+                      <span title="Good" class="options"><em>C</em> 45%</span>
+                      <span title="Excellent" class="options"><em>D</em> 7%</span>
+                    </div>
+                  </div>
+                  <div class="grid-bottom">
+                    <div class="user-wrap">
+                      <i class="las la-user"></i> Audrey
+                    </div>
+                    <div class="share-wrap" title="Share">
+                      <em class="share show-submenu"></em>
+                      <ul class="submenu share-routes">
+                        <li><a href="https://facebook.com/#"><i class="lab la-facebook"></i><span>Facebook</span></a></li>
+                        <li><a href="https://instagram.com/#"><i class="lab la-instagram"></i><span>Instagram</span></a></li>
+                        <li><a href="https://twitter.com/#"><i class="lab la-twitter"></i><span>Twitter</span></a></li>
+                        <li><a href="https://whatsapp.com/#"><i class="lab la-whatsapp"></i><span>WhatsAspp</span></a></li>
+                        <li><a href="mailto:myemail@myemail.com"><i class="las la-envelope"></i><span>Email</span></a></li>
+                        <li><a href="#"><i class="las la-copy"></i><span>Copy poll link</span></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="bottom-fix"></div>
+          <!-- End of entire page content-->
+        </div>
+      </div>
+
+
+      <app-footer [pageName]=page></app-footer>
+    </div>
+    <!-- <a href="#" class="back-to-top-badge"><i class="las la-caret-up"></i>Back to top</a> -->
+  </div>
+
+
+
+</ion-content>

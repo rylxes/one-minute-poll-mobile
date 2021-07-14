@@ -1,0 +1,48 @@
+
+<app-header></app-header>
+<ion-content class="left-sidebar">
+
+
+
+  <div class="add-new">
+    <a class="btn-new add-new-poll" [routerLink]="['/add-new']">
+      <span class="plus"><i class="las la-plus"></i></span>
+      <span class="high"><i class="las la-poll"></i></span>
+    </a>
+  </div>
+
+  <div class="all-elements">
+    <div class="snap-drawers">
+
+      <!--Search wrap -->
+      <app-search></app-search>
+
+
+
+      <div id="content" class="snap-content">
+        <div class="content">
+          <div class="header-clear"></div>
+          <!--Page content goes here, fixed elements go above the all elements class-->
+
+          <div class="notice notice-approve text-center">
+            <h4>Thank you for voting, your vote was submitted successfully.</h4>
+          </div>
+          <div class="check-mark check-mark">
+            <div class="icon animate__animated animate__pulse">
+              <i class="las la-check"></i>
+            </div>
+          </div>
+          <div class="button-wrap">
+            <a [routerLink]="['/view-poll']" class="buttonWrap button button-blue">Poll Result</a>
+          </div>
+          <div class="bottom-fix"></div>
+          <!-- End of entire page content-->
+        </div>
+      </div>
+      <app-footer [pageName]=page></app-footer>
+    </div>
+    <!-- <a href="#" class="back-to-top-badge"><i class="las la-caret-up"></i>Back to top</a> -->
+  </div>
+
+
+</ion-content>

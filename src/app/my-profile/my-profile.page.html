@@ -1,0 +1,108 @@
+<app-header></app-header>
+
+<ion-content class="left-sidebar">
+
+
+
+  <div class="add-new">
+    <a class="btn-new add-new-poll" [routerLink]="['/add-new']">
+      <span class="plus"><i class="las la-plus"></i></span>
+      <span class="high"><i class="las la-poll"></i></span>
+    </a>
+  </div>
+
+  <div class="all-elements">
+    <div class="snap-drawers">
+
+      <!--Search wrap -->
+      <app-search></app-search>
+
+
+
+      <div id="content" class="snap-content">
+        <div class="content">
+          <div class="header-clear"></div>
+          <!--Page content goes here, fixed elements go above the all elements class-->
+
+          <div class="container">
+            <div class="profile-title">
+              <h4>Hi Audrey,</h4>
+              <p>Update your profile</p>
+            </div>
+            <div class="profile-image">
+              <div class="profile-image-wrap">
+                <img src="assets/images/user_d.png" alt="Profile Image" />
+                <div class="edit-profile-image">
+                  <span onclick="editProfileImage()">Edit <i class="las la-edit"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="decoration"></div>
+          <div class="container">
+            <div class="container no-bottom">
+              <div class="profile-form poll-form no-bottom">
+                <form action="#" method="post" class="updateProfile" id="updateProfile">
+                  <fieldset>
+                    <div class="formFieldWrap">
+                      <label for="userName">Username</label>
+                      <input type="text" name="userName" value="Audery" class="textField bg"id="userName"/>
+                    </div>
+                    <div class="formFieldWrap">
+                      <label for="firstName">First Name</label>
+                      <input type="text" name="firstName" value="Audery" class="textField bg"id="firstName"/>
+                    </div>
+                    <div class="formFieldWrap">
+                      <label for="lastName">Surname</label>
+                      <input type="text" name="lastName" value="Njemena" class="textField bg"id="lastName"/>
+                    </div>
+                    <div class="formFieldWrap">
+                      <label for="userEmail">Email Address</label>
+                      <input type="email" name="userEmail" value="auderyn@gmail.com" class="textField bg" id="userEmail" readonly />
+                    </div>
+
+                    <div class="formFieldWrap">
+                      <label for="userGender">Gender</label>
+                      <select name="category" class="contactField selectField" id="userGender">
+                        <option value="Male" title="Male">Male</option>
+                        <option value="Female" title="Female" selected>Female</option>
+                      </select>
+                      <script>
+                        $(document).ready(function() {
+                          $('.selectField').select2();
+                        });
+                      </script>
+                    </div>
+
+                    <div class="formFieldWrap">
+                      <label for="userPass">Password</label>
+                      <input type="password" name="userPass" value="1234567890" class="textField bg"id="userPass"/>
+                    </div>
+                    <div class="formFieldWrap">
+                      <label for="userPassC">Password</label>
+                      <input type="password" name="userPassC" value="" class="textField bg"id="userPassC"/>
+                    </div>
+
+                    <div class="formSubmitButtonErrorsWrap">
+                      <input type="submit" class="buttonWrap button button-blue searchSubmitButton" id="searchSubmitButton" value="Save" data-formId="contactForm"/>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="bottom-fix"></div>
+          <!-- End of entire page content-->
+        </div>
+      </div>
+      <app-footer [pageName]=page></app-footer>
+    </div>
+    <!-- <a href="#" class="back-to-top-badge"><i class="las la-caret-up"></i>Back to top</a> -->
+  </div>
+
+
+
+</ion-content>

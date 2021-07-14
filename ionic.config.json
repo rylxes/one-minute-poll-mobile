@@ -1,0 +1,8 @@
+{
+  "name": "oneMinutePoll",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "c396be8b"
+}
