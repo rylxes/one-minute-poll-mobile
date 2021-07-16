@@ -17,12 +17,14 @@
             <h2>Add New Poll</h2>
             <div class="container no-bottom">
               <div class="add-new-form poll-form no-bottom">
-                <form action="post-preview.html" method="post" class="newPoll" id="newPoll">
+                <form [formGroup]="data" (ngSubmit)="onSubmit(pageForm)" #pageForm="ngForm" class="newPoll">
                   <fieldset>
-                    <div class="formFieldWrap">
-                      <input type="text" name="titleField" placeholder="Title" class="contactField textField titleField"
-                             id="titleField"/>
-                    </div>
+                    <ion-item class="formFieldWrap" lines="full">
+                      <ion-label position="floating">Title</ion-label>
+                      <ion-input class="textField" autocapitalize="words" type="text" required
+                                 formControlName="titleField"></ion-input>
+                    </ion-item>
+
                     <div class="formFieldWrap">
                       <select name="category" class="contactField selectField" id="selectField">
                         <option value="" title="Select Category">Select Category (Optional)</option>
