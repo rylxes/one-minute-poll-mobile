@@ -1,22 +1,16 @@
-<app-header></app-header>
+<app-header name="Preview Your Poll"></app-header>
 
 <ion-content class="left-sidebar">
 
 
-
   <div class="all-elements">
     <div class="snap-drawers">
-
-      <!--Search wrap -->
-      <app-search></app-search>
-
       <div id="content" class="snap-content">
         <div class="content">
           <div class="header-clear"></div>
           <!--Page content goes here, fixed elements go above the all elements class-->
 
           <div class="container">
-            <h2>Preview Your Poll</h2>
             <p>Preview your poll before it is posted, you can go back and make adjustments.</p>
             <div class="container no-bottom">
               <div class="add-new-form poll-form no-bottom">
@@ -24,17 +18,17 @@
                   <fieldset>
                     <div class="formFieldWrap">
                       <p>Title</p>
-                      <input type="text" name="titleField" value="Opinion about renaming Nigeria" readonly
+                      <input type="text" name="titleField" value="{{pollList.title}}" readonly
                              class="contactField textField" id="titleField"/>
                     </div>
                     <div class="formFieldWrap">
                       <p>Category</p>
-                      <input type="email" name="category" value="General Opinion" readonly
+                      <input type="email" name="category" value="{{category.name}}" readonly
                              class="contactField textField" id="category"/>
                     </div>
                     <div class="formFieldWrap">
                       <p>Question</p>
-                      <input type="text" name="question" value="What do you think about renaming Nigeria?" readonly
+                      <input type="text" name="question" value="{{pollList.question}}" readonly
                              class="contactField textField" id="question"/>
                     </div>
                     <div class="formFieldWrap form-group radio-wrap border-bottom">
@@ -42,14 +36,45 @@
                       <div class="form-radio">
                         <input class="radio" id="customRadioInline2" type="radio" checked name="customRadioInline">
                         <span class="radiomark"></span>
-                        <label class="c-label" for="customRadioInline2">A - E Options</label>
+                        <label class="c-label" for="customRadioInline2">{{pollType.name}}</label>
                       </div>
+                    </div>
+
+                    <div class="radio-wrap border-bottom" *ngIf="showA2E">
+
+                      <ion-item>
+                        <ion-label position="floating">A</ion-label>
+                        <ion-input readonly value="{{pollList.A}}" type="text"></ion-input>
+                      </ion-item>
+
+                      <ion-item>
+                        <ion-label position="floating">B</ion-label>
+                        <ion-input readonly value="{{pollList.B}}" type="text"></ion-input>
+                      </ion-item>
+
+                      <ion-item>
+                        <ion-label position="floating">C</ion-label>
+                        <ion-input readonly value="{{pollList.C}}" type="text"></ion-input>
+                      </ion-item>
+
+
+                      <ion-item>
+                        <ion-label position="floating">D</ion-label>
+                        <ion-input readonly value="{{pollList.D}}" type="text"></ion-input>
+                      </ion-item>
+
+
+                      <ion-item>
+                        <ion-label position="floating">E</ion-label>
+                        <ion-input readonly value="{{pollList.E}}" type="text"></ion-input>
+                      </ion-item>
+
                     </div>
 
                     <div class="formFieldWrap border-bottom">
                       <p>Uploaded Image</p>
                       <div class="upload-wrap preview-image">
-                        <img src="assets/uploads/test/nigeria-rename.jpg"/>
+                        <img *ngIf="photo" [src]="photo"/>
                       </div>
                     </div>
                     <div class="formFieldWrap border-bottom">
@@ -62,7 +87,7 @@
                     </div>
                     <div class="formFieldWrap">
                       <p>Close Date</p>
-                      <input type="text" name="close-date" value="2021-06-15" readonly class="contactField textField"
+                      <input type="text" name="close-date" value="{{pollList.closeDate}}" readonly class="contactField textField"
                              id="close-date"/>
                     </div>
 
@@ -75,18 +100,23 @@
                         <p class="triggerRegister anchor">Register to save the results permanently and access other
                           features.</p>
                       </div>
-                      <div id="registerWrap" class="formFieldWrap">
+                      <div class="formFieldWrap">
                         <p>Your Email Address</p>
-                        <input type="email" name="emailField" placeholder="you@yourdomain.com"
+                        <input type="email" name="emailField" readonly value="{{pollList.emailField}}"
                                class="contactField textField" id="emailField"/>
                       </div>
                     </div>
                     <!-- end - trigger this block for non-registered users -->
 
                     <div class="formSubmitButtonErrorsWrap">
-                      <input type="submit" class="buttonWrap button button-blue searchSubmitButton"
-                             id="searchSubmitButton" value="Post"/>
-                      <a href="javascript:history.back()" class="buttonWrap button button-red searchSubmitButton">Edit
+<!--                      <input type="submit" class="buttonWrap button button-blue searchSubmitButton"-->
+<!--                             id="searchSubmitButton" value="Post"/>-->
+
+                      <ion-button (click)="submit()" class="buttonWrap button button-blue searchSubmitButton"
+                                  color="primary" expand="block">Post
+                      </ion-button>
+
+                      <a [routerLink]="['/add-new']" class="buttonWrap button button-red searchSubmitButton">Edit
                         Poll</a>
                     </div>
                   </fieldset>
@@ -98,12 +128,11 @@
           <!-- End of entire page content-->
         </div>
       </div>
-      <app-footer [pageName]=page></app-footer>
 
 
     </div>
-    <a href="#" class="back-to-top-badge"><i class="las la-caret-up"></i>Back to top</a>
   </div>
 
 
 </ion-content>
+<app-footer [pageName]=page></app-footer>

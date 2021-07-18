@@ -1,32 +1,37 @@
-<div class="static-footer">
-  <div class="footer-wrap">
-    <div class="footer-menu">
-      <ul class="h-menu">
-        <li class="menu-item {{pageName == 'Home' ? 'current-item' : ''}}">
-          <a [routerLink]="['/home']">
-            <i class="las la-home"></i>
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="menu-item {{pageName == 'Polls' ? 'current-item' : ''}} ">
-          <a [routerLink]="['/my-polls']">
-            <i class="las la-poll"></i>
-            <span>Polls</span>
-          </a>
-        </li>
-        <li class="menu-item {{pageName == 'Profile' ? 'current-item' : ''}}">
-          <a [routerLink]="['/my-profile']">
-            <i class="las la-user"></i>
-            <span>Profile</span>
-          </a>
-        </li>
-        <li class="menu-item {{pageName == 'Help' ? 'current-item' : ''}}">
-          <a [routerLink]="['/help']">
-            <i class="las la-cog"></i>
-            <span>Help</span>
-          </a>
-        </li>
-      </ul>
+
+<ion-footer>
+  <div class="static-footer">
+    <div class="footer-wrap">
+      <div class="footer-menu">
+        <ul class="h-menu">
+          <li class="menu-item {{pageName == 'Home' ? 'current-item' : ''}}">
+            <a [routerLink]="['/home']">
+              <i class="las la-home"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="menu-item {{pageName == 'Polls' ? 'current-item' : ''}} ">
+            <a [routerLink]="['/my-polls']">
+              <i class="las la-poll"></i>
+              <span>Polls</span>
+            </a>
+          </li>
+          <li class="menu-item {{pageName == 'Profile' ? 'current-item' : ''}}">
+            <a [routerLink]="['/my-profile']">
+              <i class="las la-user"></i>
+              <span>Profile</span>
+            </a>
+          </li>
+          <li class="menu-item {{pageName == 'Help' ? 'current-item' : ''}}">
+            <a [routerLink]="['/help']">
+              <i class="las la-cog"></i>
+              <span>Help</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
+</ion-footer>
+
+

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {filter, pairwise} from "rxjs/operators";
+import {NavigationEnd, NavigationStart, Router, RoutesRecognized} from "@angular/router";
 
 @Component({
   selector: 'app-my-profile',
@@ -8,7 +10,14 @@ import { Component, OnInit } from '@angular/core';
 export class MyProfilePage implements OnInit {
 
   page = 'Profile';
-  constructor() { }
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter((event: any) => event instanceof RoutesRecognized), pairwise())
+      .subscribe((events: RoutesRecognized[]) => {
+        console.log('previous url', events[0].urlAfterRedirects);
+        console.log('current url', events[1].urlAfterRedirects);
+      });
+  }
 
   ngOnInit() {
   }

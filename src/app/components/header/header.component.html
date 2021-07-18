@@ -8,7 +8,9 @@
   <div class="gallery-fix"></div> <!-- Important for all pages that have galleries or portfolios -->
 
   <div id="header-fixed" class="header-style-1">
-    <h2 class="logo"><a [routerLink]="['/']">OnePoll</a></h2>
+    <h2 class="logo"><a [routerLink]="['/']">{{getName()}}</a></h2>
     <a id="open-search" class="header-2" href="#"><span><i class="las la-search flip"></i></span></a>
   </div>
+
+  <app-search></app-search>
 </ion-header>

@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {PreviousURLService} from "../services/previous-url.service";
+import {filter, pairwise} from "rxjs/operators";
+import {NavigationEnd, Router, RoutesRecognized} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -8,8 +11,24 @@ import {Component, OnInit} from '@angular/core';
 export class HomePage implements OnInit {
 
   page = 'Home';
+  currentUrl;
+  previousUrl;
 
-  constructor() {
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        console.log(event)
+      });
+    this.router.events
+      .pipe(filter((event: any) => event instanceof RoutesRecognized), pairwise())
+      .subscribe((events: RoutesRecognized[]) => {
+        // this.previousUrl = events[0].urlAfterRedirects;
+        // this.currentUrl = events[1].urlAfterRedirects;
+
+        console.log('previous url', events[0].urlAfterRedirects);
+        console.log('current url', events[1].urlAfterRedirects);
+      });
   }
 
   ngOnInit() {

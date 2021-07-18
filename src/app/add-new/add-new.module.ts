@@ -8,6 +8,7 @@ import {AddNewPageRoutingModule} from './add-new-routing.module';
 
 import {AddNewPage} from './add-new.page';
 import {HomePageModule} from "../home/home.module";
+import {FormatFileSizePipe} from "../pipe/format-file-size.pipe";
 
 @NgModule({
   imports: [
@@ -18,9 +19,8 @@ import {HomePageModule} from "../home/home.module";
     AddNewPageRoutingModule,
     HomePageModule,
   ],
-  exports: [
-  ],
-  declarations: [AddNewPage]
+  exports: [],
+  declarations: [AddNewPage, FormatFileSizePipe]
 })
 export class AddNewPageModule {
 }
