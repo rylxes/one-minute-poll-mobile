@@ -1,0 +1,35 @@
+<!--                *ngFor="let eachCategory of categoriesList"-->
+<ion-card class="item grid" *ngFor="let eachPoll of pollList">
+  <ion-card-header class="grid-top">
+    <div class="image-holder">
+      <img *ngIf="eachPoll.url" [src]="eachPoll.url"/>
+    </div>
+    <div class="contents">
+      <h4><a [routerLink]="['/view-poll']" title="View Poll">{{eachPoll.title}}
+        <span>{{eachPoll.question}}</span></a>
+      </h4>
+
+    </div>
+  </ion-card-header>
+  <app-vote-result-template [poll]="eachPoll"></app-vote-result-template>
+  <ion-card-content class="grid-bottom">
+    <div class="user-wrap">
+      <i class="las la-user"></i> {{eachPoll?.user?.name || 'Guest'}}
+    </div>
+    <div class="share-wrap" title="Share">
+      <em class="share show-submenu"></em>
+      <ul class="submenu share-routes">
+        <li><a href="https://facebook.com/#"><i class="lab la-facebook"></i><span>Facebook</span></a>
+        </li>
+        <li><a href="https://instagram.com/#"><i class="lab la-instagram"></i><span>Instagram</span></a>
+        </li>
+        <li><a href="https://twitter.com/#"><i class="lab la-twitter"></i><span>Twitter</span></a></li>
+        <li><a href="https://whatsapp.com/#"><i class="lab la-whatsapp"></i><span>WhatsAspp</span></a>
+        </li>
+        <li><a href="mailto:myemail@myemail.com"><i class="las la-envelope"></i><span>Email</span></a>
+        </li>
+        <li><a href="#"><i class="las la-copy"></i><span>Copy poll link</span></a></li>
+      </ul>
+    </div>
+  </ion-card-content>
+</ion-card>

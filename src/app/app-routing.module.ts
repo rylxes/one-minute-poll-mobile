@@ -49,6 +49,10 @@ const routes: Routes = [
   {
     path: 'vote-now',
     loadChildren: () => import('./vote-now/vote-now.module').then( m => m.VoteNowPageModule)
+  },
+  {
+    path: 'user-polls',
+    loadChildren: () => import('./components/user-polls/user-polls.module').then( m => m.UserPollsPageModule)
   }
 ];
 @NgModule({

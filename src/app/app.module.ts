@@ -9,11 +9,12 @@ import {AppComponent} from './app.component';
 import {Globals} from "../config/globals";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {TokenInterceptor} from "../interceptors/token.interceptor";
+import {UserPollsPageModule} from "./components/user-polls/user-polls.module";
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, UserPollsPageModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

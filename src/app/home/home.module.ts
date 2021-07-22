@@ -10,6 +10,9 @@ import {HomePage} from './home.page';
 import {FooterComponent} from "../components/footer/footer.component";
 import {HeaderComponent} from "../components/header/header.component";
 import {SearchComponent} from "../components/search/search.component";
+import {UserPollsPage} from "../components/user-polls/user-polls.page";
+import {MyPollsPageModule} from "../my-polls/my-polls.module";
+import {UserPollsPageModule} from "../components/user-polls/user-polls.module";
 
 @NgModule({
   imports: [
@@ -17,11 +20,12 @@ import {SearchComponent} from "../components/search/search.component";
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
+    UserPollsPageModule
   ],
   exports: [
     FooterComponent,
     HeaderComponent,
-    SearchComponent
+    SearchComponent,
   ],
   declarations: [HomePage, FooterComponent, HeaderComponent, SearchComponent]
 })
