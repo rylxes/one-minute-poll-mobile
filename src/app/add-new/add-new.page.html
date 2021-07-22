@@ -145,7 +145,7 @@
                       <p class="triggerRegister anchor">Register to save the results permanently and access other
                         features.</p>
                     </div>
-                    <div class="formFieldWrap">
+                    <div class="formFieldWrap" *ngIf="!isAuth">
                       <ion-label position="floating"><p>Your Email Address</p></ion-label>
                       <span class="tooltip show-submenu"><i class="las la-question-circle"></i></span>
                       <div class="submenu tooltip-info">
@@ -195,4 +195,4 @@
 
 </ion-content>
 
-<app-footer [pageName]="page"></app-footer>
+<app-footer [showAdd]="false" [pageName]="page"></app-footer>

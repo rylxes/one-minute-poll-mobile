@@ -1,22 +1,12 @@
-<app-header></app-header>
-
+<app-header name="My Polls"></app-header>
 <ion-content class="left-sidebar">
-
-
-  <div class="add-new">
-    <a class="btn-new add-new-poll" [routerLink]="['/add-new']">
-      <span class="plus"><i class="las la-plus"></i></span>
-      <span class="high"><i class="las la-poll"></i></span>
-    </a>
-  </div>
 
   <div class="all-elements">
     <div class="snap-drawers">
 
       <!--Search wrap -->
 
-      <app-search></app-search>
-
+      <!--      <app-search></app-search>-->
 
 
       <div id="content" class="snap-content">
@@ -26,18 +16,65 @@
 
 
           <div class="container">
-            <h4>My Polls</h4>
+            <!--            <h4>My Polls</h4>-->
             <div class="decoration"></div>
             <div class="recent-poll-wrap">
 
               <div class="recent-polls">
+
+                <!--                *ngFor="let eachCategory of categoriesList"-->
+                <ion-card class="item grid" *ngFor="let eachPoll of pollList">
+                  <ion-card-header class="grid-top">
+                    <div class="image-holder">
+                      <img *ngIf="eachPoll.url" [src]="eachPoll.url"/>
+                    </div>
+                    <div class="contents">
+                      <h4><a [routerLink]="['/view-poll']" title="View Poll">{{eachPoll.title}}
+                        <span>{{eachPoll.question}}</span></a>
+                      </h4>
+
+                    </div>
+
+                  </ion-card-header>
+                  <div class="summary">
+                    <div class="votes"><i class="las la-poll"></i> <span>577</span></div>
+                    <div class="results">
+                      <span title="Lagos" class="options"><em>A</em> 75%</span>
+                      <span title="Edo" class="options"><em>B</em> 3%</span>
+                      <span title="Ogun" class="options"><em>C</em> 14%</span>
+                      <span title="Oyo" class="options"><em>D</em> 8%</span>
+                    </div>
+                  </div>
+                  <ion-card-content class="grid-bottom">
+                    <div class="user-wrap">
+                      <i class="las la-user"></i> {{eachPoll?.user?.name || 'Guest'}}
+                    </div>
+                    <div class="share-wrap" title="Share">
+                      <em class="share show-submenu"></em>
+                      <ul class="submenu share-routes">
+                        <li><a href="https://facebook.com/#"><i class="lab la-facebook"></i><span>Facebook</span></a>
+                        </li>
+                        <li><a href="https://instagram.com/#"><i class="lab la-instagram"></i><span>Instagram</span></a>
+                        </li>
+                        <li><a href="https://twitter.com/#"><i class="lab la-twitter"></i><span>Twitter</span></a></li>
+                        <li><a href="https://whatsapp.com/#"><i class="lab la-whatsapp"></i><span>WhatsAspp</span></a>
+                        </li>
+                        <li><a href="mailto:myemail@myemail.com"><i class="las la-envelope"></i><span>Email</span></a>
+                        </li>
+                        <li><a href="#"><i class="las la-copy"></i><span>Copy poll link</span></a></li>
+                      </ul>
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+
+
                 <div class="item grid">
                   <div class="grid-top">
                     <div class="image-holder">
-                      <img src="assets/uploads/test/nigeria-rename.jpg" />
+                      <img src="assets/uploads/test/nigeria-rename.jpg"/>
                     </div>
                     <div class="contents">
-                      <h4><a  [routerLink]="['/view-poll']" title="View Poll">Which state is richer?
+                      <h4><a [routerLink]="['/view-poll']" title="View Poll">Which state is richer?
                         <span>There are 36 States in Nigeria, which do you think is richer?</span></a>
                       </h4>
 
@@ -53,27 +90,15 @@
                     </div>
                   </div>
                   <div class="grid-bottom">
-                    <div class="user-wrap">
-                      <i class="las la-user"></i> Audrey
-                    </div>
-                    <div class="share-wrap" title="Share">
-                      <em class="share show-submenu"></em>
-                      <ul class="submenu share-routes">
-                        <li><a href="https://facebook.com/#"><i class="lab la-facebook"></i><span>Facebook</span></a></li>
-                        <li><a href="https://instagram.com/#"><i class="lab la-instagram"></i><span>Instagram</span></a></li>
-                        <li><a href="https://twitter.com/#"><i class="lab la-twitter"></i><span>Twitter</span></a></li>
-                        <li><a href="https://whatsapp.com/#"><i class="lab la-whatsapp"></i><span>WhatsAspp</span></a></li>
-                        <li><a href="mailto:myemail@myemail.com"><i class="las la-envelope"></i><span>Email</span></a></li>
-                        <li><a href="#"><i class="las la-copy"></i><span>Copy poll link</span></a></li>
-                      </ul>
-                    </div>
+
                   </div>
                 </div>
+
 
                 <div class="item grid">
                   <div class="grid-top">
                     <div class="image-holder">
-                      <img src="assets/images/bola_ahmed_tinubu_2023.jpg" />
+                      <img src="assets/images/bola_ahmed_tinubu_2023.jpg"/>
                     </div>
                     <div class="contents">
                       <h4><a [routerLink]="['/view-poll']" title="View Poll">Will Tinubu run in 2023?
@@ -95,11 +120,15 @@
                     <div class="share-wrap" title="Share">
                       <em class="share show-submenu"></em>
                       <ul class="submenu share-routes">
-                        <li><a href="https://facebook.com/#"><i class="lab la-facebook"></i><span>Facebook</span></a></li>
-                        <li><a href="https://instagram.com/#"><i class="lab la-instagram"></i><span>Instagram</span></a></li>
+                        <li><a href="https://facebook.com/#"><i class="lab la-facebook"></i><span>Facebook</span></a>
+                        </li>
+                        <li><a href="https://instagram.com/#"><i class="lab la-instagram"></i><span>Instagram</span></a>
+                        </li>
                         <li><a href="https://twitter.com/#"><i class="lab la-twitter"></i><span>Twitter</span></a></li>
-                        <li><a href="https://whatsapp.com/#"><i class="lab la-whatsapp"></i><span>WhatsAspp</span></a></li>
-                        <li><a href="mailto:myemail@myemail.com"><i class="las la-envelope"></i><span>Email</span></a></li>
+                        <li><a href="https://whatsapp.com/#"><i class="lab la-whatsapp"></i><span>WhatsAspp</span></a>
+                        </li>
+                        <li><a href="mailto:myemail@myemail.com"><i class="las la-envelope"></i><span>Email</span></a>
+                        </li>
                         <li><a href="#"><i class="las la-copy"></i><span>Copy poll link</span></a></li>
                       </ul>
                     </div>
@@ -109,7 +138,7 @@
                 <div class="item grid">
                   <div class="grid-top">
                     <div class="image-holder">
-                      <img src="assets/images/cameroon-vs-nigeria.jpg" />
+                      <img src="assets/images/cameroon-vs-nigeria.jpg"/>
                     </div>
                     <div class="contents">
                       <h4><a [routerLink]="['/view-poll']" title="View Poll">Super Eagles vs Cameroun?
@@ -133,11 +162,15 @@
                     <div class="share-wrap" title="Share">
                       <em class="share show-submenu"></em>
                       <ul class="submenu share-routes">
-                        <li><a href="https://facebook.com/#"><i class="lab la-facebook"></i><span>Facebook</span></a></li>
-                        <li><a href="https://instagram.com/#"><i class="lab la-instagram"></i><span>Instagram</span></a></li>
+                        <li><a href="https://facebook.com/#"><i class="lab la-facebook"></i><span>Facebook</span></a>
+                        </li>
+                        <li><a href="https://instagram.com/#"><i class="lab la-instagram"></i><span>Instagram</span></a>
+                        </li>
                         <li><a href="https://twitter.com/#"><i class="lab la-twitter"></i><span>Twitter</span></a></li>
-                        <li><a href="https://whatsapp.com/#"><i class="lab la-whatsapp"></i><span>WhatsAspp</span></a></li>
-                        <li><a href="mailto:myemail@myemail.com"><i class="las la-envelope"></i><span>Email</span></a></li>
+                        <li><a href="https://whatsapp.com/#"><i class="lab la-whatsapp"></i><span>WhatsAspp</span></a>
+                        </li>
+                        <li><a href="mailto:myemail@myemail.com"><i class="las la-envelope"></i><span>Email</span></a>
+                        </li>
                         <li><a href="#"><i class="las la-copy"></i><span>Copy poll link</span></a></li>
                       </ul>
                     </div>
@@ -154,11 +187,10 @@
       </div>
 
 
-      <app-footer [pageName]=page></app-footer>
     </div>
     <!-- <a href="#" class="back-to-top-badge"><i class="las la-caret-up"></i>Back to top</a> -->
   </div>
 
 
-
 </ion-content>
+<app-footer [pageName]="page"></app-footer>

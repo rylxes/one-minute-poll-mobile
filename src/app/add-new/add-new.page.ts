@@ -50,6 +50,7 @@ export class AddNewPage implements OnInit {
   category: any;
   public showSpinner = false;
   public showA2E = false;
+  public isAuth = false;
 
   // Uploaded image collection
   files: Observable<imgFile[]>;
@@ -170,6 +171,7 @@ export class AddNewPage implements OnInit {
     this.loadPollType();
     this.loadCategories();
     this.editForm();
+    this.isAuth = this.utils.getValue('IS_AUTH');
   }
 
   public onSubmit(data) {

@@ -100,7 +100,7 @@
                         <p class="triggerRegister anchor">Register to save the results permanently and access other
                           features.</p>
                       </div>
-                      <div class="formFieldWrap">
+                      <div class="formFieldWrap" *ngIf="!isAuth">
                         <p>Your Email Address</p>
                         <input type="email" name="emailField" readonly value="{{pollList.emailField}}"
                                class="contactField textField" id="emailField"/>
@@ -135,4 +135,4 @@
 
 
 </ion-content>
-<app-footer [pageName]=page></app-footer>
+<app-footer [showAdd]="false" [pageName]=page></app-footer>

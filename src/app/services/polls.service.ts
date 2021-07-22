@@ -42,4 +42,11 @@ export class PollsService {
       catchError(this.utils.handleError(this.logName, []))
     );
 
+  mine = () => this.http.post(this.globals.url + 'polls/mine',{})
+    .pipe(
+      take(1),
+      tap(_ => this.utils.log(this.logName)),
+      catchError(this.utils.handleError(this.logName, []))
+    );
+
 }

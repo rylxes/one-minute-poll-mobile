@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {PollsService} from "../services/polls.service";
 
 @Component({
   selector: 'app-my-polls',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyPollsPage implements OnInit {
   page = 'Polls';
-  constructor() { }
+  pollList: any;
+
+  constructor(private pollsService: PollsService) {
+  }
 
   ngOnInit() {
+    this.loadPoll();
+  }
+
+  loadPoll = () => {
+    this.pollsService.mine().subscribe(data => {
+      this.pollList = data['data'];
+      // this.utils.setValue('pollTypesList', this.pollTypesList);
+      console.log(this.pollList);
+    });
   }
 
 }

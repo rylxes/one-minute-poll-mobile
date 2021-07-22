@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PreviousURLService} from "../services/previous-url.service";
 import {filter, pairwise} from "rxjs/operators";
 import {NavigationEnd, Router, RoutesRecognized} from "@angular/router";
+import {UtilitiesService} from "../services/utilities.service";
 
 @Component({
   selector: 'app-home',
@@ -11,10 +12,14 @@ import {NavigationEnd, Router, RoutesRecognized} from "@angular/router";
 export class HomePage implements OnInit {
 
   page = 'Home';
+  userDetails: any;
   currentUrl;
   previousUrl;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private utils: UtilitiesService
+  ) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
@@ -32,6 +37,7 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+    this.userDetails = this.utils.getValue('USER_DETAILS') || {};
   }
 
 }

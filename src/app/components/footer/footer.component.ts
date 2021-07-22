@@ -8,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class FooterComponent implements OnInit {
 
   @Input() pageName;
+  @Input() showAdd: boolean = true;
 
   constructor() {
   }

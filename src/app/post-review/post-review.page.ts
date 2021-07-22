@@ -22,6 +22,7 @@ export class PostReviewPage implements OnInit {
   category: any;
   pollType: any;
   pollTypesList: any;
+  isAuth = false;
   page = '';
 
   constructor(
@@ -75,8 +76,12 @@ export class PostReviewPage implements OnInit {
     }
     this.ionLoader.showLoader();
     this.pollsService.create(toSubmit).subscribe(res => {
-      console.log(res)
+      console.log(res);
       this.utils.showToast('Poll Created !');
+      if(!this.isAuth){
+        this.router.navigate(['/home']);
+      }
+      this.router.navigate(['/my-polls']);
       this.ionLoader.hideLoader();
     });
 
@@ -90,6 +95,8 @@ export class PostReviewPage implements OnInit {
     this.showA2E = this.utils.getValue('showA2E');
     this.pollTypesList = this.utils.getValue('pollTypesList');
     this.categoriesList = this.utils.getValue('categoriesList');
+    this.isAuth = this.utils.getValue('IS_AUTH');
+
 
     this.category = this.categoriesList.find(input => input.id == this.pollList.category);
     this.pollType = this.pollTypesList.find(input => input.id == this.pollList.answerType);
