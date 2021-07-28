@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">oneMinutePoll</string>
+    <string name="title_activity_main">oneMinutePoll</string>
+    <string name="package_name">com.digitalweb.oneMinutePoll</string>
+    <string name="custom_url_scheme">com.digitalweb.oneMinutePoll</string>
+</resources>
