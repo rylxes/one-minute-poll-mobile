@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {PreviousURLService} from "../services/previous-url.service";
 import {filter, pairwise} from "rxjs/operators";
 import {NavigationEnd, Router, RoutesRecognized} from "@angular/router";
 import {UtilitiesService} from "../services/utilities.service";
-import {LoaderService} from "../services/loader.service";
 import {PollsService} from "../services/polls.service";
+import {LoadingService} from "../services/loading.service";
 
 @Component({
   selector: 'app-home',
@@ -15,20 +14,20 @@ export class HomePage implements OnInit {
 
   page = 'Home';
   userDetails: any;
-  pollList: any;
+  pollList: any = [];
   currentUrl;
   previousUrl;
 
   constructor(
     private router: Router,
     private pollsService: PollsService,
-    private ionLoader: LoaderService,
+    private ionLoader: LoadingService,
     private utils: UtilitiesService
   ) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        console.log(event)
+        console.log(event);
       });
     this.router.events
       .pipe(filter((event: any) => event instanceof RoutesRecognized), pairwise())
@@ -42,7 +41,6 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    //this.ionLoader.presentLoader('Loading polls ...');
     this.loadPoll();
     this.userDetails = this.utils.getValue('USER_DETAILS') || {};
   }
@@ -52,7 +50,6 @@ export class HomePage implements OnInit {
       this.pollList = data['data'];
       // this.utils.setValue('pollTypesList', this.pollTypesList);
       console.log(this.pollList);
-      //this.ionLoader.dismissLoader();
     });
   }
 }

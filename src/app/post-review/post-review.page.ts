@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {LoaderService} from "../services/loader.service";
 import {UtilitiesService} from "../services/utilities.service";
 import {MenuController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
-import {CategoriesService} from "../services/categories.service";
 import {PollsService} from "../services/polls.service";
 
 @Component({
@@ -26,7 +24,6 @@ export class PostReviewPage implements OnInit {
   page = '';
 
   constructor(
-    private ionLoader: LoaderService,
     private router: Router,
     private pollsService: PollsService,
     private readonly sanitizer: DomSanitizer,
@@ -74,15 +71,13 @@ export class PostReviewPage implements OnInit {
     if (this.showA2E) {
       toSubmit.options = options;
     }
-    this.ionLoader.showLoader();
     this.pollsService.create(toSubmit).subscribe(res => {
       console.log(res);
       this.utils.showToast('Poll Created !');
-      if(!this.isAuth){
+      if (!this.isAuth) {
         this.router.navigate(['/home']);
       }
       this.router.navigate(['/my-polls']);
-      this.ionLoader.hideLoader();
     });
 
     console.log(toSubmit);

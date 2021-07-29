@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PollsService} from "../../services/polls.service";
-import {LoaderService} from "../../services/loader.service";
+import {LoadingService} from "../../services/loading.service";
 
 @Component({
   selector: 'app-my-poll-list',
@@ -13,12 +13,11 @@ export class UserPollsPage implements OnInit {
 
   constructor(
     private pollsService: PollsService,
-    private ionLoader: LoaderService
+    private ionLoader: LoadingService
   ) {
   }
 
   ngOnInit() {
-    this.ionLoader.presentLoader('Loading my polls ...');
     this.loadPoll();
   }
 
@@ -27,7 +26,6 @@ export class UserPollsPage implements OnInit {
       this.pollList = data['data'];
       // this.utils.setValue('pollTypesList', this.pollTypesList);
       console.log(this.pollList);
-      this.ionLoader.dismissLoader();
     });
   }
 

@@ -7,7 +7,6 @@ import * as moment from 'moment';
 import {decode} from 'base64-arraybuffer';
 import {Camera, CameraResultType, CameraSource} from '@capacitor/camera';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {LoaderService} from '../services/loader.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {Router, RoutesRecognized} from '@angular/router';
 import {PollTypeService} from '../services/poll-type.service';
@@ -74,7 +73,6 @@ export class AddNewPage implements OnInit {
     private categoriesService: CategoriesService,
     private previousURLService: PreviousURLService,
     private readonly sanitizer: DomSanitizer,
-    private ionLoader: LoaderService,
     private loadingEventService: LoadingEventService,
     private utils: UtilitiesService,
     public menuCTL: MenuController
@@ -163,11 +161,12 @@ export class AddNewPage implements OnInit {
 
       this.category = this.categoriesList.find(input => input.id == this.data.value.category);
       this.photo = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64, ' + this.image.base64String);
+    } else {
+      this.data.reset();
     }
   };
 
   ngOnInit() {
-    this.ionLoader.showLoader();
     this.loadPollType();
     this.loadCategories();
     this.editForm();
@@ -208,7 +207,7 @@ export class AddNewPage implements OnInit {
   }
 
   private hideLoader() {
-    this.ionLoader.hideLoader();
+
   }
 
   async setCamera(source: CameraSource, resultType: CameraResultType) {
@@ -244,6 +243,18 @@ export class AddNewPage implements OnInit {
     this.showNext = false;
     //this.hideLoader();
     //this.utils.setValue('photoDetails', webPath);
+  }
+
+  takePhoto() {
+    const ab = this.getPhoto(CameraSource.Camera);
+    if (ab) {
+      this.setPhoto(ab);
+      // if (this.tus) {
+      //   await this.driverProfileService.uploadTus(ab);
+      // } else {
+      //   await this.driverProfileService.uploadAll(ab);
+      // }
+    }
   }
 
   public selectPhoto() {
