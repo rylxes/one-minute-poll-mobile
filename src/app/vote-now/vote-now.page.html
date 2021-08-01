@@ -5,111 +5,109 @@
   <div class="all-elements">
     <div class="snap-drawers">
 
-      <!--Search wrap -->
-      <app-search></app-search>
 
-      <div id="content" class="snap-content">
+      <div *ngIf="poll" id="content" class="snap-content">
         <div class="content">
           <div class="header-clear"></div>
           <!--Page content goes here, fixed elements go above the all elements class-->
 
+          <!--            <ion-item lines="full">-->
+          <!--              <ion-label position="floating">Search for Driver</ion-label>-->
+          <!--              <ion-input type="text"-->
+          <!--                         formControlName="name"-->
+          <!--                         required></ion-input>-->
+          <!--            </ion-item>-->
+
           <div class="vote-title full-width">
-            <h2>Will Tinubu run in 2023?</h2>
-            <p>Will APC aspirant, Sen Bola Ahmed Tinubu run in the Presidential Elections coming in 2023? </p>
+            <h2>{{poll?.title}}</h2>
+            <p>{{poll?.question}} </p>
           </div>
 
           <div class="decoration"></div>
           <div class="poll-image">
-            <iframe style="" width="100%" height="650px" allow="camera;microphone"
-                    src="http://localhost/dw/chatroom/grupo/chat/office-abuse/" frameborder=0 allowfullscreen></iframe>
-            <img src="assets/images/bola_ahmed_tinubu_2023.jpg"/>
+            <img *ngIf="poll.url" [src]="poll.url"/>
           </div>
           <div class="decoration"></div>
 
-          <div class="vote-wrap">
 
-            <div class="formFieldWrap form-group radio-wrap radio-group">
-              <label class="radio-item" for="true">
-                <p>True</p>
-                <input class="radio" id="true" type="radio" name="vote" required/>
-                <span class="checkmark"></span>
-              </label>
-              <label class="radio-item" for="false">
-                <p>False</p>
-                <input class="radio" id="false" type="radio" name="vote"/>
-                <span class="checkmark"></span>
-              </label>
+          <form #pageForm="ngForm" [formGroup]="data" (ngSubmit)="onSubmit(pageForm)" class="searchForm">
+            <div class="vote-wrap">
+
+              <div class="formFieldWrap form-group radio-wrap radio-group">
+
+
+                <ion-radio-group *ngIf="poll?.pollType?.id != 3" lines="full" formControlName="vote">
+
+                  <ion-item class="form-radio" *ngFor="let eachType of poll?.valueVote">
+                    <ion-radio class="radio" slot="start" name="answer" [value]="eachType.id"
+                               checked></ion-radio>
+                    <ion-label class="c-label">{{eachType.value}}</ion-label>
+                  </ion-item>
+
+
+                </ion-radio-group>
+
+
+                <ion-radio-group *ngIf="poll?.pollType?.id == 3" lines="full" formControlName="vote">
+
+                  <ion-item class="form-radio" *ngFor="let eachType of poll?.pollOptions">
+                    <ion-radio class="radio" slot="start" name="answer" [value]="eachType.vote_value_id"
+                               checked></ion-radio>
+                    <ion-label class="c-label">{{eachType.value}}</ion-label>
+                  </ion-item>
+                </ion-radio-group>
+
+
+              </div>
+
             </div>
 
-          </div>
-
-          <!-- trigger this section after voting is successful -->
-          <div id="pollResBasic" class="poll-summary">
-            <h4>Poll Summary</h4>
-            <table class="table">
-              <tbody>
-              <tr>
-                <td>Category</td>
-                <td>Politics</td>
-              </tr>
-              <tr>
-                <td>Total Votes</td>
-                <td>22,576</td>
-              </tr>
-              <tr>
-                <td>True Votes</td>
-                <td>18,109</td>
-              </tr>
-              <tr>
-                <td>False Votes</td>
-                <td>4,467</td>
-              </tr>
-              </tbody>
-            </table>
-            <!--
-            <div class="poll-graph-wrap">
-              <canvas id="pollResult" style="width:100%; max-width:100%;"></canvas>
-              <script type="text/javascript">
-                var xValues = ["True", "False"];
-                var yValues = [18109, 4467];
-                var barColors = ["#3E77B1", "#DD1111"];
-
-                new Chart("pollResult", {
-                  type: "doughnut",
-                  data: {
-                    labels: xValues,
-                    datasets: [{
-                      backgroundColor: barColors,
-                      data: yValues
-                    }]
-                  },
-                  options: {
-                    legend: {display: true},
-                    title: {
-                      display: true,
-                      text: "Will Tinubu run in 2023?"
-                    }
-                  }
-                });
-              </script>
+            <!-- trigger this section after voting is successful -->
+            <div id="pollResBasic" class="poll-summary">
+              <h4>Poll Summary</h4>
+              <table class="table">
+                <tbody>
+                <tr>
+                  <td>Category</td>
+                  <td>{{poll?.category?.name}}</td>
+                </tr>
+                <tr>
+                  <td>Total Votes</td>
+                  <td>22,576</td>
+                </tr>
+                <tr>
+                  <td>True Votes</td>
+                  <td>18,109</td>
+                </tr>
+                <tr>
+                  <td>False Votes</td>
+                  <td>4,467</td>
+                </tr>
+                </tbody>
+              </table>
             </div>
-            -->
-          </div>
-          <!-- end - trigger this section after voting is successful -->
-          <div class="decoration"></div>
-          <div class="formSubmitButtonErrorsWrap">
-            <input type="submit" class="buttonWrap button button-blue searchSubmitButton" value="Vote"/>
-          </div>
+            <!-- end - trigger this section after voting is successful -->
+            <div class="decoration"></div>
+            <div class="formSubmitButtonErrorsWrap">
+
+              <ion-button [disabled]="!pageForm.form.valid"
+                          type="submit"
+                          class="buttonWrap button button-blue searchSubmitButton">Submit
+              </ion-button>
+
+            </div>
 
 
-          <div class="bottom-fix"></div>
-          <!-- End of entire page content-->
+            <div class="bottom-fix"></div>
+            <!-- End of entire page content-->
+          </form>
         </div>
       </div>
-      <app-footer [pageName]=page></app-footer>
+
     </div>
     <!-- <a href="#" class="back-to-top-badge"><i class="las la-caret-up"></i>Back to top</a> -->
   </div>
 
 
 </ion-content>
+<app-footer [showAdd]="false" [pageName]=page></app-footer>

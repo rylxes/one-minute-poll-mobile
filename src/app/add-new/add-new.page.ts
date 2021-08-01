@@ -13,6 +13,7 @@ import {PollTypeService} from '../services/poll-type.service';
 import {CategoriesService} from '../services/categories.service';
 import {LoadingEventService} from '../events/loading-event.service';
 import {PreviousURLService} from "../services/previous-url.service";
+import {EventsService} from "../events/events.service";
 
 
 export interface imgFile {
@@ -70,6 +71,7 @@ export class AddNewPage implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private pollTypeService: PollTypeService,
+    private eventsService: EventsService,
     private categoriesService: CategoriesService,
     private previousURLService: PreviousURLService,
     private readonly sanitizer: DomSanitizer,
@@ -92,8 +94,9 @@ export class AddNewPage implements OnInit {
       D: [''],
       E: [''],
     });
-    this.menuCTL.enable(true);
 
+
+    this.menuCTL.enable(true);
     this.isFileUploading = false;
     this.isFileUploaded = false;
 
@@ -104,6 +107,12 @@ export class AddNewPage implements OnInit {
       console.log(this.loadCategoriesEvent);
       if (this.loadCategoriesEvent && this.loadPollTypeEvent) {
         this.hideLoader();
+      }
+    });
+
+    this.eventsService.getObservable().subscribe((data) => {
+      if (data.completed) {
+        this.data.reset();
       }
     });
 
@@ -161,8 +170,6 @@ export class AddNewPage implements OnInit {
 
       this.category = this.categoriesList.find(input => input.id == this.data.value.category);
       this.photo = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64, ' + this.image.base64String);
-    } else {
-      this.data.reset();
     }
   };
 

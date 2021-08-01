@@ -10,6 +10,7 @@ import {Globals} from "../config/globals";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {TokenInterceptor} from "../interceptors/token.interceptor";
 import {UserPollsPageModule} from "./components/user-polls/user-polls.module";
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import {UserPollsPageModule} from "./components/user-polls/user-polls.module";
       useClass: TokenInterceptor,
       multi: true
     },
+    DatePipe,
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, Globals],
   bootstrap: [AppComponent],
 })

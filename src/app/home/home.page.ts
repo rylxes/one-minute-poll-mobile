@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {filter, pairwise} from "rxjs/operators";
+import {v4 as uuidv4} from 'uuid';
 import {NavigationEnd, Router, RoutesRecognized} from "@angular/router";
 import {UtilitiesService} from "../services/utilities.service";
 import {PollsService} from "../services/polls.service";
 import {LoadingService} from "../services/loading.service";
+import {PreviousURLService} from "../services/previous-url.service";
+import {isNil} from 'lodash-es';
 
 @Component({
   selector: 'app-home',
@@ -21,29 +23,27 @@ export class HomePage implements OnInit {
   constructor(
     private router: Router,
     private pollsService: PollsService,
+    private previousURLService: PreviousURLService,
     private ionLoader: LoadingService,
     private utils: UtilitiesService
   ) {
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        console.log(event);
-      });
-    this.router.events
-      .pipe(filter((event: any) => event instanceof RoutesRecognized), pairwise())
-      .subscribe((events: RoutesRecognized[]) => {
-        // this.previousUrl = events[0].urlAfterRedirects;
-        // this.currentUrl = events[1].urlAfterRedirects;
 
-        console.log('previous url', events[0].urlAfterRedirects);
-        console.log('current url', events[1].urlAfterRedirects);
-      });
   }
 
   ngOnInit() {
+    this.setHash();
     this.loadPoll();
     this.userDetails = this.utils.getValue('USER_DETAILS') || {};
   }
+
+  setHash = () => {
+    let values = this.utils.getValue('UUID')
+    if (isNil(values)) {
+      this.utils.setValue('UUID', uuidv4())
+    }
+    console.log(values)
+  }
+
 
   loadPoll = () => {
     this.pollsService.list().subscribe(data => {

@@ -1,18 +1,9 @@
-<!--<ion-fab class="add-new" horizontal="end" vertical="bottom" slot="fixed">-->
-<!--  <ion-fab-button color="primary" [routerLink]="['/add-new']">-->
-<!--&lt;!&ndash;    <ion-icon name="add"></ion-icon>&ndash;&gt;-->
-<!--    <span class="plus"><i class="las la-plus"></i></span>-->
-<!--    <span class="high"><i class="las la-poll"></i></span>-->
-<!--  </ion-fab-button>-->
-<!--</ion-fab>-->
-
 <div *ngIf="showAdd" class="add-new">
   <a [routerLink]="['/add-new']" class="btn-new add-new-poll">
     <span class="plus"><i class="las la-plus"></i></span>
     <span class="high"><i class="las la-poll"></i></span>
   </a>
 </div>
-
 
 <ion-footer>
   <div class="static-footer">

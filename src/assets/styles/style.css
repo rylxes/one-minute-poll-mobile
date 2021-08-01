@@ -108,7 +108,7 @@
 }
 
 .image-column-left strong{
-    display:block; 
+    display:block;
     width:100%;
     font-size:16px;
 }
@@ -140,7 +140,7 @@
 }
 
 .image-column-right strong{
-    display:block; 
+    display:block;
     width:100%;
     font-size:16px;
 }
@@ -482,7 +482,7 @@
     background-color:transparent;
     border:none;
     border-bottom:solid 1px rgba(255,255,255,0.08)!important;
-    margin-bottom:40px;    
+    margin-bottom:40px;
     padding-left:10px;
     transition:all 400ms ease;
 }

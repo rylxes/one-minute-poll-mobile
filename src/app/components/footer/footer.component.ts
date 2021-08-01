@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {UtilitiesService} from "../../services/utilities.service";
 
 @Component({
   selector: 'app-footer',
@@ -7,13 +8,17 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+  isAuth = false;
   @Input() pageName;
   @Input() showAdd: boolean = true;
 
-  constructor() {
+  constructor(
+    private utils: UtilitiesService
+  ) {
   }
 
   ngOnInit() {
+    this.isAuth = this.utils.getValue('IS_AUTH');
   }
 
   loadPage = (page) => {

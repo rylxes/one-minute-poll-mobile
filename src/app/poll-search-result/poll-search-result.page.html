@@ -1,0 +1,56 @@
+<app-header [search]="false" name="Polls Search"></app-header>
+
+
+<ion-content [fullscreen]="true" class="left-sidebar">
+
+  <div class="all-elements" style="padding-bottom: 20%">
+    <div class="snap-drawers">
+      <!--Search wrap -->
+
+      <div id="content" class="snap-content">
+        <div class="content">
+          <div class="header-clear"></div>
+          <!--Page content goes here, fixed elements go above the all elements class-->
+          <div class="container">
+            <div class="container no-bottom">
+              <div class="add-new-form poll-form no-bottom">
+                <form [formGroup]="SearchForm" (ngSubmit)="onSubmit(pageForm)" #pageForm="ngForm">
+
+                  <ion-item lines="full">
+                    <ion-label position="floating">Search for Poll</ion-label>
+                    <ion-input type="text"
+                               formControlName="name"
+                               required></ion-input>
+                  </ion-item>
+                  <ion-row>
+                    <ion-col>
+                      <ion-button [disabled]="!pageForm.form.valid" type="submit"
+                                  color="primary" expand="block">Submit
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <ion-list class="recent-polls">
+
+            <ion-reorder-group (ionItemReorder)="reorderList($event)" disabled="false">
+              <app-my-poll-list name="search" [pollList]="rows"></app-my-poll-list>
+            </ion-reorder-group>
+
+          </ion-list>
+
+          <!-- End of entire page content-->
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+</ion-content>
+
+<app-footer [showAdd]="false" [pageName]="page"></app-footer>

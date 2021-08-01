@@ -4,6 +4,7 @@ import {MenuController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
 import {PollsService} from "../services/polls.service";
+import {EventsService} from "../events/events.service";
 
 @Component({
   selector: 'app-post-review',
@@ -26,6 +27,7 @@ export class PostReviewPage implements OnInit {
   constructor(
     private router: Router,
     private pollsService: PollsService,
+    private eventsService: EventsService,
     private readonly sanitizer: DomSanitizer,
     private utils: UtilitiesService,
     public menuCTL: MenuController
@@ -35,21 +37,10 @@ export class PostReviewPage implements OnInit {
 
   submit = () => {
 
-    // 'title' => 'required|string|max:255',
-    //   'options.A' => 'nullable|string|max:255',
-    //   'options.B' => 'nullable|string|max:255',
-    //   'options.C' => 'nullable|string|max:255',
-    //   'options.D' => 'nullable|string|max:255',
-    //   'options.E' => 'nullable|string|max:255',
-    //   'category_id' => 'required|integer',
-    //   'poll_type_id' => 'required|integer',
-    //   'open_to_everyone' => 'required',
-    //   'question' => 'required|string',
-    //   'close_date' => 'nullable',
-
 
     let toSubmit = {
       title: this.pollList.title,
+      uuid: this.utils.getValue('UUID'),
       category_id: this.pollList.category,
       poll_type_id: this.pollList.answerType,
       open_to_everyone: this.pollList.openToAll,
@@ -74,10 +65,10 @@ export class PostReviewPage implements OnInit {
     this.pollsService.create(toSubmit).subscribe(res => {
       console.log(res);
       this.utils.showToast('Poll Created !');
-      if (!this.isAuth) {
-        this.router.navigate(['/home']);
-      }
-      this.router.navigate(['/my-polls']);
+      this.eventsService.publishSomeData({
+        completed: true
+      });
+      this.router.navigate(['/home']);
     });
 
     console.log(toSubmit);

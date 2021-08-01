@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PollsService} from "../../services/polls.service";
 import {LoadingService} from "../../services/loading.service";
 
@@ -9,7 +9,8 @@ import {LoadingService} from "../../services/loading.service";
 })
 export class UserPollsPage implements OnInit {
 
-  pollList: any;
+  @Input() pollList: any;
+  @Input() name: any;
 
   constructor(
     private pollsService: PollsService,
@@ -18,13 +19,14 @@ export class UserPollsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.loadPoll();
+    if (this.name != 'search') {
+      this.loadPoll();
+    }
   }
 
   loadPoll = () => {
     this.pollsService.mine().subscribe(data => {
       this.pollList = data['data'];
-      // this.utils.setValue('pollTypesList', this.pollTypesList);
       console.log(this.pollList);
     });
   }

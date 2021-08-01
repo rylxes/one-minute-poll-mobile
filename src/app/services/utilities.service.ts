@@ -156,6 +156,16 @@ export class UtilitiesService {
     }
   }
 
+  async showErrorToast(text) {
+    const toast = await this.toastController.create({
+      color: 'danger',
+      duration: 2000,
+      message: text,
+      //showCloseButton: true
+    });
+
+    await toast.present();
+  }
 
   async showToast(text) {
     const toast = await this.toastController.create({

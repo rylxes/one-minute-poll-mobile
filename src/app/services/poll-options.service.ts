@@ -1,20 +1,21 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Globals} from '../../config/globals';
-import {UtilitiesService} from './utilities.service';
-import {Platform} from '@ionic/angular';
-import {catchError, take, tap} from 'rxjs/operators';
+import {BehaviorSubject, Observable} from "rxjs";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Globals} from "../../config/globals";
+import {UtilitiesService} from "./utilities.service";
+import {Platform} from "@ionic/angular";
 import {Router} from "@angular/router";
+import {catchError, take, tap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
-export class PollsService {
+export class PollOptionsService {
+
 
   public user: Observable<any>;
   public token: any;
-  public logName = 'Polls';
+  public logName = 'Poll Option';
   private userData = new BehaviorSubject(null);
   private httpOptions = {
     headers: new HttpHeaders({
@@ -28,14 +29,7 @@ export class PollsService {
   }
 
 
-  create = credentials => this.http.post(this.globals.url + 'polls', credentials, this.httpOptions)
-    .pipe(
-      take(1),
-      tap(_ => this.utils.log(this.logName)),
-      catchError(this.utils.handleError(this.logName, []))
-    );
-
-  list = () => this.http.get(this.globals.url + 'polls')
+  create = credentials => this.http.post(this.globals.url + 'poll_options', credentials, this.httpOptions)
     .pipe(
       take(1),
       tap(_ => this.utils.log(this.logName)),
@@ -51,7 +45,7 @@ export class PollsService {
     );
 
 
-  mine = () => this.http.post(this.globals.url + 'polls/mine', {})
+  byPoll = (id) => this.http.get(this.globals.url + 'poll_options/byPoll/' + id)
     .pipe(
       take(1),
       tap(_ => this.utils.log(this.logName)),

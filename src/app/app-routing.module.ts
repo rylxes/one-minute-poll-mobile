@@ -35,10 +35,6 @@ const routes: Routes = [
     loadChildren: () => import('./post-review/post-review.module').then( m => m.PostReviewPageModule)
   },
   {
-    path: 'view-poll',
-    loadChildren: () => import('./view-poll/view-poll.module').then( m => m.ViewPollPageModule)
-  },
-  {
     path: 'vote',
     loadChildren: () => import('./vote/vote.module').then( m => m.VotePageModule)
   },
@@ -47,12 +43,32 @@ const routes: Routes = [
     loadChildren: () => import('./vote-complete/vote-complete.module').then( m => m.VoteCompletePageModule)
   },
   {
-    path: 'vote-now',
+    path: 'vote-now/:id',
     loadChildren: () => import('./vote-now/vote-now.module').then( m => m.VoteNowPageModule)
   },
   {
     path: 'user-polls',
     loadChildren: () => import('./components/user-polls/user-polls.module').then( m => m.UserPollsPageModule)
+  },
+  {
+    path: 'poll-search-result',
+    loadChildren: () => import('./poll-search-result/poll-search-result.module').then( m => m.PollSearchResultPageModule)
+  },
+  {
+    path: 'five-star-bar-chart',
+    loadChildren: () => import('./components/five-star-bar-chart/five-star-bar-chart.module').then(m => m.FiveStarBarChartPageModule)
+  },
+  {
+    path: 'yes-no-bar-chart',
+    loadChildren: () => import('./components/yes-no-bar-chart/yes-no-bar-chart.module').then(m => m.YesNoBarChartPageModule)
+  },
+  {
+    path: 'a2-ebar-chart',
+    loadChildren: () => import('./components/a2-ebar-chart/a2-ebar-chart.module').then(m => m.A2EBarChartPageModule)
+  },
+  {
+    path: 'poll-details/:id',
+    loadChildren: () => import('./poll-details/poll-details.module').then( m => m.PollDetailsPageModule)
   }
 ];
 @NgModule({

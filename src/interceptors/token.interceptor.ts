@@ -14,6 +14,7 @@ import {
 import {ToastController} from '@ionic/angular';
 import {Injectable} from '@angular/core';
 import {LoadingService} from "../app/services/loading.service";
+import {UtilitiesService} from "../app/services/utilities.service";
 
 const TOKEN_KEY = 'jwt-token';
 
@@ -22,6 +23,7 @@ const TOKEN_KEY = 'jwt-token';
 export class TokenInterceptor implements HttpInterceptor {
   constructor(private router: Router,
               private loading: LoadingService,
+              private utilitiesService: UtilitiesService,
               public toastController: ToastController) {
   }
 
@@ -65,23 +67,24 @@ export class TokenInterceptor implements HttpInterceptor {
             this.router.navigate(['login']);
           }
         }
+        this.utilitiesService.showErrorToast(error.error.errors);
         return throwError(error);
       }),
-      retryWhen(err => {
-        let retries = 1;
-        return err.pipe(
-          delay(1000),
-          tap(() => {
-            // this.showRetryToast(retries);
-          }),
-          map(error => {
-            if (retries++ === 3) {
-              throw error; // Now retryWhen completes
-            }
-            return error;
-          })
-        );
-      }),
+      // retryWhen(err => {
+      //   let retries = 1;
+      //   return err.pipe(
+      //     delay(1000),
+      //     tap(() => {
+      //       // this.showRetryToast(retries);
+      //     }),
+      //     map(error => {
+      //       if (retries++ === 3) {
+      //         throw error; // Now retryWhen completes
+      //       }
+      //       return error;
+      //     })
+      //   );
+      // }),
       catchError(err => EMPTY),
       finalize(() => this.loading.hide())
     );

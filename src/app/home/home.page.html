@@ -26,8 +26,9 @@
               <div class="recent-polls">
 
                 <div class="item" *ngFor="let eachPoll of pollList">
-                  <h4><a [routerLink]="['/vote-now']">{{eachPoll.question}}</a></h4>
-                  <span class="votes"><a [routerLink]="['/vote-now']">576 / {{eachPoll.category.name}}</a></span>
+                  <h4><a [routerLink]="['/vote-now',eachPoll.id]">{{eachPoll.question}}</a></h4>
+                  <span class="votes"><a
+                    [routerLink]="['/vote-now',eachPoll.id]">{{eachPoll?.counters?.value || 0}} / {{eachPoll.category.name}}</a></span>
                 </div>
               </div>
             </div>

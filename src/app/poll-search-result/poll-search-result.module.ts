@@ -4,11 +4,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {IonicModule} from '@ionic/angular';
 
-import {VoteNowPageRoutingModule} from './vote-now-routing.module';
+import {PollSearchResultPageRoutingModule} from './poll-search-result-routing.module';
 
-import {VoteNowPage} from './vote-now.page';
+import {PollSearchResultPage} from './poll-search-result.page';
 import {HomePageModule} from "../home/home.module";
-import {AddNewPageModule} from "../add-new/add-new.module";
+import {UserPollsPageModule} from "../components/user-polls/user-polls.module";
 
 @NgModule({
   imports: [
@@ -16,11 +16,11 @@ import {AddNewPageModule} from "../add-new/add-new.module";
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    VoteNowPageRoutingModule,
+    PollSearchResultPageRoutingModule,
     HomePageModule,
-    AddNewPageModule
+    UserPollsPageModule
   ],
-  declarations: [VoteNowPage]
+  declarations: [PollSearchResultPage]
 })
-export class VoteNowPageModule {
+export class PollSearchResultPageModule {
 }

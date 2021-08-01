@@ -1,0 +1,78 @@
+<app-header></app-header>
+<ion-content class="left-sidebar">
+
+  <div class="all-elements">
+    <div class="snap-drawers">
+
+      <div *ngIf="poll" id="content" class="snap-content">
+        <div class="content">
+          <div class="header-clear"></div>
+          <!--Page content goes here, fixed elements go above the all elements class-->
+
+          <div class="vote-title full-width">
+            <h2>{{poll?.title}}</h2>
+            <p>{{poll?.question}} </p>
+          </div>
+
+          <div class="decoration"></div>
+          <div class="poll-image">
+            <img *ngIf="poll.url" [src]="poll.url"/>
+          </div>
+          <div class="decoration"></div>
+
+          <!-- Poll summary table visible only to poll creator/admin -->
+          <div class="poll-summary">
+            <h4>Poll Summary</h4>
+            <table class="table">
+              <tbody>
+              <tr>
+                <td>Poll Type</td>
+                <td>{{poll?.pollType?.name}}</td>
+              </tr>
+              <tr>
+                <td>Category</td>
+                <td>{{poll?.category?.name}}</td>
+              </tr>
+              <tr>
+                <td>Total Votes</td>
+                <td>{{poll?.counters?.value}}</td>
+              </tr>
+              <tr *ngFor="let eachType of pollOptions">
+                <td>{{eachType.name}} Votes</td>
+                <td>{{eachType?.counters?.value || 0}}</td>
+              </tr>
+              <tr>
+                <td>Created On</td>
+                <td>{{poll?.created_at |date }}</td>
+              </tr>
+<!--              <tr>-->
+<!--                <td>Latest Vote</td>-->
+<!--                <td>Today, 11:23 AM</td>-->
+<!--              </tr>-->
+              <tr>
+                <td>Closes</td>
+                <td>{{poll?.close_date |date }}</td>
+              </tr>
+              </tbody>
+            </table>
+
+
+          </div>
+
+          <div class="decoration"></div>
+          <div class="formSubmitButtonErrorsWrap">
+            <a href="#" class="buttonWrap button button-blue searchSubmitButton">Edit Poll</a>
+          </div>
+
+
+          <div class="bottom-fix"></div>
+          <!-- End of entire page content-->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</ion-content>
+
+<app-footer [pageName]=page></app-footer>

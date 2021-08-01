@@ -1,16 +1,18 @@
 <ion-header>
-  <!--  <div id="preloader">-->
-  <!--    <div id="status">-->
-  <!--      <div class="preloader-logo"></div>-->
-  <!--    </div>-->
-  <!--  </div>-->
 
   <div class="gallery-fix"></div> <!-- Important for all pages that have galleries or portfolios -->
 
   <div id="header-fixed" class="header-style-1">
     <h2 class="logo"><a [routerLink]="['/']">{{getName()}}</a></h2>
-    <a id="open-search" class="header-2" href="#"><span><i class="las la-search flip"></i></span></a>
+    <a *ngIf="search" id="open-search" class="header-2" (click)="searchLink()">
+      <span><i class="las la-search flip"></i></span>
+    </a>
   </div>
 
-  <app-search></app-search>
+  <div *ngIf="showSearch" class="search-draw">
+
+    <ion-searchbar type="text" debounce="500" (ionChange)="getItems($event)" inputmode="search" animated
+                   placeholder="Search for Poll"></ion-searchbar>
+  </div>
+
 </ion-header>
