@@ -6,6 +6,8 @@ import {LoaderService} from "../services/loader.service";
 import {IonReorderGroup, ModalController} from "@ionic/angular";
 import {PollsService} from "../services/polls.service";
 import {ResultEventsService} from "../events/result-events.service";
+import {PollResultService} from "../services/poll-result.service";
+import {isNil} from 'lodash-es';
 
 @Component({
   selector: 'app-poll-search-result',
@@ -24,6 +26,7 @@ export class PollSearchResultPage implements OnInit {
   constructor(
     private authService: AuthService,
     private utils: UtilitiesService,
+    private pollResultService: PollResultService,
     private ionLoader: LoaderService,
     private resultEventsService: ResultEventsService,
     private formBuilder: FormBuilder,
@@ -38,6 +41,7 @@ export class PollSearchResultPage implements OnInit {
       {prop: 'first_name', name: 'First Name'},
       {prop: 'automobile_type', name: 'Automobile Type'}
     ];
+
     this.resultEventsService.getObservable().subscribe((data) => {
       this.rows = data.result;
       console.log(this.rows)
@@ -72,6 +76,11 @@ export class PollSearchResultPage implements OnInit {
   }
 
   ngOnInit(): void {
+    if (!isNil(this.pollResultService.searchResult)) {
+      this.rows = this.pollResultService.searchResult;
+    }
+    console.log(this.rows)
+
   }
 
   @ViewChild(IonReorderGroup, {static: true}) reorderGroup: IonReorderGroup;

@@ -3,6 +3,7 @@ import {PollsService} from "../../services/polls.service";
 import {UtilitiesService} from "../../services/utilities.service";
 import {Router} from "@angular/router";
 import {ResultEventsService} from "../../events/result-events.service";
+import {PollResultService} from "../../services/poll-result.service";
 
 @Component({
   selector: 'app-header',
@@ -20,6 +21,7 @@ export class HeaderComponent implements OnInit {
     private pollsService: PollsService,
     private router: Router,
     private resultEventsService: ResultEventsService,
+    private pollResultService: PollResultService,
     private utils: UtilitiesService
   ) {
   }
@@ -36,6 +38,7 @@ export class HeaderComponent implements OnInit {
         if (this.rows.length === 0) {
           this.utils.showToast('No results found !');
         } else {
+          this.pollResultService.searchResult = this.rows;
           this.resultEventsService.publish({
             result: this.rows,
           });
