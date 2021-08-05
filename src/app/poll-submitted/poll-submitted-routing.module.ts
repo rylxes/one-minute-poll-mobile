@@ -1,11 +1,16 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
-import { PollSubmittedPage } from './poll-submitted.page';
+import {PollSubmittedPage} from './poll-submitted.page';
+import {VoteCompletePage} from "../vote-complete/vote-complete.page";
 
 const routes: Routes = [
   {
     path: '',
+    component: PollSubmittedPage
+  },
+  {
+    path: ':id',
     component: PollSubmittedPage
   }
 ];
@@ -14,4 +19,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PollSubmittedPageRoutingModule {}
+export class PollSubmittedPageRoutingModule {
+}

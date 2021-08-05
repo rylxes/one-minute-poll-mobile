@@ -1,25 +1,25 @@
-<div class="summary">
-  <div class="votes"><i class="las la-poll"></i> <span>{{poll?.counters.value}}</span></div>
+<div class="summary" *ngIf="poll">
+  <div class="votes"><i class="las la-poll"></i> <span>{{poll?.counters?.value || 0}}</span></div>
 
 
   <div class="results">
 
-    <div *ngIf="poll.pollType.id === 3">
-      <span title="{{eachValue.value}}" class="options" *ngFor="let eachValue of optionValues">
-        <em>{{eachValue.name}}</em> {{eachValue.perc}}%
+    <div *ngIf="poll?.pollType?.id === 3">
+      <span title="{{eachValue?.value}}" class="options" *ngFor="let eachValue of optionValues">
+        <em>{{eachValue?.name}}</em> {{eachValue?.perc}}%
       </span>
 
     </div>
 
-    <div *ngIf="poll.pollType.id === 2">
-     <span title="{{eachValue.value}}" class="options" *ngFor="let eachValue of optionValues">
-        <em>{{eachValue.name}}</em> {{eachValue.perc}}%
+    <div *ngIf="poll?.pollType?.id === 2">
+     <span title="{{eachValue?.value}}" class="options" *ngFor="let eachValue of optionValues">
+        <em>{{eachValue?.name}}</em> {{eachValue?.perc}}%
       </span>
     </div>
 
-    <div *ngIf="poll.pollType.id === 1">
+    <div *ngIf="poll?.pollType?.id === 1">
       <span class="options agree" *ngFor="let eachValue of optionValues">
-        <i class="report yes"> {{eachValue.name}} </i> {{eachValue.perc}}%
+        <i class="report yes"> {{eachValue?.name}} </i> {{eachValue?.perc}}%
       </span>
     </div>
 

@@ -1,7 +1,5 @@
-
 <app-header></app-header>
 <ion-content class="left-sidebar">
-
 
 
   <div class="all-elements">
@@ -9,7 +7,6 @@
 
       <!--Search wrap -->
       <app-search></app-search>
-
 
 
       <div id="content" class="snap-content">
@@ -26,17 +23,17 @@
             </div>
           </div>
           <div class="button-wrap">
-            <a [routerLink]="['/view-poll']" class="buttonWrap button button-blue">View Poll</a>
+            <a [routerLink]="['/poll-details', theID]" class="buttonWrap button button-blue">View Poll</a>
           </div>
           <div class="bottom-fix"></div>
           <!-- End of entire page content-->
         </div>
       </div>
-      <app-footer [pageName]=page></app-footer>
+
     </div>
     <!-- <a href="#" class="back-to-top-badge"><i class="las la-caret-up"></i>Back to top</a> -->
   </div>
 
 
-
 </ion-content>
+<app-footer [pageName]=page></app-footer>

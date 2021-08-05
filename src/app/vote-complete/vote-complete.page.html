@@ -1,4 +1,3 @@
-
 <app-header></app-header>
 <ion-content class="left-sidebar">
 
@@ -8,7 +7,6 @@
 
       <!--Search wrap -->
       <app-search></app-search>
-
 
 
       <div id="content" class="snap-content">
@@ -25,7 +23,7 @@
             </div>
           </div>
           <div class="button-wrap">
-            <a [routerLink]="['/view-poll']" class="buttonWrap button button-blue">Poll Result</a>
+            <a [routerLink]="['/poll-details',theID]" class="buttonWrap button button-blue">Poll Result</a>
           </div>
           <div class="bottom-fix"></div>
           <!-- End of entire page content-->

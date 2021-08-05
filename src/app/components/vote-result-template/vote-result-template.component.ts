@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import * as _ from "underscore";
+import {PollResultService} from "../../services/poll-result.service";
 
 @Component({
   selector: 'app-vote-result-template',
@@ -11,38 +12,19 @@ export class VoteResultTemplateComponent implements OnInit {
   @Input() poll: any;
   public optionValues: any;
 
-  constructor() {
+  constructor(private pollResultService: PollResultService) {
   }
 
   ngOnInit() {
-    console.log('ddd')
+
     this.calculate();
   }
 
   calculate = () => {
-    let options = [];
-    let sum = 0;
-    this.poll.pollCounters.forEach((each) => {
-      let res = _.first(each.counters)
-      let opt = {
-        'name': each.name,
-        'value': each.value,
-        'count': res?.pivot?.value || 0,
-      }
-      sum += opt.count;
-      options = [...options, opt]
-    })
-
-    options.forEach((each) => {
-      let perc = (each.count / sum) * 100;
-      each.perc = perc;
-    })
-
-    this.optionValues = options;
-    // let res = _.first(this.poll.pollCounters.counters)
-    //  console.log(this.poll.pollCounters)
-    console.log(sum)
-    console.log(options)
+    this.pollResultService.calculate(this.poll);
+    this.optionValues = this.pollResultService.optionValues;
+    console.log(this.poll)
+    console.log(this.optionValues)
   }
 
 }

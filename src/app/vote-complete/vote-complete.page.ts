@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-vote-complete',
@@ -8,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class VoteCompletePage implements OnInit {
 
   page = 'Polls';
-  constructor() { }
+  theID: any;
+
+  constructor(
+    private route: ActivatedRoute,
+  ) {
+    this.theID = this.route.snapshot.paramMap.get('id');
+  }
 
   ngOnInit() {
   }

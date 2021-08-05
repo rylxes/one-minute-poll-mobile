@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
   {
@@ -8,51 +8,53 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'add-new',
-    loadChildren: () => import('./add-new/add-new.module').then( m => m.AddNewPageModule)
+    loadChildren: () => import('./add-new/add-new.module').then(m => m.AddNewPageModule)
   },
+
   {
     path: 'help',
-    loadChildren: () => import('./help/help.module').then( m => m.HelpPageModule)
+    loadChildren: () => import('./help/help.module').then(m => m.HelpPageModule)
   },
   {
     path: 'my-polls',
-    loadChildren: () => import('./my-polls/my-polls.module').then( m => m.MyPollsPageModule)
+    loadChildren: () => import('./my-polls/my-polls.module').then(m => m.MyPollsPageModule)
   },
   {
     path: 'my-profile',
-    loadChildren: () => import('./my-profile/my-profile.module').then( m => m.MyProfilePageModule)
+    loadChildren: () => import('./my-profile/my-profile.module').then(m => m.MyProfilePageModule)
   },
   {
     path: 'poll-submitted',
-    loadChildren: () => import('./poll-submitted/poll-submitted.module').then( m => m.PollSubmittedPageModule)
+    loadChildren: () => import('./poll-submitted/poll-submitted.module').then(m => m.PollSubmittedPageModule)
   },
   {
     path: 'post-review',
-    loadChildren: () => import('./post-review/post-review.module').then( m => m.PostReviewPageModule)
+    loadChildren: () => import('./post-review/post-review.module').then(m => m.PostReviewPageModule)
   },
   {
     path: 'vote',
-    loadChildren: () => import('./vote/vote.module').then( m => m.VotePageModule)
+    loadChildren: () => import('./vote/vote.module').then(m => m.VotePageModule)
   },
+
   {
     path: 'vote-complete',
-    loadChildren: () => import('./vote-complete/vote-complete.module').then( m => m.VoteCompletePageModule)
+    loadChildren: () => import('./vote-complete/vote-complete.module').then(m => m.VoteCompletePageModule)
   },
   {
     path: 'vote-now/:id',
-    loadChildren: () => import('./vote-now/vote-now.module').then( m => m.VoteNowPageModule)
+    loadChildren: () => import('./vote-now/vote-now.module').then(m => m.VoteNowPageModule)
   },
   {
     path: 'user-polls',
-    loadChildren: () => import('./components/user-polls/user-polls.module').then( m => m.UserPollsPageModule)
+    loadChildren: () => import('./components/user-polls/user-polls.module').then(m => m.UserPollsPageModule)
   },
   {
     path: 'poll-search-result',
-    loadChildren: () => import('./poll-search-result/poll-search-result.module').then( m => m.PollSearchResultPageModule)
+    loadChildren: () => import('./poll-search-result/poll-search-result.module').then(m => m.PollSearchResultPageModule)
   },
   {
     path: 'five-star-bar-chart',
@@ -68,13 +70,15 @@ const routes: Routes = [
   },
   {
     path: 'poll-details/:id',
-    loadChildren: () => import('./poll-details/poll-details.module').then( m => m.PollDetailsPageModule)
+    loadChildren: () => import('./poll-details/poll-details.module').then(m => m.PollDetailsPageModule)
   }
 ];
+
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

@@ -8,13 +8,14 @@ import {decode} from 'base64-arraybuffer';
 import {Camera, CameraResultType, CameraSource} from '@capacitor/camera';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {UtilitiesService} from '../services/utilities.service';
-import {Router, RoutesRecognized} from '@angular/router';
+import {ActivatedRoute, Router, RoutesRecognized} from '@angular/router';
 import {PollTypeService} from '../services/poll-type.service';
 import {CategoriesService} from '../services/categories.service';
 import {LoadingEventService} from '../events/loading-event.service';
 import {PreviousURLService} from "../services/previous-url.service";
 import {EventsService} from "../events/events.service";
-
+import {isNil} from 'lodash-es';
+import {PollsService} from "../services/polls.service";
 
 export interface imgFile {
   name: string;
@@ -45,11 +46,13 @@ export class AddNewPage implements OnInit {
   error: any;
   image: any = '';
   stage: any;
+  poll: any;
   pollTypesList: any;
   categoriesList: any;
   category: any;
   public showSpinner = false;
   public showA2E = false;
+  public myShowAE = false;
   public isAuth = false;
 
   // Uploaded image collection
@@ -63,13 +66,15 @@ export class AddNewPage implements OnInit {
   isFileUploading: boolean;
   isFileUploaded: boolean;
 
-
+  theID: any;
   loadPollTypeEvent = false;
   loadCategoriesEvent = false;
 
   constructor(
     private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
     private router: Router,
+    private pollsService: PollsService,
     private pollTypeService: PollTypeService,
     private eventsService: EventsService,
     private categoriesService: CategoriesService,
@@ -79,6 +84,7 @@ export class AddNewPage implements OnInit {
     private utils: UtilitiesService,
     public menuCTL: MenuController
   ) {
+    this.theID = this.route.snapshot.paramMap.get('id');
     this.data = this.formBuilder.group({
       title: ['', [Validators.required]],
       answerType: ['', [Validators.required]],
@@ -173,7 +179,44 @@ export class AddNewPage implements OnInit {
     }
   };
 
+  loadPoll = () => {
+    if (!isNil(this.theID)) {
+      console.log(this.theID)
+      this.pollsService.getOne(this.theID).subscribe(data => {
+        this.poll = data['data'];
+        console.log(this.poll);
+
+        let form = {
+          title: this.poll.title,
+          answerType: this.poll.poll_type_id,
+          closeDate: this.poll.close_date,
+          question: this.poll.question,
+          image: this.poll.url,
+          category: this.poll.category?.id,
+          emailField: [''],
+          openToAll: this.poll.open_to_everyone,
+          A: this.poll?.pollOptions.find(input => input.name == 'A')?.value || null,
+          B: this.poll?.pollOptions.find(input => input.name == 'B')?.value || null,
+          C: this.poll?.pollOptions.find(input => input.name == 'C')?.value || null,
+          D: this.poll?.pollOptions.find(input => input.name == 'D')?.value || null,
+          E: this.poll?.pollOptions.find(input => input.name == 'E')?.value || null,
+        }
+        if (this.poll?.poll_type_id === 3) {
+          this.showA2E = true
+          this.myShowAE = true
+        }
+        console.log(form)
+        this.category = this.poll.category;
+        this.photo = this.poll.url;
+        this.utils.setValue('PHOTO_URL', this.photo);
+        this.data.setValue(form);
+      });
+    }
+
+  }
+
   ngOnInit() {
+    this.loadPoll()
     this.loadPollType();
     this.loadCategories();
     this.editForm();
@@ -186,7 +229,12 @@ export class AddNewPage implements OnInit {
     this.data.value.image = this.utils.getValue('thePhoto');
     this.utils.setValue('toSubmit', this.data.value);
     this.utils.setValue('showA2E', this.showA2E);
-    this.router.navigate(['/post-review']);
+    if (!isNil(this.theID)) {
+      this.router.navigate(['/post-review', this.theID]);
+    } else {
+      this.router.navigate(['/post-review']);
+    }
+
     console.log(this.data.value);
   }
 

@@ -2,17 +2,20 @@
 <ion-card class="item grid" *ngFor="let eachPoll of pollList">
   <a [routerLink]="['/poll-details',eachPoll.id]">
     <ion-card-header class="grid-top">
-      {{eachPoll.code}}
+
       <div class="image-holder">
         <img *ngIf="eachPoll.url" [src]="eachPoll.url"/>
       </div>
       <div class="contents">
-        <h4><a title="View Poll">{{eachPoll.title}}
-          <span>{{eachPoll.question}}</span></a>
+        <h4>
+          <a title="View Poll">{{eachPoll.title}}
+          <span>{{eachPoll.question}}</span>
+          </a>
         </h4>
-
       </div>
+
     </ion-card-header>
+
     <app-vote-result-template [poll]="eachPoll"></app-vote-result-template>
     <ion-card-content class="grid-bottom">
       <div class="user-wrap">
@@ -33,6 +36,7 @@
           <li><a href="#"><i class="las la-copy"></i><span>Copy poll link</span></a></li>
         </ul>
       </div>
+      {{eachPoll.code}}
     </ion-card-content>
   </a>
 

@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
 
   searchLink = () => this.showSearch = !this.showSearch;
 
-  getName = () => this.name ? this.name : "OnePoll";
+  getName = () => this.name ? this.name : "One Minute Poll";
   getItems = (e) => {
     if (e.detail.value.length > 3) {
       console.log(e.detail.value);

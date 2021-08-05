@@ -30,10 +30,20 @@ export class HomePage implements OnInit {
 
   }
 
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.pollsService.list().subscribe(data => {
+      this.pollList = data['data'];
+      event.target.complete();
+      console.log(this.pollList);
+    });
+  }
+
   ngOnInit() {
     this.setHash();
     this.loadPoll();
     this.userDetails = this.utils.getValue('USER_DETAILS') || {};
+    console.log(this.userDetails)
   }
 
   setHash = () => {

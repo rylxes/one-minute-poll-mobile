@@ -1,6 +1,6 @@
 {
 	"appId": "com.digitalweb.oneMinutePoll",
-	"appName": "oneMinutePoll",
+	"appName": "One Minute Poll",
 	"webDir": "www",
 	"bundledWebRuntime": false
 }

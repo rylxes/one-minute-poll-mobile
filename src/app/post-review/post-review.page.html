@@ -87,7 +87,8 @@
                     </div>
                     <div class="formFieldWrap">
                       <p>Close Date</p>
-                      <input type="text" name="close-date" value="{{pollList.closeDate}}" readonly class="contactField textField"
+                      <input type="text" name="close-date" value="{{pollList.closeDate}}" readonly
+                             class="contactField textField"
                              id="close-date"/>
                     </div>
 
@@ -108,17 +109,34 @@
                     </div>
                     <!-- end - trigger this block for non-registered users -->
 
+<!--                    <div class="formSubmitButtonErrorsWrap">-->
+<!--                      &lt;!&ndash;                      <input type="submit" class="buttonWrap button button-blue searchSubmitButton"&ndash;&gt;-->
+<!--                      &lt;!&ndash;                             id="searchSubmitButton" value="Post"/>&ndash;&gt;-->
+
+<!--                      <ion-button (click)="submit()" class="buttonWrap button button-blue searchSubmitButton"-->
+<!--                                  color="primary" expand="block">Post-->
+<!--                      </ion-button>-->
+
+<!--                      <a *ngIf="!isEdit" [routerLink]="['/add-new']"-->
+<!--                         class="buttonWrap button button-red searchSubmitButton">Edit-->
+<!--                        Poll</a>-->
+<!--                    </div>-->
+
+
                     <div class="formSubmitButtonErrorsWrap">
-<!--                      <input type="submit" class="buttonWrap button button-blue searchSubmitButton"-->
-<!--                             id="searchSubmitButton" value="Post"/>-->
+                      <input type="submit"
+                             (click)="submit()"
+                             class="buttonWrap button button-blue searchSubmitButton"
+                             id="searchSubmitButton" value="Post"
+                      />
+                      <a *ngIf="!isEdit" [routerLink]="['/add-new']"
+                         class="buttonWrap button button-red searchSubmitButton">Edit
+                        Poll
+                      </a>
 
-                      <ion-button (click)="submit()" class="buttonWrap button button-blue searchSubmitButton"
-                                  color="primary" expand="block">Post
-                      </ion-button>
-
-                      <a [routerLink]="['/add-new']" class="buttonWrap button button-red searchSubmitButton">Edit
-                        Poll</a>
                     </div>
+
+
                   </fieldset>
                 </form>
               </div>

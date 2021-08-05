@@ -24,9 +24,10 @@
                   </ion-item>
                   <ion-row>
                     <ion-col>
-                      <ion-button [disabled]="!pageForm.form.valid" type="submit"
-                                  color="primary" expand="block">Submit
-                      </ion-button>
+                      <input [disabled]="!pageForm.form.valid" type="submit"
+                             class="buttonWrap button button-blue searchSubmitButton" id="searchSubmitButton"
+                             value="Submit" data-formId="contactForm"/>
+
                     </ion-col>
                   </ion-row>
                 </form>

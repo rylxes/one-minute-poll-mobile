@@ -60,8 +60,8 @@
           </div>
 
           <div class="decoration"></div>
-          <div class="formSubmitButtonErrorsWrap">
-            <a href="#" class="buttonWrap button button-blue searchSubmitButton">Edit Poll</a>
+          <div *ngIf="canEdit" class="formSubmitButtonErrorsWrap">
+            <a [routerLink]="['/add-new', poll.id]" class="buttonWrap button button-blue searchSubmitButton">Edit Poll</a>
           </div>
 
 

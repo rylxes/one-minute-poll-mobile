@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {UtilitiesService} from "../services/utilities.service";
 import {MenuController} from "@ionic/angular";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
 import {PollsService} from "../services/polls.service";
 import {EventsService} from "../events/events.service";
+import {isNil} from 'lodash-es';
+
 
 @Component({
   selector: 'app-post-review',
@@ -20,18 +22,22 @@ export class PostReviewPage implements OnInit {
   image: any;
   category: any;
   pollType: any;
+  theID: any;
   pollTypesList: any;
   isAuth = false;
+  isEdit = false;
   page = '';
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private pollsService: PollsService,
     private eventsService: EventsService,
     private readonly sanitizer: DomSanitizer,
     private utils: UtilitiesService,
     public menuCTL: MenuController
   ) {
+    this.theID = this.route.snapshot.paramMap.get('id');
     this.menuCTL.enable(true);
   }
 
@@ -62,14 +68,27 @@ export class PostReviewPage implements OnInit {
     if (this.showA2E) {
       toSubmit.options = options;
     }
-    this.pollsService.create(toSubmit).subscribe(res => {
-      console.log(res);
-      this.utils.showToast('Poll Created !');
-      this.eventsService.publishSomeData({
-        completed: true
+    if (this.isEdit) {
+      this.pollsService.edit(toSubmit, this.theID).subscribe(res => {
+        console.log(res);
+        this.utils.showToast('Poll Editted !');
+        this.eventsService.publishSomeData({
+          completed: true
+        });
+        this.router.navigate(['/home']);
       });
-      this.router.navigate(['/home']);
-    });
+    } else {
+      this.pollsService.create(toSubmit).subscribe(res => {
+        console.log(res);
+        this.utils.showToast('Poll Created !');
+        this.eventsService.publishSomeData({
+          completed: true
+        });
+        const response = res['data']
+        this.router.navigate(['/poll-submitted', response.id]);
+      });
+
+    }
 
     console.log(toSubmit);
   }
@@ -82,12 +101,20 @@ export class PostReviewPage implements OnInit {
     this.pollTypesList = this.utils.getValue('pollTypesList');
     this.categoriesList = this.utils.getValue('categoriesList');
     this.isAuth = this.utils.getValue('IS_AUTH');
-
-
     this.category = this.categoriesList.find(input => input.id == this.pollList.category);
     this.pollType = this.pollTypesList.find(input => input.id == this.pollList.answerType);
 
-    this.photo = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64, ' + this.image.base64String);
+    console.log(this.theID)
+    this.isEdit = false;
+    if (!isNil(this.theID)) {
+      this.isEdit = true;
+    }
+    console.log(this.image?.base64String)
+    try {
+      this.photo = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64, ' + this.image.base64String);
+    } catch (e) {
+      this.photo = this.utils.getValue('PHOTO_URL');
+    }
     console.log(this.pollList)
     console.log(this.category)
   }

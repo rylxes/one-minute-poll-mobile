@@ -1,6 +1,7 @@
 <app-header></app-header>
 
-<ion-content class="left-sidebar">
+<ion-content class="left-sidebar" [fullscreen]="true">
+
 
 
   <div class="all-elements">
@@ -11,11 +12,16 @@
 
       <div id="content" class="snap-content">
         <div class="content">
+          <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content></ion-refresher-content>
+          </ion-refresher>
           <div class="header-clear"></div>
+
+
           <!--Page content goes here, fixed elements go above the all elements class-->
 
           <div class="container">
-            <h4>Hi {{userDetails.name || 'Guest'}},</h4>
+            <h4>Hi {{userDetails?.name || 'Guest'}},</h4>
           </div>
 
           <div class="decoration"></div>
@@ -28,7 +34,8 @@
                 <div class="item" *ngFor="let eachPoll of pollList">
                   <h4><a [routerLink]="['/vote-now',eachPoll.id]">{{eachPoll.question}}</a></h4>
                   <span class="votes"><a
-                    [routerLink]="['/vote-now',eachPoll.id]">{{eachPoll?.counters?.value || 0}} / {{eachPoll.category.name}}</a></span>
+                    [routerLink]="['/vote-now',eachPoll.id]">{{eachPoll?.counters?.value || 0}}
+                    / {{eachPoll.category.name}}</a></span>
                 </div>
               </div>
             </div>
@@ -56,7 +63,6 @@
     </div>
     <!-- <a href="#" class="back-to-top-badge"><i class="las la-caret-up"></i>Back to top</a> -->
   </div>
-
 
 </ion-content>
 <app-footer [pageName]=page></app-footer>

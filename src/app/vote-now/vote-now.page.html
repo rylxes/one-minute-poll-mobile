@@ -73,16 +73,13 @@
                 </tr>
                 <tr>
                   <td>Total Votes</td>
-                  <td>22,576</td>
+                  <td>{{sum}}</td>
                 </tr>
-                <tr>
-                  <td>True Votes</td>
-                  <td>18,109</td>
+                <tr *ngFor="let eachValue of optionValues">
+                  <td>{{eachValue.name}}</td>
+                  <td>{{eachValue.count}}</td>
                 </tr>
-                <tr>
-                  <td>False Votes</td>
-                  <td>4,467</td>
-                </tr>
+
                 </tbody>
               </table>
             </div>
@@ -90,10 +87,9 @@
             <div class="decoration"></div>
             <div class="formSubmitButtonErrorsWrap">
 
-              <ion-button [disabled]="!pageForm.form.valid"
-                          type="submit"
-                          class="buttonWrap button button-blue searchSubmitButton">Submit
-              </ion-button>
+              <input [disabled]="!pageForm.form.valid" type="submit"
+                     class="buttonWrap button button-blue searchSubmitButton" id="searchSubmitButton"
+                     value="Submit" data-formId="contactForm"/>
 
             </div>
 

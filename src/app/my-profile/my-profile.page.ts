@@ -5,6 +5,9 @@ import {AlertController} from "@ionic/angular";
 import {AuthService} from "../services/auth.service";
 import {UtilitiesService} from "../services/utilities.service";
 import {PollsService} from "../services/polls.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import * as moment from "moment";
+import {UsersService} from "../services/users.service";
 
 const TOKEN_KEY = 'jwt-token';
 
@@ -17,15 +20,21 @@ export class MyProfilePage implements OnInit {
 
   page = 'Profile';
   userDetails: any;
-
+  public data: FormGroup;
 
   constructor(
     private router: Router,
+    private formBuilder: FormBuilder,
     private auth: AuthService,
+    private usersService: UsersService,
     private pollsService: PollsService,
     private utils: UtilitiesService,
     private alertCtrl: AlertController
   ) {
+    this.data = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+    });
     this.router.events
       .pipe(filter((event: any) => event instanceof RoutesRecognized), pairwise())
       .subscribe((events: RoutesRecognized[]) => {
@@ -35,11 +44,25 @@ export class MyProfilePage implements OnInit {
 
   }
 
-  ngOnInit() {
-    this.userDetails = this.utils.getValue('USER_DETAILS') || {};
-    console.log(this.userDetails);
+  public onSubmitForm(data) {
+    console.log(this.data.value);
+    this.usersService.edit(this.data.value, 1).subscribe(res => {
+      if (res) {
+        this.utils.setValue('USER_DETAILS', res['data']);
+        this.utils.showToast('profile edited !');
+      }
+    });
   }
 
+  ngOnInit() {
+    this.userDetails = this.utils.getValue('USER_DETAILS') || {};
+    let form = {
+      name: this.userDetails?.name,
+      email: this.userDetails?.email,
+    }
+    this.data.setValue(form);
+    console.log(this.userDetails);
+  }
 
 
   presentPrompt = async () => {

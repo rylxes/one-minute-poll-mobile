@@ -7,18 +7,24 @@ import * as moment from "moment";
 import {UtilitiesService} from "../services/utilities.service";
 import {VoteService} from "../services/vote.service";
 import {PollOptionsService} from "../services/poll-options.service";
+import {PollResultService} from "../services/poll-result.service";
+import {isNil} from 'lodash-es';
+
 
 @Component({
   selector: 'app-vote-now',
   templateUrl: './vote-now.page.html',
   styleUrls: ['./vote-now.page.scss'],
 })
+
 export class VoteNowPage implements OnInit {
 
   page = 'Polls';
   theID: any;
   poll: any = {};
   pollOptions: any = {};
+  optionValues: any = [];
+  sum: any = 0;
   public data: FormGroup;
 
   constructor(
@@ -28,6 +34,7 @@ export class VoteNowPage implements OnInit {
     public menuCTL: MenuController,
     private utils: UtilitiesService,
     private pollsService: PollsService,
+    private pollResultService: PollResultService,
     private pollOptionsService: PollOptionsService,
     private voteService: VoteService,
   ) {
@@ -49,8 +56,9 @@ export class VoteNowPage implements OnInit {
     };
 
     this.voteService.create(toSubmit).subscribe(res => {
-      this.utils.showToast('Voted in poll!');
-      this.router.navigate(['/home']);
+      let vote = res['data'];
+      console.log(res)
+      this.router.navigate(['/vote-complete', vote?.id]);
     });
 
   }
@@ -59,11 +67,19 @@ export class VoteNowPage implements OnInit {
     this.loadPoll();
   }
 
+  calculate = () => {
+    if (!isNil(this.poll)) {
+      this.pollResultService.calculate(this.poll);
+      this.optionValues = this.pollResultService.optionValues;
+      this.sum = this.pollResultService.sum;
+    }
+  }
 
 
   loadPoll = () => {
     this.pollsService.getOne(this.theID).subscribe(data => {
       this.poll = data['data'];
+      this.calculate();
       console.log(this.poll);
     });
   }

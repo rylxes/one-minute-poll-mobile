@@ -9,7 +9,13 @@
 
       <div id="content" class="snap-content">
         <div class="content">
-          <ion-button (click)="presentPrompt()" color="primary" expand="block">Authenticate</ion-button>
+          <input type="submit"
+                 (click)="presentPrompt()"
+                 class="buttonWrap button button-blue searchSubmitButton"
+                 value="Authenticate"
+          />
+
+
           <div class="header-clear"></div>
           <!--Page content goes here, fixed elements go above the all elements class-->
 
@@ -22,9 +28,9 @@
             <div class="profile-image">
               <div class="profile-image-wrap">
                 <img src="assets/images/user_d.png" alt="Profile Image"/>
-                <div class="edit-profile-image">
-                  <span>Edit <i class="las la-edit"></i></span>
-                </div>
+                <!--                <div class="edit-profile-image">-->
+                <!--                  <span>Edit <i class="las la-edit"></i></span>-->
+                <!--                </div>-->
               </div>
             </div>
           </div>
@@ -33,11 +39,13 @@
           <div class="container">
             <div class="container no-bottom">
               <div class="profile-form poll-form no-bottom">
-                <form action="#" method="post" class="updateProfile" id="updateProfile">
+                <form [formGroup]="data" (ngSubmit)="onSubmitForm(pageForm)" #pageForm="ngForm" class="updateProfile">
                   <fieldset>
                     <div class="formFieldWrap">
                       <label for="userName">Username</label>
-                      <input type="text" name="userName" value="{{userDetails.name}}" class="textField bg"
+                      <input type="text"
+                             formControlName="name"
+                             value="{{userDetails.name}}" class="textField bg"
                              id="userName"/>
                     </div>
                     <!--                    <div class="formFieldWrap">-->
@@ -50,7 +58,10 @@
                     <!--                    </div>-->
                     <div class="formFieldWrap">
                       <label for="userEmail">Email Address</label>
-                      <input type="email" name="userEmail" value="{{userDetails.email}}" class="textField bg"
+                      <input type="email"
+                             formControlName="email"
+                             contenteditable="false"
+                             value="{{userDetails.email}}" class="textField bg"
                              id="userEmail" readonly/>
                     </div>
 

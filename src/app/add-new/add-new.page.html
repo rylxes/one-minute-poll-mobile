@@ -57,7 +57,7 @@
                   </ion-item>
 
 
-                  <div class="radio-wrap border-bottom" *ngIf="showA2E">
+                  <div class="radio-wrap border-bottom" *ngIf="showA2E || myShowAE">
 
                     <ion-item>
                       <ion-label position="floating">A</ion-label>
@@ -168,20 +168,23 @@
                   </div>
                   <!-- end - trigger this block for non-registered users -->
 
+
+                  <!--                  <div class="formSubmitButtonErrorsWrap">-->
+
+                  <!--                    <ion-button [disabled]="!pageForm.form.valid"-->
+                  <!--                                type="submit"-->
+                  <!--                                class="buttonWrap button button-blue searchSubmitButton">Submit-->
+                  <!--                    </ion-button>-->
+
+
+                  <!--                  </div>-->
                   <div class="formSubmitButtonErrorsWrap">
-
-                    <ion-button [disabled]="!pageForm.form.valid"
-                                type="submit"
-                                class="buttonWrap button button-blue searchSubmitButton">Submit
-                    </ion-button>
-
-
-
+                    <input [disabled]="!pageForm.form.valid" type="submit"
+                           class="buttonWrap button button-blue searchSubmitButton" id="searchSubmitButton"
+                           value="Preview" data-formId="contactForm"/>
                   </div>
-                  <ion-row>
-                    <ion-col>
-                    </ion-col>
-                  </ion-row>
+                  <br/>
+                  <br/>
 
                 </form>
               </div>
