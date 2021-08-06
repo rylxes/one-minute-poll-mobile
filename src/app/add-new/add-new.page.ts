@@ -16,6 +16,7 @@ import {PreviousURLService} from "../services/previous-url.service";
 import {EventsService} from "../events/events.service";
 import {isNil} from 'lodash-es';
 import {PollsService} from "../services/polls.service";
+import {PollCreatedService} from "../events/poll-created.service";
 
 export interface imgFile {
   name: string;
@@ -76,6 +77,7 @@ export class AddNewPage implements OnInit {
     private router: Router,
     private pollsService: PollsService,
     private pollTypeService: PollTypeService,
+    private pollCreatedService: PollCreatedService,
     private eventsService: EventsService,
     private categoriesService: CategoriesService,
     private previousURLService: PreviousURLService,
@@ -229,6 +231,9 @@ export class AddNewPage implements OnInit {
     this.data.value.image = this.utils.getValue('thePhoto');
     this.utils.setValue('toSubmit', this.data.value);
     this.utils.setValue('showA2E', this.showA2E);
+    this.pollCreatedService.publish({
+      form: this.data.value,
+    });
     if (!isNil(this.theID)) {
       this.router.navigate(['/post-review', this.theID]);
     } else {

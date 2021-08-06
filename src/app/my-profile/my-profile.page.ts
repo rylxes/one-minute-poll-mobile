@@ -8,6 +8,8 @@ import {PollsService} from "../services/polls.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import * as moment from "moment";
 import {UsersService} from "../services/users.service";
+import {isNil} from 'lodash-es';
+import * as _ from "underscore";
 
 const TOKEN_KEY = 'jwt-token';
 
@@ -20,6 +22,7 @@ export class MyProfilePage implements OnInit {
 
   page = 'Profile';
   userDetails: any;
+  isAuth: any;
   public data: FormGroup;
 
   constructor(
@@ -46,6 +49,7 @@ export class MyProfilePage implements OnInit {
 
   public onSubmitForm(data) {
     console.log(this.data.value);
+
     this.usersService.edit(this.data.value, 1).subscribe(res => {
       if (res) {
         this.utils.setValue('USER_DETAILS', res['data']);
@@ -55,12 +59,16 @@ export class MyProfilePage implements OnInit {
   }
 
   ngOnInit() {
+    this.isAuth = this.utils.getValue('IS_AUTH');
     this.userDetails = this.utils.getValue('USER_DETAILS') || {};
-    let form = {
-      name: this.userDetails?.name,
-      email: this.userDetails?.email,
+    if (!_.isEmpty(this.userDetails)) {
+      console.log(this.userDetails)
+      let form = {
+        name: this.userDetails?.name,
+        email: this.userDetails?.email,
+      }
+      this.data.setValue(form);
     }
-    this.data.setValue(form);
     console.log(this.userDetails);
   }
 

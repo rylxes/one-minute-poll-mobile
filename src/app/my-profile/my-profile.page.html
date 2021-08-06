@@ -9,7 +9,7 @@
 
       <div id="content" class="snap-content">
         <div class="content">
-          <input type="submit"
+          <input *ngIf="!isAuth" type="submit"
                  (click)="presentPrompt()"
                  class="buttonWrap button button-blue searchSubmitButton"
                  value="Authenticate"

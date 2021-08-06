@@ -78,12 +78,15 @@
                       </div>
                     </div>
                     <div class="formFieldWrap border-bottom">
-                      <p>Open to Everyone?</p>
-                      <div class="form-group check-wrap">
-                        <label class="c-label">Yes
-                          <input type="checkbox" onclick="return false;" checked="checked" name="polltype_open_to_all"
-                                 class="checkbox"/><span class="checkmark"></span></label>
-                      </div>
+                      <p>Open to Everyone?</p> <strong>{{pollList.openToAll ? 'Yes' : 'No'}}</strong>
+<!--                      <div class="form-group check-wrap">-->
+<!--                        <label class="c-label">Yes-->
+<!--                          <input type="checkbox"-->
+<!--                                 contenteditable="false"-->
+<!--                                 [checked]="pollList.openToAll"-->
+<!--                                 name="polltype_open_to_all"-->
+<!--                                 class="checkbox"/><span class="checkmark"></span></label>-->
+<!--                      </div>-->
                     </div>
                     <div class="formFieldWrap">
                       <p>Close Date</p>
@@ -109,18 +112,18 @@
                     </div>
                     <!-- end - trigger this block for non-registered users -->
 
-<!--                    <div class="formSubmitButtonErrorsWrap">-->
-<!--                      &lt;!&ndash;                      <input type="submit" class="buttonWrap button button-blue searchSubmitButton"&ndash;&gt;-->
-<!--                      &lt;!&ndash;                             id="searchSubmitButton" value="Post"/>&ndash;&gt;-->
+                    <!--                    <div class="formSubmitButtonErrorsWrap">-->
+                    <!--                      &lt;!&ndash;                      <input type="submit" class="buttonWrap button button-blue searchSubmitButton"&ndash;&gt;-->
+                    <!--                      &lt;!&ndash;                             id="searchSubmitButton" value="Post"/>&ndash;&gt;-->
 
-<!--                      <ion-button (click)="submit()" class="buttonWrap button button-blue searchSubmitButton"-->
-<!--                                  color="primary" expand="block">Post-->
-<!--                      </ion-button>-->
+                    <!--                      <ion-button (click)="submit()" class="buttonWrap button button-blue searchSubmitButton"-->
+                    <!--                                  color="primary" expand="block">Post-->
+                    <!--                      </ion-button>-->
 
-<!--                      <a *ngIf="!isEdit" [routerLink]="['/add-new']"-->
-<!--                         class="buttonWrap button button-red searchSubmitButton">Edit-->
-<!--                        Poll</a>-->
-<!--                    </div>-->
+                    <!--                      <a *ngIf="!isEdit" [routerLink]="['/add-new']"-->
+                    <!--                         class="buttonWrap button button-red searchSubmitButton">Edit-->
+                    <!--                        Poll</a>-->
+                    <!--                    </div>-->
 
 
                     <div class="formSubmitButtonErrorsWrap">

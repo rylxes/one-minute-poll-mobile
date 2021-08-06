@@ -6,6 +6,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {PollsService} from "../services/polls.service";
 import {EventsService} from "../events/events.service";
 import {isNil} from 'lodash-es';
+import {PollCreatedService} from "../events/poll-created.service";
 
 
 @Component({
@@ -24,6 +25,7 @@ export class PostReviewPage implements OnInit {
   pollType: any;
   theID: any;
   pollTypesList: any;
+  theFormData: any;
   isAuth = false;
   isEdit = false;
   page = '';
@@ -31,6 +33,7 @@ export class PostReviewPage implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private pollCreatedService: PollCreatedService,
     private pollsService: PollsService,
     private eventsService: EventsService,
     private readonly sanitizer: DomSanitizer,
@@ -39,6 +42,10 @@ export class PostReviewPage implements OnInit {
   ) {
     this.theID = this.route.snapshot.paramMap.get('id');
     this.menuCTL.enable(true);
+    this.pollCreatedService.getObservable().subscribe((data) => {
+      this.theFormData = data.form;
+      console.log(this.theFormData)
+    });
   }
 
   submit = () => {
@@ -95,6 +102,7 @@ export class PostReviewPage implements OnInit {
 
 
   ngOnInit() {
+
     this.pollList = this.utils.getValue('toSubmit');
     this.image = this.utils.getValue('theImage');
     this.showA2E = this.utils.getValue('showA2E');
@@ -109,7 +117,6 @@ export class PostReviewPage implements OnInit {
     if (!isNil(this.theID)) {
       this.isEdit = true;
     }
-    console.log(this.image?.base64String)
     try {
       this.photo = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64, ' + this.image.base64String);
     } catch (e) {
