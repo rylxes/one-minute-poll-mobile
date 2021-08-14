@@ -114,6 +114,7 @@ export class MyProfilePage implements OnInit {
       if (token) {
         localStorage.setItem(TOKEN_KEY, token);
         this.utils.showToast('Authenticated !');
+        this.ngOnInit();
         //this.router.navigate(['/my-profile']);
       }
     });

@@ -42,16 +42,16 @@
                   </ion-item>
 
 
-                  <ion-item lines="full" class="radio-wrap border-bottom">
+                  <ion-item  lines="full" class="radio-wrap border-bottom">
 
                     <ion-radio-group (ionChange)="clickOptions($event)" lines="full" formControlName="answerType">
                       <ion-list-header>
                         <ion-label><p>How will people respond to your poll?</p></ion-label>
                       </ion-list-header>
 
-                      <ion-item class="form-radio" *ngFor="let eachType of pollTypesList">
+                      <ion-item  class="form-radio" *ngFor="let eachType of pollTypesList">
                         <ion-radio class="radio" slot="start" name="answer" [value]="eachType.id" checked></ion-radio>
-                        <ion-label class="c-label">{{eachType.name}}</ion-label>
+                        <ion-label (click)="clickOptions2(eachType)" class="c-label">{{eachType.name}}</ion-label>
                       </ion-item>
                     </ion-radio-group>
                   </ion-item>
@@ -124,7 +124,7 @@
 
                       <ion-checkbox [(ngModel)]="checked" class="checkbox" color="primary"
                                     formControlName="openToAll"></ion-checkbox>
-                      <label class="c-label">Yes
+                      <label (click)="openClick()" class="c-label">Yes
                         <!--                          <span class="checkmark"></span>-->
                       </label>
                     </div>
@@ -133,8 +133,7 @@
 
                   <ion-item lines="full">
                     <ion-label>Close Date</ion-label>
-                    <ion-datetime formControlName="closeDate" placeholder="Select Date" displayFormat="YYYY-MM-DD"
-                                  required></ion-datetime>
+                    <ion-datetime formControlName="closeDate" placeholder="Select Date" displayFormat="YYYY-MM-DD"></ion-datetime>
                   </ion-item>
 
 
@@ -184,6 +183,14 @@
                     <input [disabled]="!pageForm.form.valid" type="submit"
                            class="buttonWrap button button-blue searchSubmitButton" id="searchSubmitButton"
                            value="Preview" data-formId="contactForm"/>
+
+
+                    <a (click)="reset()"
+                       class="buttonWrap button button-red searchSubmitButton">Reset
+                      Poll
+                    </a>
+
+
                   </div>
                   <br/>
                   <br/>

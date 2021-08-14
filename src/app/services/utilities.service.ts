@@ -115,6 +115,11 @@ export class UtilitiesService {
   };
 
 
+  remove(key) {
+    localStorage.removeItem(key);
+  }
+
+
   setValue(key, value) {
     this.saveKeys(key);
     localStorage.setItem(key, JSON.stringify(value));

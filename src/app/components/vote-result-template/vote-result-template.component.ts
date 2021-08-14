@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import * as _ from "underscore";
+
 import {PollResultService} from "../../services/poll-result.service";
 
 @Component({

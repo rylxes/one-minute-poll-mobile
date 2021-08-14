@@ -2,12 +2,14 @@
 <ion-content class="left-sidebar">
 
 
+
   <div class="all-elements">
     <div class="snap-drawers">
 
 
-      <div *ngIf="poll" id="content" class="snap-content">
-        <div class="content">
+      <div  id="content" class="snap-content">
+        <div *ngIf="poll" class="content">
+
           <div class="header-clear"></div>
           <!--Page content goes here, fixed elements go above the all elements class-->
 
@@ -30,10 +32,13 @@
           <div class="decoration"></div>
 
 
+
+
+
           <form #pageForm="ngForm" [formGroup]="data" (ngSubmit)="onSubmit(pageForm)" class="searchForm">
             <div class="vote-wrap">
 
-              <div class="formFieldWrap form-group radio-wrap radio-group">
+              <div *ngIf="hasNotExpired" class="formFieldWrap form-group radio-wrap radio-group">
 
 
                 <ion-radio-group *ngIf="poll?.pollType?.id != 3" lines="full" formControlName="vote">
@@ -41,7 +46,7 @@
                   <ion-item class="form-radio" *ngFor="let eachType of poll?.valueVote">
                     <ion-radio class="radio" slot="start" name="answer" [value]="eachType.id"
                                checked></ion-radio>
-                    <ion-label class="c-label">{{eachType.value}}</ion-label>
+                    <ion-label (click)="clickOptions2(eachType.id)" class="c-label">{{eachType.value}}</ion-label>
                   </ion-item>
 
 
@@ -53,7 +58,8 @@
                   <ion-item class="form-radio" *ngFor="let eachType of poll?.pollOptions">
                     <ion-radio class="radio" slot="start" name="answer" [value]="eachType.vote_value_id"
                                checked></ion-radio>
-                    <ion-label class="c-label">{{eachType.value}}</ion-label>
+                    <ion-label (click)="clickOptions2(eachType.vote_value_id)"
+                               class="c-label">{{eachType.value}}</ion-label>
                   </ion-item>
                 </ion-radio-group>
 
@@ -63,7 +69,8 @@
             </div>
 
             <!-- trigger this section after voting is successful -->
-            <div id="pollResBasic" class="poll-summary">
+
+            <div class="poll-summary">
               <h4>Poll Summary</h4>
               <table class="table">
                 <tbody>
@@ -82,7 +89,14 @@
 
                 </tbody>
               </table>
+
+              <ion-card>
+                <ion-card-content>
+                  <canvas #barChart></canvas>
+                </ion-card-content>
+              </ion-card>
             </div>
+
             <!-- end - trigger this section after voting is successful -->
             <div class="decoration"></div>
             <div class="formSubmitButtonErrorsWrap">
@@ -97,12 +111,32 @@
             <div class="bottom-fix"></div>
             <!-- End of entire page content-->
           </form>
+
+
+
+
+
+
         </div>
+
+
+
+
+
       </div>
 
+
+
+
     </div>
+
+
+
+
     <!-- <a href="#" class="back-to-top-badge"><i class="las la-caret-up"></i>Back to top</a> -->
   </div>
+
+
 
 
 </ion-content>

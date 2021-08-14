@@ -90,7 +90,7 @@ export class AddNewPage implements OnInit {
     this.data = this.formBuilder.group({
       title: ['', [Validators.required]],
       answerType: ['', [Validators.required]],
-      closeDate: ['', [Validators.required]],
+      closeDate: [''],
       question: ['', [Validators.required]],
       image: [''],
       category: [''],
@@ -121,6 +121,13 @@ export class AddNewPage implements OnInit {
     this.eventsService.getObservable().subscribe((data) => {
       if (data.completed) {
         this.data.reset();
+        this.photo = null;
+        this.utils.remove('toSubmit');
+        this.utils.remove('theImage');
+        this.utils.remove('showA2E');
+        this.utils.remove('pollTypesList');
+        this.utils.remove('categoriesList');
+        this.utils.remove('PHOTO_URL');
       }
     });
 
@@ -136,8 +143,33 @@ export class AddNewPage implements OnInit {
 
   }
 
+  reset = () => {
+    this.data.reset();
+  }
+
+  openClick = () => {
+    //console.log(this.data.value.openToAll)
+    let formData = {
+      ...this.data.value, ...{
+        openToAll: !this.data.value.openToAll
+      }
+    }
+    this.data.setValue(formData);
+    // this.clickOptions(eachType)
+  }
+
+  clickOptions2 = (eachType) => {
+    let formData = {
+      ...this.data.value, ...{
+        answerType: eachType.id
+      }
+    }
+    this.data.setValue(formData);
+    this.clickOptions(eachType)
+  }
+
   clickOptions = (event) => {
-    //console.log(this.data.value.answerType)
+    console.log(this.data.value.answerType)
     this.showA2E = false;
     if (this.data.value.answerType === 3) {
       this.showA2E = true;
@@ -226,7 +258,10 @@ export class AddNewPage implements OnInit {
   }
 
   public onSubmit(data) {
-    const mydate = moment(this.data.value.closeDate).format('YYYY-MM-DD');
+    let mydate = '';
+    if ((this.data.value.closeDate)) {
+      mydate = moment(this.data.value.closeDate).format('YYYY-MM-DD') || '';
+    }
     this.data.value.closeDate = mydate;
     this.data.value.image = this.utils.getValue('thePhoto');
     this.utils.setValue('toSubmit', this.data.value);

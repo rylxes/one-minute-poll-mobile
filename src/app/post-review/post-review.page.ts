@@ -112,7 +112,7 @@ export class PostReviewPage implements OnInit {
     this.category = this.categoriesList.find(input => input.id == this.pollList.category);
     this.pollType = this.pollTypesList.find(input => input.id == this.pollList.answerType);
 
-    console.log(this.theID)
+
     this.isEdit = false;
     if (!isNil(this.theID)) {
       this.isEdit = true;
@@ -120,7 +120,9 @@ export class PostReviewPage implements OnInit {
     try {
       this.photo = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64, ' + this.image.base64String);
     } catch (e) {
-      this.photo = this.utils.getValue('PHOTO_URL');
+      if (this.isEdit) {
+        this.photo = this.utils.getValue('PHOTO_URL');
+      }
     }
     console.log(this.pollList)
     console.log(this.category)
