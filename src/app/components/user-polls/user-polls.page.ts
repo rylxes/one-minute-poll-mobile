@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PollsService} from "../../services/polls.service";
-import {LoadingService} from "../../services/loading.service";
 import {PollOptionsService} from "../../services/poll-options.service";
 
 @Component({
@@ -17,7 +16,6 @@ export class UserPollsPage implements OnInit {
   constructor(
     private pollsService: PollsService,
     private pollOptionsService: PollOptionsService,
-    private ionLoader: LoadingService
   ) {
   }
 

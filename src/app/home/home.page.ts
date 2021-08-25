@@ -3,7 +3,6 @@ import {v4 as uuidv4} from 'uuid';
 import {NavigationEnd, Router, RoutesRecognized} from "@angular/router";
 import {UtilitiesService} from "../services/utilities.service";
 import {PollsService} from "../services/polls.service";
-import {LoadingService} from "../services/loading.service";
 import {PreviousURLService} from "../services/previous-url.service";
 import {isNil} from 'lodash-es';
 
@@ -24,7 +23,6 @@ export class HomePage implements OnInit {
     private router: Router,
     private pollsService: PollsService,
     private previousURLService: PreviousURLService,
-    private ionLoader: LoadingService,
     private utils: UtilitiesService
   ) {
 
