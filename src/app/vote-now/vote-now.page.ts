@@ -33,6 +33,10 @@ export class VoteNowPage implements OnInit {
   bars: any;
   colorArray: any;
 
+  voteNow = {
+    vote: '',
+  };
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -52,6 +56,11 @@ export class VoteNowPage implements OnInit {
     this.menuCTL.enable(true);
   }
 
+
+  clickOptions = (event) => {
+    console.log(this.data.value.answerType)
+  }
+
   public onSubmit(pageForm) {
 
     console.log(this.data.value);
@@ -65,9 +74,8 @@ export class VoteNowPage implements OnInit {
     this.voteService.create(toSubmit).subscribe(res => {
       let vote = res['data'];
       console.log(res)
-      this.router.navigate(['/vote-complete', vote?.id]);
+      this.router.navigate(['/vote-complete', vote?.poll_id]);
     });
-
   }
 
   clickOptions2 = (id) => {
@@ -97,6 +105,7 @@ export class VoteNowPage implements OnInit {
     // console.log(keys)
 
     var options = {
+      //indexAxis: 'y',
       scales: {
         y: {
           title: {
@@ -110,6 +119,12 @@ export class VoteNowPage implements OnInit {
         }
       }
     }
+    // if (this.poll?.pollType?.id == 2) {
+    //   options['indexAxis'] = 'y';
+    //   options.scales['x'] = options.scales.y;
+    //   options.scales.y = null;
+    //   //options.scales.x
+    // }
     this.bars = new Chart(this.barChart.nativeElement, {
       type: 'bar',
       options,

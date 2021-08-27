@@ -71,6 +71,16 @@ export class AddNewPage implements OnInit {
   loadPollTypeEvent = false;
   loadCategoriesEvent = false;
 
+  maxNumberOfTitleCharacters = 25;
+  maxNumberOfQuestionCharacters = 200;
+  numberOfTitleCharacters = 0;
+  numberOfQuestionCharacters = 0;
+  counter = true;
+  interaction = {
+    title: '',
+    question: ''
+  };
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -141,6 +151,15 @@ export class AddNewPage implements OnInit {
     //     console.log('current url', events[1].urlAfterRedirects);
     //   });
 
+  }
+
+
+  onTitleModelChange(textValue: string): void {
+    this.numberOfTitleCharacters = textValue?.length;
+  }
+
+  onQuestionModelChange(textValue: string): void {
+    this.numberOfQuestionCharacters = textValue?.length;
   }
 
   reset = () => {
@@ -350,6 +369,18 @@ export class AddNewPage implements OnInit {
       //   await this.driverProfileService.uploadAll(ab);
       // }
     }
+  }
+
+  public removePhoto() {
+    this.photo = null;
+    this.utils.remove('theImage');
+    this.utils.remove('thePhoto');
+    let formData = {
+      ...this.data.value, ...{
+        image: null
+      }
+    }
+    this.data.setValue(formData);
   }
 
   public selectPhoto() {

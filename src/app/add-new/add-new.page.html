@@ -16,8 +16,16 @@
                 <form [formGroup]="data" (ngSubmit)="onSubmit(pageForm)" #pageForm="ngForm" class="searchForm">
                   <ion-item class="formFieldWrap" lines="full">
                     <ion-label position="floating">Title</ion-label>
-                    <ion-input class="textField" autocapitalize="words" type="text" required
+                    <ion-input class="textField"
+                               [(ngModel)]="interaction.title"
+                               (ngModelChange)="onTitleModelChange($event)"
+                               [attr.maxlength]="counter ? maxNumberOfTitleCharacters : ''"
+                               autocapitalize="words" type="text" required
                                formControlName="title"></ion-input>
+
+                    <div>
+                      {{numberOfTitleCharacters}} / {{maxNumberOfTitleCharacters}}
+                    </div>
                   </ion-item>
 
                   <ion-item class="formFieldWrap" lines="full">
@@ -38,21 +46,29 @@
                                   rows="4"
                                   placeholder="Type your question here"
                                   formControlName="question"
+                                  [(ngModel)]="interaction.question"
+                                  (ngModelChange)="onQuestionModelChange($event)"
+                                  [attr.maxlength]="counter ? maxNumberOfQuestionCharacters : ''"
                                   required></ion-textarea>
+
+                    <div>
+                      {{numberOfQuestionCharacters}} / {{maxNumberOfQuestionCharacters}}
+                    </div>
                   </ion-item>
 
 
-                  <ion-item  lines="full" class="radio-wrap border-bottom">
+                  <ion-item lines="full" class="radio-wrap border-bottom">
 
                     <ion-radio-group (ionChange)="clickOptions($event)" lines="full" formControlName="answerType">
                       <ion-list-header>
                         <ion-label><p>How will people respond to your poll?</p></ion-label>
                       </ion-list-header>
 
-                      <ion-item  class="form-radio" *ngFor="let eachType of pollTypesList">
-                        <ion-radio class="radio" slot="start" name="answer" [value]="eachType.id" checked></ion-radio>
+                      <ion-item class="form-radio" *ngFor="let eachType of pollTypesList">
+                        <ion-radio slot="start" name="answer" [value]="eachType.id" checked></ion-radio>
                         <ion-label (click)="clickOptions2(eachType)" class="c-label">{{eachType.name}}</ion-label>
                       </ion-item>
+
                     </ion-radio-group>
                   </ion-item>
 
@@ -97,7 +113,7 @@
                       <div class="submenu tooltip-info">
                         Email verification required to edit this item.
                       </div>
-                      <div class="upload-wrap">
+                      <div *ngIf="!photo" class="upload-wrap">
                         <ion-input class="pollImage" type="file"
                                    (click)="selectPhoto()"
                                    formControlName="image"></ion-input>
@@ -108,6 +124,10 @@
                           <img *ngIf="photo" [src]="photo"/>
                         </ion-col>
                       </ion-row>
+
+
+                      <!--                      <button *ngIf="photo" (click)="selectPhoto()" class="button button-blue">Change</button>-->
+                      <button *ngIf="photo" (click)="removePhoto()" class="button button-red">Remove</button>
                     </div>
                   </ion-item>
 
@@ -133,7 +153,8 @@
 
                   <ion-item lines="full">
                     <ion-label>Close Date</ion-label>
-                    <ion-datetime formControlName="closeDate" placeholder="Select Date" displayFormat="YYYY-MM-DD"></ion-datetime>
+                    <ion-datetime formControlName="closeDate" placeholder="Select Date"
+                                  displayFormat="YYYY-MM-DD"></ion-datetime>
                   </ion-item>
 
 

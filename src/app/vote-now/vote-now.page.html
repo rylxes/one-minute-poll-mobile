@@ -2,12 +2,11 @@
 <ion-content class="left-sidebar">
 
 
-
   <div class="all-elements">
     <div class="snap-drawers">
 
 
-      <div  id="content" class="snap-content">
+      <div id="content" class="snap-content">
         <div *ngIf="poll" class="content">
 
           <div class="header-clear"></div>
@@ -32,28 +31,65 @@
           <div class="decoration"></div>
 
 
-
-
-
           <form #pageForm="ngForm" [formGroup]="data" (ngSubmit)="onSubmit(pageForm)" class="searchForm">
             <div class="vote-wrap">
 
-              <div *ngIf="hasNotExpired" class="formFieldWrap form-group radio-wrap radio-group">
 
+              <div *ngIf="poll?.pollType?.id == 1 && hasNotExpired"
+                   class="formFieldWrap form-group radio-wrap radio-group">
+                <!--                <label class="radio-item" for="true">-->
+                <!--                  <p>True</p>-->
+                <!--                  <input class="radio" id="true" type="radio" name="vote" />-->
+                <!--                  <span class="checkmark"></span>-->
+                <!--                </label>-->
+                <!--                <label class="radio-item" for="false">-->
+                <!--                  <p>False</p>-->
+                <!--                  <input class="radio" id="false" type="radio" name="vote" />-->
+                <!--                  <span class="checkmark"></span>-->
+                <!--                </label>-->
 
-                <ion-radio-group *ngIf="poll?.pollType?.id != 3" lines="full" formControlName="vote">
-
+                <ion-radio-group lines="full" formControlName="vote">
                   <ion-item class="form-radio" *ngFor="let eachType of poll?.valueVote">
-                    <ion-radio class="radio" slot="start" name="answer" [value]="eachType.id"
+                    <ion-radio slot="start" name="answer" [value]="eachType.id"
                                checked></ion-radio>
                     <ion-label (click)="clickOptions2(eachType.id)" class="c-label">{{eachType.value}}</ion-label>
                   </ion-item>
 
 
                 </ion-radio-group>
+              </div>
 
 
-                <ion-radio-group *ngIf="poll?.pollType?.id == 3" lines="full" formControlName="vote">
+              <div *ngIf="poll?.pollType?.id == 2 && hasNotExpired"
+                   class="formFieldWrap form-group radio-wrap radio-group">
+                <div class="rate">
+                  <div class="stars">
+                    <input *ngFor="let eachType of poll?.valueVote" formControlName="vote" id="{{'STAR'+eachType.id}}"
+                           type="radio" name="vote" value="{{eachType.id}}"/>
+                    <label *ngFor="let eachType of poll?.valueVote" [htmlFor]="'STAR'+eachType.id">5 stars</label>
+                  </div>
+
+                </div>
+
+                <!--                                <ion-radio-group *ngIf="poll?.pollType?.id == 2" lines="full" formControlName="vote">-->
+
+                <!--                                  <ion-item class="form-radio" *ngFor="let eachType of poll?.valueVote">-->
+                <!--                                    <ion-radio class="radio" slot="start" name="answer" [value]="eachType.id"-->
+                <!--                                               checked></ion-radio>-->
+                <!--                                    <ion-label (click)="clickOptions2(eachType.id)" class="c-label">{{eachType.value}}</ion-label>-->
+                <!--                                  </ion-item>-->
+
+
+                <!--                                </ion-radio-group>-->
+
+              </div>
+
+
+              <div *ngIf="poll?.pollType?.id == 3 && hasNotExpired"
+                   class="formFieldWrap form-group radio-wrap radio-group">
+
+
+                <ion-radio-group lines="full" formControlName="vote">
 
                   <ion-item class="form-radio" *ngFor="let eachType of poll?.pollOptions">
                     <ion-radio class="radio" slot="start" name="answer" [value]="eachType.vote_value_id"
@@ -82,6 +118,8 @@
                   <td>Total Votes</td>
                   <td>{{sum}}</td>
                 </tr>
+
+
                 <tr *ngFor="let eachValue of optionValues">
                   <td>{{eachValue.name}}</td>
                   <td>{{eachValue.count}}</td>
@@ -102,6 +140,7 @@
             <div class="formSubmitButtonErrorsWrap">
 
               <input [disabled]="!pageForm.form.valid" type="submit"
+                     *ngIf="hasNotExpired"
                      class="buttonWrap button button-blue searchSubmitButton" id="searchSubmitButton"
                      value="Submit" data-formId="contactForm"/>
 
@@ -113,30 +152,17 @@
           </form>
 
 
-
-
-
-
         </div>
-
-
-
 
 
       </div>
 
 
-
-
     </div>
-
-
 
 
     <!-- <a href="#" class="back-to-top-badge"><i class="las la-caret-up"></i>Back to top</a> -->
   </div>
-
-
 
 
 </ion-content>
