@@ -17,9 +17,9 @@
                   <ion-item class="formFieldWrap" lines="full">
                     <ion-label position="floating">Title</ion-label>
                     <ion-input class="textField"
+                               [maxlength]="maxNumberOfTitleCharacters"
                                [(ngModel)]="interaction.title"
                                (ngModelChange)="onTitleModelChange($event)"
-                               [attr.maxlength]="counter ? maxNumberOfTitleCharacters : ''"
                                autocapitalize="words" type="text" required
                                formControlName="title"></ion-input>
 
@@ -46,9 +46,9 @@
                                   rows="4"
                                   placeholder="Type your question here"
                                   formControlName="question"
+                                  [maxlength]="maxNumberOfQuestionCharacters"
                                   [(ngModel)]="interaction.question"
                                   (ngModelChange)="onQuestionModelChange($event)"
-                                  [attr.maxlength]="counter ? maxNumberOfQuestionCharacters : ''"
                                   required></ion-textarea>
 
                     <div>

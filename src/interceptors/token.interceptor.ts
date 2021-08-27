@@ -21,7 +21,10 @@ const TOKEN_KEY = 'jwt-token';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
+  isAuth = false;
+
   constructor(private router: Router,
+              private utils: UtilitiesService,
               private loading: LoadingService,
               private utilitiesService: UtilitiesService,
               public toastController: ToastController) {
@@ -30,14 +33,24 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.loading.show();
     const token = localStorage.getItem(TOKEN_KEY);
+    this.isAuth = this.utils.getValue('IS_AUTH');
 
-    if (token) {
+    if (this.isAuth) {
       request = request.clone({
         setHeaders: {
-          Authorization: 'Bearer ' + token
+          Authorization: 'Bearer ' + token,
+          HasAuth: "YES",
+          UUID: this.utils.getValue('UUID')
         }
       });
     }
+    // if (token) {
+    //   request = request.clone({
+    //     setHeaders: {
+    //       Authorization: 'Bearer ' + token
+    //     }
+    //   });
+    // }
 
     if (!request.headers.has('Content-Type')) {
       request = request.clone({

@@ -164,6 +164,7 @@ export class AddNewPage implements OnInit {
 
   reset = () => {
     this.data.reset();
+    this.removePhoto();
   }
 
   openClick = () => {

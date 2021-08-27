@@ -38,17 +38,17 @@
                 <td>{{poll?.counters?.value}}</td>
               </tr>
               <tr *ngFor="let eachType of pollOptions">
-                <td>{{eachType.name}} Votes</td>
+                <td>{{eachType.name}} {{poll?.pollType?.id == 2 ? "Star" : "Vote"}}</td>
                 <td>{{eachType?.counters?.value || 0}}</td>
               </tr>
               <tr>
                 <td>Created On</td>
                 <td>{{poll?.created_at |date }}</td>
               </tr>
-<!--              <tr>-->
-<!--                <td>Latest Vote</td>-->
-<!--                <td>Today, 11:23 AM</td>-->
-<!--              </tr>-->
+              <!--              <tr>-->
+              <!--                <td>Latest Vote</td>-->
+              <!--                <td>Today, 11:23 AM</td>-->
+              <!--              </tr>-->
               <tr>
                 <td>Closes</td>
                 <td>{{poll?.close_date |date }}</td>
@@ -61,7 +61,8 @@
 
           <div class="decoration"></div>
           <div *ngIf="canEdit" class="formSubmitButtonErrorsWrap">
-            <a [routerLink]="['/add-new', poll.id]" class="buttonWrap button button-blue searchSubmitButton">Edit Poll</a>
+            <a [routerLink]="['/add-new', poll.id]" class="buttonWrap button button-blue searchSubmitButton">Edit
+              Poll</a>
           </div>
 
 

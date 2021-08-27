@@ -59,7 +59,7 @@ export class PostReviewPage implements OnInit {
       open_to_everyone: this.pollList.openToAll,
       question: this.pollList.question,
       close_date: this.pollList.closeDate,
-      file: this.photo.changingThisBreaksApplicationSecurity,
+      file: this.photo?.changingThisBreaksApplicationSecurity,
       email: this.pollList.emailField,
       options: undefined
 

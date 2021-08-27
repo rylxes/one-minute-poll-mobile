@@ -1,4 +1,7 @@
 <!--                *ngFor="let eachCategory of categoriesList"-->
+<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
 <ion-card class="item grid" *ngFor="let eachPoll of pollList">
   <a [routerLink]="['/poll-details',eachPoll.id]">
     <ion-card-header class="grid-top">

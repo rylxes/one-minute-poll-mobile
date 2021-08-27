@@ -121,7 +121,7 @@
 
 
                 <tr *ngFor="let eachValue of optionValues">
-                  <td>{{eachValue.name}}</td>
+                  <td>{{eachValue.name}} {{poll?.pollType?.id == 2 ? "Star" : ""}}</td>
                   <td>{{eachValue.count}}</td>
                 </tr>
 

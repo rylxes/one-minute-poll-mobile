@@ -104,7 +104,10 @@ export class MyProfilePage implements OnInit {
 
   public onSubmit(data) {
     console.log(data.value);
-    this.auth.codeLogin({code: data.code}).subscribe(res => {
+    this.auth.codeLogin({
+      code: data.code,
+      uuid: this.utils.getValue('UUID')
+    }).subscribe(res => {
       // @ts-ignore
       this.utils.setValue('USER_DETAILS', res['data'].user);
       this.userDetails = res['data'].user;

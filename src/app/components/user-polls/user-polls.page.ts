@@ -19,6 +19,15 @@ export class UserPollsPage implements OnInit {
   ) {
   }
 
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.pollsService.mine().subscribe(data => {
+      this.pollList = data['data'];
+      event.target.complete();
+      console.log(this.pollList);
+    });
+  }
+
   ngOnInit() {
     if (this.name != 'search') {
       this.loadPoll();
