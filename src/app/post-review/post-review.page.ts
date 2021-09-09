@@ -7,7 +7,7 @@ import {PollsService} from "../services/polls.service";
 import {EventsService} from "../events/events.service";
 import {isNil} from 'lodash-es';
 import {PollCreatedService} from "../events/poll-created.service";
-
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-post-review',
@@ -17,6 +17,8 @@ import {PollCreatedService} from "../events/poll-created.service";
 export class PostReviewPage implements OnInit {
 
   pollList: any;
+  long: any;
+  lat: any;
   categoriesList: any;
   showA2E: any;
   photo: any;
@@ -32,6 +34,7 @@ export class PostReviewPage implements OnInit {
 
   constructor(
     private router: Router,
+    private geolocation: Geolocation,
     private route: ActivatedRoute,
     private pollCreatedService: PollCreatedService,
     private pollsService: PollsService,
@@ -53,6 +56,9 @@ export class PostReviewPage implements OnInit {
 
     let toSubmit = {
       title: this.pollList.title,
+      lat: this.lat,
+      long: this.long,
+      device_id: this.utils.getValue('DEVICE_ID'),
       uuid: this.utils.getValue('UUID'),
       category_id: this.pollList.category,
       poll_type_id: this.pollList.answerType,
@@ -102,6 +108,14 @@ export class PostReviewPage implements OnInit {
 
 
   ngOnInit() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.long = resp.coords.longitude
+      this.lat = resp.coords.latitude
+      // resp.coords.latitude
+      // resp.coords.longitude
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
 
     this.pollList = this.utils.getValue('toSubmit');
     this.image = this.utils.getValue('theImage');

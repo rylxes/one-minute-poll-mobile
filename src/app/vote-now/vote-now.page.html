@@ -10,14 +10,7 @@
         <div *ngIf="poll" class="content">
 
           <div class="header-clear"></div>
-          <!--Page content goes here, fixed elements go above the all elements class-->
-
-          <!--            <ion-item lines="full">-->
-          <!--              <ion-label position="floating">Search for Driver</ion-label>-->
-          <!--              <ion-input type="text"-->
-          <!--                         formControlName="name"-->
-          <!--                         required></ion-input>-->
-          <!--            </ion-item>-->
+          <h4>Created By: {{poll?.user?.name || poll?.UserUuid?.name || 'Guest'}} </h4>
 
           <div class="vote-title full-width">
             <h2>{{poll?.title}}</h2>

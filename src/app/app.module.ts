@@ -11,7 +11,9 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {TokenInterceptor} from "../interceptors/token.interceptor";
 import {UserPollsPageModule} from "./components/user-polls/user-polls.module";
 import {DatePipe} from "@angular/common";
-
+import {Device} from '@ionic-native/device/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NetworkInterface } from '@ionic-native/network-interface/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -22,6 +24,9 @@ import {DatePipe} from "@angular/common";
       useClass: TokenInterceptor,
       multi: true
     },
+    Device,
+    Geolocation,
+    NetworkInterface,
     DatePipe,
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, Globals],
   bootstrap: [AppComponent],

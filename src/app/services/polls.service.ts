@@ -35,6 +35,13 @@ export class PollsService {
       catchError(this.utils.handleError(this.logName, []))
     );
 
+  listAll = credentials => this.http.post(this.globals.url + 'polls/listAll', credentials, this.httpOptions)
+    .pipe(
+      take(1),
+      tap(_ => this.utils.log(this.logName)),
+      catchError(this.utils.handleError(this.logName, []))
+    );
+
   edit = (data, id) => this.http.patch(this.globals.url + 'polls/' + id, data, this.httpOptions)
     .pipe(
       take(1),

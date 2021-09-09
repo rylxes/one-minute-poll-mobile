@@ -5,6 +5,10 @@ import {UtilitiesService} from "../services/utilities.service";
 import {PollsService} from "../services/polls.service";
 import {PreviousURLService} from "../services/previous-url.service";
 import {isNil} from 'lodash-es';
+import {Device} from '@ionic-native/device/ngx';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {NetworkInterface} from '@ionic-native/network-interface/ngx';
+import {LoadingService} from "../services/loading.service";
 
 @Component({
   selector: 'app-home',
@@ -15,14 +19,20 @@ export class HomePage implements OnInit {
 
   page = 'Home';
   userDetails: any;
+  long: any;
+  lat: any;
   pollList: any = [];
   currentUrl;
   previousUrl;
 
   constructor(
     private router: Router,
+    private ionLoader: LoadingService,
+    private networkInterface: NetworkInterface,
+    private device: Device,
     private pollsService: PollsService,
     private previousURLService: PreviousURLService,
+    private geolocation: Geolocation,
     private utils: UtilitiesService
   ) {
 
@@ -46,18 +56,48 @@ export class HomePage implements OnInit {
 
   setHash = () => {
     let values = this.utils.getValue('UUID')
+    let deviceID = this.utils.getValue('DEVICE_ID')
     if (isNil(values)) {
       this.utils.setValue('UUID', uuidv4())
     }
-    console.log(values)
+    if (isNil(deviceID)) {
+      this.utils.setValue('DEVICE_ID', this.device.uuid)
+    }
+
+
+    this.networkInterface.getCarrierIPAddress()
+      .then(address => console.info(`IP: ${address.ip}, Subnet: ${address.subnet}`))
+      .catch(error => console.error(`Unable to get IP: ${error}`));
   }
 
+  // loadPoll = () => {
+  //   this.pollsService.list().subscribe(data => {
+  //     this.pollList = data['data'];
+  //     // this.utils.setValue('pollTypesList', this.pollTypesList);
+  //     console.log(this.pollList);
+  //   });
+  // }
 
   loadPoll = () => {
-    this.pollsService.list().subscribe(data => {
-      this.pollList = data['data'];
-      // this.utils.setValue('pollTypesList', this.pollTypesList);
-      console.log(this.pollList);
+    this.ionLoader.show();
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.long = resp.coords.longitude
+      this.lat = resp.coords.latitude
+      let cord = {
+        lat: this.lat,
+        long: this.long,
+      }
+      this.pollsService.listAll(cord).subscribe(data => {
+        this.pollList = data['data'];
+        // this.utils.setValue('pollTypesList', this.pollTypesList);
+        console.log(this.pollList);
+      });
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    }).finally(() => {
+      this.ionLoader.hide();
     });
+
+
   }
 }

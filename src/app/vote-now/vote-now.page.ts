@@ -106,6 +106,7 @@ export class VoteNowPage implements OnInit {
 
     var options = {
       //indexAxis: 'y',
+      segmentShowStroke: false,
       scales: {
         y: {
           title: {
@@ -133,13 +134,31 @@ export class VoteNowPage implements OnInit {
         datasets: [{
           label: 'Poll Count',
           data: theData,
-          backgroundColor: 'rgb(38, 194, 129)', // array should have same number of elements as number of dataset
-          borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
-          borderWidth: 1
+          backgroundColor: [
+            "#FAEBD7",
+            "#DCDCDC",
+            "#E9967A",
+            "#F5DEB3",
+            "#9ACD32"
+          ],
+          borderColor: [
+            "#E9DAC6",
+            "#CBCBCB",
+            "#D88569",
+            "#E4CDA2",
+            "#89BC21"
+          ],
+          borderWidth: [0, 0, 0, 0, 0],
+          // backgroundColor: 'rgb(38, 194, 129)', // array should have same number of elements as number of dataset
+          // // borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
+          // borderColor: 'rgba(0,0,0,0)',// array should have same number of elements as number of dataset
+          // borderWidth: 0,
         }]
       }
     });
+    // Chart.defaults.global.elements.arc.borderWidth = 0;
   }
+
 
   calculate = () => {
     if (!isNil(this.poll)) {
