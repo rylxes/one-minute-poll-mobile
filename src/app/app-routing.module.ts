@@ -17,7 +17,7 @@ const routes: Routes = [
 
   {
     path: 'help',
-    loadChildren: () => import('./help/help.module').then(m => m.HelpPageModule)
+    loadChildren: () => import('./settings/help.module').then(m => m.HelpPageModule)
   },
   {
     path: 'my-polls',
@@ -71,7 +71,19 @@ const routes: Routes = [
   {
     path: 'poll-details/:id',
     loadChildren: () => import('./poll-details/poll-details.module').then(m => m.PollDetailsPageModule)
-  }
+  },
+  {
+    path: 'shared-polls',
+    loadChildren: () => import('./components/shared-polls/shared-polls.module').then( m => m.SharedPollsPageModule)
+  },
+  {
+    path: 'share-success',
+    loadChildren: () => import('./share-success/share-success.module').then( m => m.ShareSuccessPageModule)
+  },
+  {
+    path: 'share-success/:id',
+    loadChildren: () => import('./share-success/share-success.module').then( m => m.ShareSuccessPageModule)
+  },
 ];
 
 @NgModule({

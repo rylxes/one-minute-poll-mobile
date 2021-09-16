@@ -81,6 +81,7 @@ export class HomePage implements OnInit {
   loadPoll = () => {
     this.ionLoader.show();
     this.geolocation.getCurrentPosition().then((resp) => {
+      console.log(resp)
       this.long = resp.coords.longitude
       this.lat = resp.coords.latitude
       let cord = {

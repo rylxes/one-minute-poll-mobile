@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0 minimal-ui"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="#1E437B">
+  <meta name="theme-color" content="#1E437B">
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/png"/>
+
+  <title>One Minute Poll - Sharing Success</title>
+
+  <link href="styles/style.css" rel="stylesheet" type="text/css">
+  <link href="styles/framework.css" rel="stylesheet" type="text/css">
+  <link href="styles/line-awesome.css" rel="stylesheet" type="text/css">
+  <link href="styles/animate.css" rel="stylesheet" type="text/css">
+  <link href="styles/select2.min.css" rel="stylesheet" type="text/css">
+  <link href="styles/poll.css" rel="stylesheet" type="text/css">
+
+  <script type="text/javascript" src="scripts/jquery.js"></script>
+  <script type="text/javascript" src="scripts/jqueryui.js"></script>
+  <script type="text/javascript" src="scripts/framework-plugins.js"></script>
+  <script type="text/javascript" src="scripts/rolldate.min.js"></script>
+  <script type="text/javascript" src="scripts/select2.min.js"></script>
+  <script type="text/javascript" src="scripts/custom.js"></script>
+
+</head>
+
+<body class="left-sidebar">
+
+<div id="preloader">
+  <div id="status">
+    <div class="preloader-logo"></div>
+  </div>
+</div>
+
+<div class="gallery-fix"></div> <!-- Important for all pages that have galleries or portfolios -->
+
+<div id="header-fixed" class="header-style-1">
+  <h2 class="logo"><a href="index.html">OnePoll</a></h2>
+  <a id="open-search" class="header-2" href="#"><span><i class="las la-search flip"></i></span></a>
+</div>
+
+<div class="add-new">
+  <a class="btn-new add-new-poll" href="add-new.html">
+    <span class="plus"><i class="las la-plus"></i></span>
+    <span class="high"><i class="las la-poll"></i></span>
+  </a>
+</div>
+
+<div class="all-elements">
+  <div class="snap-drawers">
+
+    <!--Search wrap -->
+
+    <div id="search" class="search-draw">
+
+      <div class="search-header">
+        <a class="close-wrap" href="#"><i class="las la-times"></i></a>
+      </div>
+
+      <div class="container no-bottom">
+        <div class="sidebar-form search-form no-bottom">
+
+
+          <form action="#" method="post" class="searchForm" id="searchForm">
+            <fieldset>
+
+              <div class="formFieldWrap">
+                <input onfocus="if (this.value=='Search') this.value = ''"
+                       onblur="if (this.value=='') this.value = 'Search Polls'" type="text" name="searchField"
+                       value="Search Polls" class="contactField" id="searchField"/>
+              </div>
+
+              <div class="formSubmitButtonErrorsWrap">
+                <input type="submit" class="buttonWrap button button-blue searchSubmitButton" id="searchSubmitButton"
+                       value="Search" data-formId="contactForm"/>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="content" class="snap-content">
+      <div class="content">
+        <div class="header-clear"></div>
+        <!--Page content goes here, fixed elements go above the all elements class-->
+
+
+        <div class="container">
+          <h4>Successfully shared poll</h4>
+          <div class="decoration"></div>
+          <div class="recent-poll-wrap">
+
+            <div class="recent-polls">
+              <div class="item grid">
+                <div class="grid-top">
+                  <div class="image-holder">
+                    <img src="uploads/test/nigeria-rename.jpg"/>
+                  </div>
+                  <div class="contents">
+                    <h4><a href="view-poll.html" title="View Poll">Which state is richer?
+                      <span>There are 36 States in Nigeria, which do you think is richer?</span></a>
+                    </h4>
+
+                  </div>
+                </div>
+                <div class="summary">
+                  <div class="votes"><i class="las la-poll"></i> <span>577</span></div>
+                  <div class="results">
+                    <span title="Lagos" class="options"><em>A</em> 75%</span>
+                    <span title="Edo" class="options"><em>B</em> 3%</span>
+                    <span title="Ogun" class="options"><em>C</em> 14%</span>
+                    <span title="Oyo" class="options"><em>D</em> 8%</span>
+                  </div>
+                </div>
+                <div class="grid-bottom">
+                  <div class="user-wrap">
+                    <i class="las la-user"></i> Audrey
+                  </div>
+                  <div class="share-wrap" title="Share">
+                    <em class="share show-submenu"></em>
+                    <div class="submenu share-routes share-box">
+                      <div class="share-content">
+                        <h4>Share Poll with Friends</h4>
+                        <div class="share-email-box">
+                          <div class="share-desc">
+                            <p>Enter email address of recipients (unregistered users will get an invite).</p>
+                            <form role="share">
+                              <div class="form-group">
+                                <textarea name="share-email" id="share-email" rows="7"
+                                          placeholder="Enter emails of recipients, one per line."></textarea>
+                              </div>
+                              <div class="form-group">
+                                <input type="submit" class="button button-blue btn-share" value="Share in PollFlash"/>
+                              </div>
+
+                            </form>
+                            <div class="form-group share-link">
+                              <a href="#" class="button button-green btn-share">Share as Link</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="reg-notice">
+            <div class="notice notice-approve">
+              <h4>Successfully shared with:</h4>
+              <p class="anchor">sample@email.com</p>
+              <p class="anchor">sample1@email.com</p>
+              <p class="anchor">sample3@email.com</p>
+              <p class="anchor">sample4@email.com</p>
+            </div>
+
+          </div>
+          <div class="reg-notice">
+            <div class="notice notice-simple">
+              <h4>Unregistered emails were sent invitations:</h4>
+              <p class="anchor">sample5@email.com</p>
+              <p class="anchor">sample6@email.com</p>
+              <p class="anchor">sample7@email.com</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="bottom-fix"></div>
+        <!-- End of entire page content-->
+      </div>
+    </div>
+    <div class="static-footer">
+      <div class="footer-wrap">
+        <div class="footer-menu">
+          <ul class="h-menu">
+            <li class="menu-item current-item">
+              <a href="index.html">
+                <i class="las la-home"></i>
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="my-polls.html">
+                <i class="las la-poll"></i>
+                <span>Polls</span>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="my-profile.html">
+                <i class="las la-user"></i>
+                <span>Profile</span>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="help.html">
+                <i class="las la-cog"></i>
+                <span>Help</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <a href="#" class="back-to-top-badge"><i class="las la-caret-up"></i>Back to top</a> -->
+</div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

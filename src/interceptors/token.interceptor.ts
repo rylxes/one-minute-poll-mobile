@@ -35,15 +35,13 @@ export class TokenInterceptor implements HttpInterceptor {
     const token = localStorage.getItem(TOKEN_KEY);
     this.isAuth = this.utils.getValue('IS_AUTH');
 
-    if (this.isAuth) {
-      request = request.clone({
-        setHeaders: {
-          Authorization: 'Bearer ' + token,
-          HasAuth: "YES",
-          UUID: this.utils.getValue('UUID')
-        }
-      });
-    }
+    request = request.clone({
+      setHeaders: {
+        Authorization: 'Bearer ' + token,
+        HasAuth: "YES",
+        UUID: this.utils.getValue('UUID')
+      }
+    });
     // if (token) {
     //   request = request.clone({
     //     setHeaders: {

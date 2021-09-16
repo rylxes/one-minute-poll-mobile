@@ -1,0 +1,318 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0 minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="#1E437B">
+	<meta name="theme-color" content="#1E437B">
+
+	<link rel="shortcut icon" href="images/favicon.png" type="image/png" /> 
+		
+	<title>View Poll (Yes / No Poll)- One Minute Poll</title>
+
+	<link href="styles/style.css"           rel="stylesheet" type="text/css">
+	<link href="styles/framework.css"       rel="stylesheet" type="text/css">
+	<link href="styles/line-awesome.css"    rel="stylesheet" type="text/css">
+	<link href="styles/animate.css"         rel="stylesheet" type="text/css">
+	<link href="styles/select2.min.css" 	rel="stylesheet" type="text/css">
+	<link href="styles/poll.css"         	rel="stylesheet" type="text/css">
+
+	<script type="text/javascript" src="scripts/jquery.js"></script>
+	<script type="text/javascript" src="scripts/jqueryui.js"></script>
+	<script type="text/javascript" src="scripts/framework-plugins.js"></script>
+	<script type="text/javascript" src="scripts/rolldate.min.js"></script>
+	<script type="text/javascript" src="scripts/select2.min.js"></script>
+	<script type="text/javascript" src="scripts/custom.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+</head>
+
+<body class="left-sidebar"> 
+
+<div id="preloader">
+	<div id="status">
+        <div class="preloader-logo"></div>
+    </div>
+</div>
+    
+<div class="gallery-fix"></div> <!-- Important for all pages that have galleries or portfolios -->
+    
+<div id="header-fixed" class="header-style-1">
+    <h2 class="logo"><a href="index.html">OnePoll</a></h2>
+    <a id="open-search" class="header-2" href="#"><span><i class="las la-search flip"></i></span></a>
+</div>
+    
+<div class="add-new">
+	<a class="btn-new add-new-poll" href="add-new.html">
+		<span class="plus"><i class="las la-plus"></i></span>
+		<span class="high"><i class="las la-poll"></i></span>
+	</a>
+</div>
+            
+<div class="all-elements">
+    <div class="snap-drawers">
+        
+        <!--Search wrap -->
+        
+        <div id="search" class="search-draw">
+            
+            <div class="search-header">
+                <a class="close-wrap" href="#"><i class="las la-times"></i></a>
+            </div>
+                     
+            <div class="container no-bottom">
+                <div class="sidebar-form search-form no-bottom"> 
+                    
+                    
+                    <form action="#" method="post" class="searchForm" id="searchForm">
+                        <fieldset>
+                              
+                            <div class="formFieldWrap">
+                                <input onfocus="if (this.value=='Search') this.value = ''" onblur="if (this.value=='') this.value = 'Search Polls'" type="text" name="searchField" value="Search Polls" class="contactField" id="searchField"/>
+                            </div>
+                            
+                            <div class="formSubmitButtonErrorsWrap">
+                                <input type="submit" class="buttonWrap button button-blue searchSubmitButton" id="searchSubmitButton" value="Search" data-formId="contactForm"/>
+                            </div>
+                        </fieldset>
+                    </form>       
+                </div>
+            </div>            
+        </div>
+		
+        
+        
+        
+        <div id="content" class="snap-content">
+            <div class="content">
+				<div class="header-clear"></div>
+				<!--Page content goes here, fixed elements go above the all elements class-->
+
+					<div class="vote-title full-width">
+						<h2>Will Tinubu run in 2023?</h2>
+						<p>Will APC aspirant, Sen Bola Ahmed Tinubu run in the Presidential Elections coming in 2023? </p>
+					</div>
+                
+                <div class="decoration"></div>
+				<div class="poll-image">					
+					<img src="images/bola_ahmed_tinubu_2023.jpg" />
+				</div>
+                <div class="decoration"></div>
+				
+				<!-- Poll summary table visible only to poll creator/admin -->
+				<div class="poll-summary">
+					<h4>Poll Summary</h4>
+					<table class="table">
+						<tbody>
+							<tr><td>Poll Type</td><td>True/False</td></tr>
+							<tr><td>Category</td><td>Politics</td></tr>
+							<tr><td>Total Votes</td><td>22, 576</td></tr>
+							<tr><td>True Votes</td><td>18,109</td></tr>
+							<tr><td>False Votes</td><td>4,467</td></tr>
+							<tr><td>Created On</td><td>11th May, 2021</td></tr>
+							<tr><td>Latest Vote</td><td>Today, 11:23 AM</td></tr>
+							<tr><td>Closes</td><td>12th June, 2021</td></tr>
+						</tbody>
+					</table>
+					<!--
+					<div class="poll-graph-wrap">
+						<canvas id="pollResult" style="width:100%; max-width:100%;"></canvas>
+						<script type="text/javascript">
+							var xValues = ["True", "False"];
+							var yValues = [18109, 4467];
+							var barColors = ["#3E77B1", "#DD1111"];
+
+							new Chart("pollResult", {
+								type: "doughnut",
+								data: {
+									labels: xValues,
+									datasets: [{
+										backgroundColor: barColors,
+										data: yValues
+									}]
+								},
+								options: {
+									legend: {display: true},
+									title: {
+										display: true,
+										text: "Will Tinubu run in 2023?"
+									}
+								}
+							});
+						</script>
+					</div>
+					-->
+					<!-- yes/no bar chart -->
+					<div class="poll-canvas-wrap canvas-bordered">
+						<h4>Yes / No Bar Chart </h4>
+						<div class="poll-canvas tf-bar-canvas">
+							<div class="boundary">
+								<div class="bars" data-total-votes="1221">
+									<div id="bar" class="true-bar bar" data-poll="341" data-size="27.9"></div>		
+									<div id="fbar" class="false-bar bar" data-poll="880" data-size="72.1"></div>
+								</div>					
+							</div>
+							<div class="labels">
+								<div class="true-label label">
+									<p>Yes</p>
+								</div>
+								<div class="false-label label">
+									<p>No</p>
+								</div>
+							</div>
+							
+						</div>
+						<div class="tf-bar-legend">
+							<p><strong>Total Views:</strong> 11,688</p>
+							<p><strong>Total Votes:</strong> 1,221</p>
+						</div>
+					</div>
+					<!-- end yes/no bar chart -->
+					
+					<!-- 5 Star rating chart -->
+					<div class="poll-canvas-wrap canvas-bordered">
+					<h4> 5 Star Rating Chart </h4>
+						<div class="poll-canvas fsh-bar-canvas">
+							<div class="h-boundary">
+								<div data-rate="5" class="rate-item"><span>5 Star</span></div>
+								<div data-rate="4" class="rate-item"><span>4 Star</span></div>
+								<div data-rate="3" class="rate-item"><span>3 Star</span></div>
+								<div data-rate="2" class="rate-item"><span>2 Star</span></div>
+								<div data-rate="1" class="rate-item"><span>1 Star</span></div>
+							</div>
+							<div data-total-votes="8657" class="rate-bars">
+								<div class="fs-hbar"><div data-votes="677" data-poll="7.8" class="hbar"></div></div>
+								<div class="fs-hbar"><div data-votes="1345" data-poll="15.5" class="hbar"></div></div>
+								<div class="fs-hbar"><div data-votes="3456" data-poll="40"  class="hbar"></div></div>
+								<div class="fs-hbar"><div data-votes="2788" data-poll="32.2" class="hbar"></div></div>
+								<div class="fs-hbar"><div data-votes="391" data-poll="4.5" class="hbar"></div></div>
+							</div>
+						</div>
+						<div class="tf-bar-legend">
+							<p><strong>Total Views:</strong> 123,941</p>
+							<p><strong>Total Votes:</strong> 8,657</p>
+						</div>
+					</div>
+					<!-- end 5 Star rating chart -->
+					
+					<!-- A - E Options chart -->
+					<div class="poll-canvas-wrap canvas-bordered">
+					<h4> A - E Options Chart  </h4>
+						<div class="poll-canvas fsv-bar-canvas">
+							<div class="v-boundary">
+								<div data-total-votes="14411" class="v-bars">
+									<div class="fs-vbar"><div data-votes="1456" data-poll="10.1" class="vbar color-1"></div></div>
+									<div class="fs-vbar"><div data-votes="8654" data-poll="60" class="vbar color-2"></div></div>
+									<div class="fs-vbar"><div data-votes="2287" data-poll="15.9"  class="vbar color-3"></div></div>
+									<div class="fs-vbar"><div data-votes="890" data-poll="6.2" class="vbar color-4"></div></div>
+									<div class="fs-vbar"><div data-votes="1124" data-poll="7.8" class="vbar color-5"></div></div>
+								</div>
+							</div>
+							<div class="v-boundary-base">
+								<div class="rate-item"><span>A</span></div>
+								<div class="rate-item"><span>B</span></div>
+								<div class="rate-item"><span>C</span></div>
+								<div class="rate-item"><span>D</span></div>
+								<div class="rate-item"><span>E</span></div>
+							</div>							
+						</div>
+						<div class="tf-bar-legend tv-bar">
+							<p class="color-1"><strong>A - </strong> Mind my business</p>
+							<p class="color-2"><strong>B - </strong> Tell her the truth</p>
+							<p class="color-3"><strong>C - </strong> Tell her you heard rumours</p>
+							<p class="color-4"><strong>D - </strong> Tell Him to change</p>
+							<p class="color-5"><strong>E - </strong> Leave the company</p>							
+							<div class="decoration"></div>							
+						</div>
+						<div class="tf-bar-legend">
+							<p><strong>Total Views:</strong> 62,300</p>
+							<p><strong>Total Votes:</strong> 14,411</p>
+						</div>
+					</div>
+					<!-- end A - E Options chart -->
+					
+					
+				</div>
+				
+                <div class="decoration"></div>
+				<div class="formSubmitButtonErrorsWrap">
+					<a href="#" class="buttonWrap button button-blue searchSubmitButton" />Edit Poll</a>
+				</div>
+                          
+				
+                <div class="bottom-fix"></div>
+            <!-- End of entire page content-->
+            </div> 
+        </div>
+		<div class="static-footer">
+			<div class="footer-wrap">
+				<div class="footer-menu">
+					<ul class="h-menu">
+						<li class="menu-item">
+							<a href="index.html">
+								<i class="las la-home"></i>
+								<span>Home</span>
+							</a>
+						</li>
+						<li class="menu-item current-item">
+							<a href="my-polls.html">
+								<i class="las la-poll"></i>
+								<span>Polls</span>
+							</a>
+						</li>
+						<li class="menu-item">
+							<a href="my-profile.html">
+								<i class="las la-user"></i>
+								<span>Profile</span>
+							</a>
+						</li>
+						<li class="menu-item">
+							<a href="help.html">
+								<i class="las la-cog"></i>
+								<span>Help</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+    </div>  
+    <!-- <a href="#" class="back-to-top-badge"><i class="las la-caret-up"></i>Back to top</a> -->
+</div>
+    
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

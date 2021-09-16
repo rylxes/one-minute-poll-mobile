@@ -43,6 +43,14 @@ export class AuthService {
       catchError(this.utils.handleLoginError('login', []))
     );
 
+
+  authenticate = credentials => this.http.post(this.globals.url + 'authenticate', credentials, this.httpOptions)
+    .pipe(
+      take(1),
+      tap(_ => this.utils.log('login')),
+      catchError(this.utils.handleLoginError('login', []))
+    );
+
   removeData = () => {
     this.utils.deleteAll();
   };

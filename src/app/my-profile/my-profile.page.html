@@ -9,11 +9,6 @@
 
       <div id="content" class="snap-content">
         <div class="content">
-          <input *ngIf="!isAuth" type="submit"
-                 (click)="presentPrompt()"
-                 class="buttonWrap button button-blue searchSubmitButton"
-                 value="Authenticate"
-          />
 
 
           <div class="header-clear"></div>
@@ -24,6 +19,7 @@
             <div class="profile-title">
               <h4>Hi {{userDetails.name || 'Guest'}},</h4>
               <p *ngIf="isAuth">Update your profile</p>
+              <h4 *ngIf="!isAuth">Authenticate Email to enable your profile</h4>
             </div>
             <div class="profile-image">
               <div class="profile-image-wrap">
@@ -33,6 +29,28 @@
                 <!--                </div>-->
               </div>
             </div>
+
+            <div class="formFieldWrap" *ngIf="!isAuth">
+              <ion-label position="stacked">Email</ion-label>
+              <input type="text"
+                     [(ngModel)]="email"
+                     class="contactField titleField"/>
+
+
+              <input type="submit"
+                     (click)="authenticate()"
+                     class="buttonWrap button button-blue searchSubmitButton"
+                     value="Authenticate"
+              />
+
+<!--              <input type="submit"-->
+<!--                     (click)="presentPrompt()"-->
+<!--                     class="buttonWrap button button-blue searchSubmitButton"-->
+<!--                     value="Authenticate"-->
+<!--              />-->
+            </div>
+
+
           </div>
 
           <div class="decoration"></div>

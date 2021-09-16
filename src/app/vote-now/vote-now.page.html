@@ -17,8 +17,8 @@
             <p>{{poll?.question}} </p>
           </div>
 
-          <div class="decoration"></div>
-          <div class="poll-image">
+          <div class="decoration" *ngIf="poll.url"></div>
+          <div class="poll-image" *ngIf="poll.url">
             <img *ngIf="poll.url" [src]="poll.url"/>
           </div>
           <div class="decoration"></div>
@@ -126,6 +126,7 @@
                   <canvas #barChart></canvas>
                 </ion-card-content>
               </ion-card>
+
             </div>
 
             <!-- end - trigger this section after voting is successful -->

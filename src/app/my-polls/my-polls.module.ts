@@ -10,17 +10,19 @@ import {MyPollsPage} from './my-polls.page';
 import {UserPollsPageModule} from "../components/user-polls/user-polls.module";
 import {UserPollsPage} from "../components/user-polls/user-polls.page";
 import {HomePageModule} from "../home/home.module";
+import {SharedPollsPageModule} from "../components/shared-polls/shared-polls.module";
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    MyPollsPageRoutingModule,
-    UserPollsPageModule,
-    HomePageModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        MyPollsPageRoutingModule,
+        UserPollsPageModule,
+        HomePageModule,
+        SharedPollsPageModule
+    ],
   exports: [
     MyPollsPage,
   ],

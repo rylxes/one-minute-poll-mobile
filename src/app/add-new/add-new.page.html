@@ -15,8 +15,8 @@
               <div class="add-new-form poll-form no-bottom">
                 <form [formGroup]="data" (ngSubmit)="onSubmit(pageForm)" #pageForm="ngForm" class="searchForm">
                   <ion-item class="formFieldWrap" lines="full">
-                    <ion-label position="floating">Title</ion-label>
-                    <ion-input class="textField"
+                    <ion-label position="stacked" style="padding-bottom: 20px">Title</ion-label>
+                    <ion-input class="contactField textField titleField"
                                [maxlength]="maxNumberOfTitleCharacters"
                                [(ngModel)]="interaction.title"
                                (ngModelChange)="onTitleModelChange($event)"
@@ -28,10 +28,11 @@
                     </div>
                   </ion-item>
 
+
                   <ion-item class="formFieldWrap" lines="full">
-                    <ion-label position="floating">Select Category</ion-label>
+                    <ion-label position="stacked" style="padding-bottom: 20px">Select Category</ion-label>
                     <ion-select placeholder="{{category?.name}}" value="brown" okText="Select"
-                                formControlName="category" class="textField" cancelText="Cancel">
+                                formControlName="category" class="contactField selectField" cancelText="Cancel">
                       <ion-select-option [value]="">Select Category</ion-select-option>
                       <ion-select-option class="form-radio" *ngFor="let eachCategory of categoriesList"
                                          value="{{eachCategory.id}}">{{eachCategory.name}}</ion-select-option>
@@ -39,17 +40,17 @@
                   </ion-item>
 
 
-                  <ion-item lines="full" class="formFieldWrap">
-                    <ion-label position="floating">Question</ion-label>
+                  <ion-item class="formFieldWrap" lines="full">
+                    <ion-label position="stacked" style="padding-bottom: 20px">Question</ion-label>
                     <ion-textarea autocapitalize="words" type="text"
                                   class="textarea"
                                   rows="4"
-                                  placeholder="Type your question here"
                                   formControlName="question"
                                   [maxlength]="maxNumberOfQuestionCharacters"
                                   [(ngModel)]="interaction.question"
                                   (ngModelChange)="onQuestionModelChange($event)"
-                                  required></ion-textarea>
+                                  required>
+                    </ion-textarea>
 
                     <div>
                       {{numberOfQuestionCharacters}} / {{maxNumberOfQuestionCharacters}}
@@ -76,29 +77,29 @@
                   <div class="radio-wrap border-bottom" *ngIf="showA2E || myShowAE">
 
                     <ion-item>
-                      <ion-label position="floating">A</ion-label>
+                      <ion-label position="stacked">A</ion-label>
                       <ion-input autocapitalize="words" type="text" formControlName="A"></ion-input>
                     </ion-item>
 
                     <ion-item>
-                      <ion-label position="floating">B</ion-label>
+                      <ion-label position="stacked">B</ion-label>
                       <ion-input autocapitalize="words" type="text" formControlName="B"></ion-input>
                     </ion-item>
 
                     <ion-item>
-                      <ion-label position="floating">C</ion-label>
+                      <ion-label position="stacked">C</ion-label>
                       <ion-input autocapitalize="words" type="text" formControlName="C"></ion-input>
                     </ion-item>
 
 
                     <ion-item>
-                      <ion-label position="floating">D</ion-label>
+                      <ion-label position="stacked">D</ion-label>
                       <ion-input autocapitalize="words" type="text" formControlName="D"></ion-input>
                     </ion-item>
 
 
                     <ion-item>
-                      <ion-label position="floating">E</ion-label>
+                      <ion-label position="stacked">E</ion-label>
                       <ion-input autocapitalize="words" type="text" formControlName="E"></ion-input>
                     </ion-item>
 
@@ -152,8 +153,9 @@
 
 
                   <ion-item lines="full">
-                    <ion-label>Close Date</ion-label>
+                    <ion-label position="stacked" style="padding-bottom: 20px">Close Date</ion-label>
                     <ion-datetime formControlName="closeDate" placeholder="Select Date"
+                                  class="form-control textField"
                                   displayFormat="YYYY-MM-DD"></ion-datetime>
                   </ion-item>
 
@@ -170,14 +172,16 @@
                         features.</p>
                     </div>
                     <div class="formFieldWrap" *ngIf="!isAuth">
-                      <ion-label position="floating"><p>Your Email Address</p></ion-label>
+                      <ion-label position="stacked"><p>Your Email Address</p></ion-label>
+
+<!--                      <ion-label position="stacked" style="padding-bottom: 20px">Your Email Address</ion-label>-->
                       <span class="tooltip show-submenu"><i class="las la-question-circle"></i></span>
                       <div class="submenu tooltip-info">
                         Email verification required to edit this item.
                       </div>
 
                       <!--                        <ion-item lines="full">-->
-                      <!--                          <ion-label position="floating">Surname</ion-label>-->
+                      <!--                          <ion-label position="stacked">Surname</ion-label>-->
                       <!--                          <ion-input autocapitalize="words" type="text" required formControlName="emailField"></ion-input>-->
                       <!--                        </ion-item>-->
 

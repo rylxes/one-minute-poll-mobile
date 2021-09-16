@@ -14,6 +14,7 @@ import {DatePipe} from "@angular/common";
 import {Device} from '@ionic-native/device/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NetworkInterface } from '@ionic-native/network-interface/ngx';
+import {SocialSharing} from "@ionic-native/social-sharing/ngx";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -26,6 +27,7 @@ import { NetworkInterface } from '@ionic-native/network-interface/ngx';
     },
     Device,
     Geolocation,
+    SocialSharing,
     NetworkInterface,
     DatePipe,
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, Globals],

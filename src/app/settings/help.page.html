@@ -1,0 +1,97 @@
+<app-header name="Settings"></app-header>
+<ion-content class="left-sidebar">
+
+
+  <div class="all-elements">
+    <div class="snap-drawers">
+
+      <!--      &lt;!&ndash;Search wrap &ndash;&gt;-->
+      <!--      <app-search></app-search>-->
+
+
+      <div id="content" class="snap-content">
+
+
+        <div class="content">
+          <div class="header-clear"></div>
+          <!--Page content goes here, fixed elements go above the all elements class-->
+
+          <!--          <div class="container">-->
+          <!--            <h2>Help Center</h2>-->
+          <!--          </div>-->
+
+          <div class="decoration"></div>
+          <div class="container">
+            <div class="global-settings">
+              <div class="settings-group">
+                <div class="item-title">
+                  <h4>Set Location of Interest</h4>
+                </div>
+                <div class="set-switch">
+                  <select class="form-control" id="interest_location">
+                    <option value="">Select city</option>
+                    <option value="Abuja">Abuja</option>
+                    <option value="Lagos">Lagos</option>
+                    <option value="Port-Harcourt">Port-Harcourt</option>
+                    <option value="Kaduna">Kaduna</option>
+                    <option value="Abeokuta">Abeokuta</option>
+                    <option value="Ibadan">Ibadan</option>
+                    <option value="Suleja">Suleja</option>
+                    <option value="Umuahia">Umuahia</option>
+                    <option value="Calabar">Calabar</option>
+                  </select>
+                </div>
+              </div>
+              <div class="settings-group">
+                <div class="item-title">
+                  <h4>Set Poll Duration (Days)</h4>
+                </div>
+                <div class="set-switch">
+                  <input class="form-control textField" type="number" id="poll_duration" step="1" placeholder="30"/>
+                </div>
+              </div>
+              <div class="settings-group">
+                <div class="item-title">
+                  <h4>Switch between Light or Dark Theme</h4>
+                </div>
+                <label class="set-switch">
+                  <input type="checkbox"
+                         [(ngModel)]="toggleMode"
+                         (ngModelChange)="toggleChange($event)"
+                  >
+                  <div class="set-slider-wrap">
+                    <span class="options">No</span>
+                    <span class="set-slider round"></span>
+                    <span class="options">Yes</span>
+                  </div>
+                </label>
+              </div>
+              <div class="settings-group">
+                <div class="item-title">
+                  <h4>Enable/Disable Decency Filter</h4>
+                </div>
+                <label class="set-switch">
+                  <input type="checkbox">
+                  <div class="set-slider-wrap">
+                    <span class="options">No</span>
+                    <span class="set-slider round"></span>
+                    <span class="options">Yes</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="bottom-fix"></div>
+          <!-- End of entire page content-->
+        </div>
+      </div>
+
+
+    </div>
+    <!-- <a href="#" class="back-to-top-badge"><i class="las la-caret-up"></i>Back to top</a> -->
+  </div>
+
+
+</ion-content>
+<app-footer [pageName]=page></app-footer>

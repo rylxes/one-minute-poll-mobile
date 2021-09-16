@@ -72,6 +72,21 @@ export class PollsService {
       catchError(this.utils.handleError(this.logName, []))
     );
 
+
+  sharePolls = data => this.http.post(this.globals.url + 'polls/sharePolls', data, this.httpOptions)
+    .pipe(
+      take(1),
+      tap(_ => this.utils.log(this.logName)),
+      catchError(this.utils.handleError(this.logName, []))
+    );
+
+  sharedWithMe = () => this.http.post(this.globals.url + 'polls/sharedWithMe', {}, this.httpOptions)
+    .pipe(
+      take(1),
+      tap(_ => this.utils.log(this.logName)),
+      catchError(this.utils.handleError(this.logName, []))
+    );
+
   search = (name) => this.http.post(this.globals.url + 'polls/search', {name})
     .pipe(
       take(1),
