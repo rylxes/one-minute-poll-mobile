@@ -43,11 +43,11 @@
                      value="Authenticate"
               />
 
-<!--              <input type="submit"-->
-<!--                     (click)="presentPrompt()"-->
-<!--                     class="buttonWrap button button-blue searchSubmitButton"-->
-<!--                     value="Authenticate"-->
-<!--              />-->
+              <!--              <input type="submit"-->
+              <!--                     (click)="presentPrompt()"-->
+              <!--                     class="buttonWrap button button-blue searchSubmitButton"-->
+              <!--                     value="Authenticate"-->
+              <!--              />-->
             </div>
 
 
@@ -66,14 +66,20 @@
                              value="{{userDetails.name}}" class="textField bg"
                              id="userName"/>
                     </div>
-                    <!--                    <div class="formFieldWrap">-->
-                    <!--                      <label for="firstName">First Name</label>-->
-                    <!--                      <input type="text" name="firstName" value="Audery" class="textField bg"id="firstName"/>-->
-                    <!--                    </div>-->
-                    <!--                    <div class="formFieldWrap">-->
-                    <!--                      <label for="lastName">Surname</label>-->
-                    <!--                      <input type="text" name="lastName" value="Njemena" class="textField bg"id="lastName"/>-->
-                    <!--                    </div>-->
+                    <div class="formFieldWrap">
+                      <label for="firstName">First Name</label>
+                      <input type="text"
+                             formControlName="firstName"
+                             value="{{userDetails.firstName}}"
+                             class="textField bg" id="firstName"/>
+                    </div>
+                    <div class="formFieldWrap">
+                      <label for="lastName">Surname</label>
+                      <input type="text"
+                             formControlName="lastName"
+                             value="{{userDetails.lastName}}"
+                             class="textField bg" id="lastName"/>
+                    </div>
                     <div class="formFieldWrap">
                       <label for="userEmail">Email Address</label>
                       <input type="email"
@@ -83,22 +89,30 @@
                              id="userEmail" readonly/>
                     </div>
 
-                    <!--                    <div class="formFieldWrap">-->
-                    <!--                      <label for="userGender">Gender</label>-->
-                    <!--                      <select name="category" class="contactField selectField" id="userGender">-->
-                    <!--                        <option value="Male" title="Male">Male</option>-->
-                    <!--                        <option value="Female" title="Female" selected>Female</option>-->
-                    <!--                      </select>-->
-                    <!--                    </div>-->
+                    <div class="formFieldWrap">
+                      <label for="userEmail">Interests</label>
+                      <ion-select placeholder="{{category?.name}}" value="brown" okText="Select"
+                                  formControlName="interest"
+                                  multiple
+                                  class="contactField selectField" cancelText="Cancel">
+                        <ion-select-option [value]="">Select Category</ion-select-option>
+                        <ion-select-option class="form-radio" *ngFor="let eachCategory of categoriesList"
+                                           value="{{eachCategory.id}}">{{eachCategory.name}}</ion-select-option>
+                      </ion-select>
+                    </div>
 
-                    <!--                    <div class="formFieldWrap">-->
-                    <!--                      <label for="userPass">Password</label>-->
-                    <!--                      <input type="password" name="userPass" value="1234567890" class="textField bg"id="userPass"/>-->
-                    <!--                    </div>-->
-                    <!--                    <div class="formFieldWrap">-->
-                    <!--                      <label for="userPassC">Password</label>-->
-                    <!--                      <input type="password" name="userPassC" value="" class="textField bg"id="userPassC"/>-->
-                    <!--                    </div>-->
+                    <div class="formFieldWrap">
+                      <label for="userGender">Gender</label>
+                      <select formControlName="gender" name="gender" class="contactField selectField" id="userGender">
+                        <option value="Male" title="Male">Male</option>
+                        <option value="Female" title="Female" selected>Female</option>
+                      </select>
+                    </div>
+
+                    <div class="formFieldWrap">
+                      <label for="userGender">Date Joined :: {{userDetails.created_at | date}}</label>
+                    </div>
+
 
                     <div class="formSubmitButtonErrorsWrap">
                       <input type="submit" class="buttonWrap button button-blue searchSubmitButton"

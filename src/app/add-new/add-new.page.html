@@ -1,12 +1,20 @@
 <app-header name="Add New Poll"></app-header>
 
 
-<ion-content class="left-sidebar">
-  <div class="all-elements" style="padding-bottom: 20%">
+  <ion-content [scrollEvents]="true"
+               (ionScrollStart)="logScrollStart($event)"
+               (ionScroll)="logScrolling($event)"
+               (ionScrollEnd)="logScrollEnd($event)" class="left-sidebar">
+
+
+
+    <div class="all-elements" style="padding-bottom: 20%">
     <div class="snap-drawers">
       <!--Search wrap -->
 
       <div id="content" class="snap-content">
+<!--        <ion-button (click)="scrollToLabel('searchSubmitButton')"> Scroll To Point Left </ion-button>-->
+
         <div class="content">
           <div class="header-clear"></div>
           <!--Page content goes here, fixed elements go above the all elements class-->
@@ -214,6 +222,8 @@
                        class="buttonWrap button button-red searchSubmitButton">Reset
                       Poll
                     </a>
+
+<!--                    <ion-button (click)="ScrollToTop()"> Scroll To Top </ion-button>-->
 
 
                   </div>

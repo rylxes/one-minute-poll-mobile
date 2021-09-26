@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UsersService} from "../services/users.service";
+import {UtilitiesService} from "../services/utilities.service";
 
 @Component({
   selector: 'app-help',
@@ -8,20 +11,56 @@ import {Component, OnInit} from '@angular/core';
 export class HelpPage implements OnInit {
   page = 'Help';
   toggleMode: any;
+  public data: FormGroup;
 
-  constructor() {
+  constructor(
+    private formBuilder: FormBuilder,
+    private usersService: UsersService,
+    private utils: UtilitiesService,
+  ) {
+    this.data = this.formBuilder.group({
+      LOCATION: [''],
+      POLL_DURATION: [''],
+      DECENCY_FILTER: [''],
+      THEME: [''],
+    });
   }
 
-  onClick(event){
+  public onSubmitForm(data) {
+    let form = {
+      LOCATION: this.data.value.LOCATION,
+      POLL_DURATION: this.data.value.POLL_DURATION,
+      DECENCY_FILTER: this.data.value.DECENCY_FILTER || 0,
+      THEME: this.data.value.THEME || 0,
+    }
+    console.log(form);
+    this.usersService.settings(form).subscribe(res => {
+      let formData = {};
+      res['data'].forEach((value) => {
+        let pan = {}
+        pan[value.key] = value.value;
+        formData = {...formData, ...pan};
+      })
+      this.utils.setValue('SETTINGS', formData);
+      this.utils.showToast('Settings saved !');
+      // if (res) {
+      //   this.utils.setValue('USER_DETAILS', res['data']);
+      //   this.utils.showToast('profile edited !');
+      // }
+    });
+
+  }
+
+  onClick(event) {
     let systemDark = window.matchMedia("(prefers-color-scheme: dark)");
     systemDark.addListener(this.colorTest);
-    if(event.detail.checked){
+    if (event.detail.checked) {
       document.body.setAttribute('data-theme', 'dark');
-    }
-    else{
+    } else {
       document.body.setAttribute('data-theme', 'light');
     }
   }
+
   colorTest(systemInitiatedDark) {
     if (systemInitiatedDark.matches) {
       document.body.setAttribute('data-theme', 'dark');
@@ -36,6 +75,15 @@ export class HelpPage implements OnInit {
   }
 
   ngOnInit() {
+    let settings = this.utils.getValue('SETTINGS');
+    let form = {
+      LOCATION: settings?.LOCATION || '',
+      POLL_DURATION: settings?.POLL_DURATION || '',
+      DECENCY_FILTER: settings?.DECENCY_FILTER || 0,
+      THEME: settings?.THEME || 0,
+    }
+    console.log(form)
+    this.data.setValue(form);
   }
 
 }

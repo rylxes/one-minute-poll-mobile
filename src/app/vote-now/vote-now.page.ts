@@ -93,7 +93,16 @@ export class VoteNowPage implements OnInit {
 
   }
 
+
+  generateColorArray(num) {
+    this.colorArray = [];
+    for (let i = 0; i < num; i++) {
+      this.colorArray.push('#' + Math.floor(Math.random() * 16777215).toString(16));
+    }
+  }
+
   createBarChart() {
+    this.generateColorArray(5)
     // var keys = _.invert(this.poll.pollCounters, true);
     let values = []
     let theData = []
@@ -118,6 +127,13 @@ export class VoteNowPage implements OnInit {
             stepSize: 1
           }
         }
+      },
+      elements: {
+        bar: {
+          borderWidth: 0,
+          borderColor: "#000000",
+          backgroundColor: "#000000"
+        }
       }
     }
     // if (this.poll?.pollType?.id == 2) {
@@ -126,34 +142,41 @@ export class VoteNowPage implements OnInit {
     //   options.scales.y = null;
     //   //options.scales.x
     // }
+
+    var datasets1 = {
+      label: 'Poll Count',
+      data: theData,
+      backgroundColor: this.colorArray,
+      borderColor: [
+        "#E9DAC6",
+        "#CBCBCB",
+        "#D88569",
+        "#E4CDA2",
+        "#89BC21"
+      ],
+      borderWidth: [0, 0, 0, 0, 0],
+      //borderWidth: 0,
+      drawOnChartArea: false,
+      drawBorder: false,
+      drawTicks: false,
+      lineWidth: 0,
+      //drawBorder: false,
+      //drawOnChartArea: false,
+      //drawTicks: false,
+      // backgroundColor: 'rgb(38, 194, 129)', // array should have same number of elements as number of dataset
+      // // borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
+      // borderColor: 'rgba(0,0,0,0)',// array should have same number of elements as number of dataset
+      // borderWidth: 0,
+    }
+
     this.bars = new Chart(this.barChart.nativeElement, {
       type: 'bar',
       options,
       data: {
         labels: values,
-        datasets: [{
-          label: 'Poll Count',
-          data: theData,
-          backgroundColor: [
-            "#FAEBD7",
-            "#DCDCDC",
-            "#E9967A",
-            "#F5DEB3",
-            "#9ACD32"
-          ],
-          borderColor: [
-            "#E9DAC6",
-            "#CBCBCB",
-            "#D88569",
-            "#E4CDA2",
-            "#89BC21"
-          ],
-          borderWidth: [0, 0, 0, 0, 0],
-          // backgroundColor: 'rgb(38, 194, 129)', // array should have same number of elements as number of dataset
-          // // borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
-          // borderColor: 'rgba(0,0,0,0)',// array should have same number of elements as number of dataset
-          // borderWidth: 0,
-        }]
+        datasets: [
+          datasets1
+        ]
       }
     });
     // Chart.defaults.global.elements.arc.borderWidth = 0;

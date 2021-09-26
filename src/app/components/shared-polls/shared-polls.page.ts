@@ -80,7 +80,7 @@ export class SharedPollsPage implements OnInit {
 
   doRefresh(event) {
     console.log('Begin async operation');
-    this.pollsService.mine().subscribe(data => {
+    this.pollsService.sharedWithMe().subscribe(data => {
       this.pollList = data['data'];
       event.target.complete();
       console.log(this.pollList);

@@ -15,6 +15,7 @@ import {ToastController} from '@ionic/angular';
 import {Injectable} from '@angular/core';
 import {LoadingService} from "../app/services/loading.service";
 import {UtilitiesService} from "../app/services/utilities.service";
+import {ErrorEventService} from "../app/events/error-event.service";
 
 const TOKEN_KEY = 'jwt-token';
 
@@ -24,6 +25,7 @@ export class TokenInterceptor implements HttpInterceptor {
   isAuth = false;
 
   constructor(private router: Router,
+              public errorEvent: ErrorEventService,
               private utils: UtilitiesService,
               private loading: LoadingService,
               private utilitiesService: UtilitiesService,
@@ -78,6 +80,10 @@ export class TokenInterceptor implements HttpInterceptor {
             this.router.navigate(['login']);
           }
         }
+        this.errorEvent.publish({
+          hasError: true,
+          statusCode: error.status,
+        });
         this.utilitiesService.showErrorToast(error.error.errors || error.error.message);
         return throwError(error);
       }),

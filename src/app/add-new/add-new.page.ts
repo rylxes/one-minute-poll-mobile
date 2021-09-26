@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MenuController} from '@ionic/angular';
+import {IonContent, MenuController} from '@ionic/angular';
 import {Observable} from 'rxjs';
 import {filter, finalize, pairwise, tap} from 'rxjs/operators';
 import * as moment from 'moment';
@@ -17,6 +17,7 @@ import {EventsService} from "../events/events.service";
 import {isNil} from 'lodash-es';
 import {PollsService} from "../services/polls.service";
 import {PollCreatedService} from "../events/poll-created.service";
+import {Content} from "@angular/compiler/src/render3/r3_ast";
 
 export interface imgFile {
   name: string;
@@ -80,7 +81,7 @@ export class AddNewPage implements OnInit {
     title: '',
     question: ''
   };
-
+  @ViewChild(IonContent, { static: false }) content: IonContent;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -135,11 +136,12 @@ export class AddNewPage implements OnInit {
         this.utils.remove('toSubmit');
         this.utils.remove('theImage');
         this.utils.remove('showA2E');
-        this.utils.remove('pollTypesList');
-        this.utils.remove('categoriesList');
+        //this.utils.remove('pollTypesList');
+       // this.utils.remove('categoriesList');
         this.utils.remove('PHOTO_URL');
       }
     });
+
 
     // this.router.events
     //   .pipe(filter((event: any) => event instanceof RoutesRecognized), pairwise())
@@ -153,6 +155,36 @@ export class AddNewPage implements OnInit {
 
   }
 
+  logScrollStart(event) {
+    console.log("logScrollStart : When Scroll Starts", event);
+  }
+
+  logScrolling(event) {
+    console.log("logScrolling : When Scrolling", event);
+  }
+
+  logScrollEnd(event) {
+    console.log("logScrollEnd : When Scroll Ends", event);
+  }
+
+  ScrollToBottom() {
+    this.content.scrollToBottom(1500);
+  }
+
+  async scrollToLabel(label) {
+    var titleELe = document.getElementById(label);
+    console.log(titleELe)
+    console.log(titleELe.offsetTop)
+    //await this.content.scrollToPoint(0, titleELe.offsetTop, 10);
+  }
+
+  ScrollToTop() {
+    this.content.scrollToTop(1500);
+  }
+
+  ScrollToPoint(X, Y) {
+    this.content.scrollToPoint(X, Y, 1500);
+  }
 
   onTitleModelChange(textValue: string): void {
     this.numberOfTitleCharacters = textValue?.length;
@@ -313,6 +345,13 @@ export class AddNewPage implements OnInit {
       lastModified: moment().unix(),
       type: blob.type,
     });
+
+    if (file.size > 1000000) {
+      //  alert("Please upload image less then 150KB");
+      this.removePhoto();
+      this.utils.showErrorToast('Please upload image less then 1MB!');
+      return;
+    }
     // this.utils.setValue('theFile', file);
     // this.utils.setValue('theBlob', blob);
     this.utils.setValue('theImage', this.image);

@@ -42,4 +42,11 @@ export class UsersService {
       catchError(this.utils.handleError(this.logName, []))
     );
 
+  settings = (data) => this.http.post(this.globals.url + 'settings', data)
+    .pipe(
+      take(1),
+      tap(_ => this.utils.log(this.logName)),
+      catchError(this.utils.handleError(this.logName, []))
+    );
+
 }

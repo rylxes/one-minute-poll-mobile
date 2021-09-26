@@ -122,6 +122,7 @@ export class UtilitiesService {
 
   setValue(key, value) {
     this.saveKeys(key);
+    this.remove(key);
     localStorage.setItem(key, JSON.stringify(value));
   }
 

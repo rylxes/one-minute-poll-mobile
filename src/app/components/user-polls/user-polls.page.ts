@@ -19,6 +19,12 @@ export class UserPollsPage implements OnInit {
   pollOptions: any;
   eachPoll: any;
 
+
+  url: string;
+  itemListData = [];
+  page_number = 1;
+  page_limit = 5;
+
   constructor(
     private socialSharing: SocialSharing,
     private router: Router,
@@ -104,9 +110,33 @@ export class UserPollsPage implements OnInit {
 
   doRefresh(event) {
     console.log('Begin async operation');
-    this.pollsService.mine().subscribe(data => {
+    let page = {
+      page: 1
+    }
+    this.pollsService.mine(page).subscribe(data => {
       this.pollList = data['data'];
       event.target.complete();
+      this.page_number = 2;
+      console.log(this.pollList);
+    });
+  }
+
+  doInfinite(event) {
+    console.log(this.page_number)
+    let page = {
+      page: this.page_number
+    }
+    this.pollsService.mine(page).subscribe(data => {
+      //this.pollList = data['data'];
+      console.log(data['data'])
+
+      this.pollList = [...this.pollList, ...data['data']];
+      try {
+        event.target.complete();
+      } catch (e) {
+
+      }
+      this.page_number++;
       console.log(this.pollList);
     });
   }
@@ -119,8 +149,12 @@ export class UserPollsPage implements OnInit {
   }
 
   loadPoll = () => {
-    this.pollsService.mine().subscribe(data => {
+    let page = {
+      page: 1
+    }
+    this.pollsService.mine(page).subscribe(data => {
       this.pollList = data['data'];
+      this.page_number = 2;
       console.log(this.pollList);
     });
   }

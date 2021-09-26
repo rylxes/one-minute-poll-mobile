@@ -65,7 +65,7 @@ export class PollsService {
     );
 
 
-  mine = () => this.http.post(this.globals.url + 'polls/mine', {})
+  mine = (data) => this.http.post(this.globals.url + 'polls/mine', data)
     .pipe(
       take(1),
       tap(_ => this.utils.log(this.logName)),

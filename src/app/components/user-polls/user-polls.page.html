@@ -2,9 +2,10 @@
 <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
   <ion-refresher-content></ion-refresher-content>
 </ion-refresher>
+
 <ion-card class="item grid" *ngFor="let eachPoll of pollList">
   <a>
-    <ion-card-header class="grid-top"  [routerLink]="['/poll-details',eachPoll.id]">
+    <ion-card-header class="grid-top" [routerLink]="['/poll-details',eachPoll.id]">
 
       <div class="image-holder">
         <img *ngIf="eachPoll.url" [src]="eachPoll.url"/>
@@ -12,12 +13,12 @@
       <div class="contents">
         <h4>
           <a title="View Poll">{{eachPoll.title}}
-          <span>{{eachPoll.question}}</span>
+            <span>{{eachPoll.question}}</span>
           </a>
         </h4>
       </div>
 
-    </ion-card-header >
+    </ion-card-header>
     <app-vote-result-template [poll]="eachPoll"></app-vote-result-template>
     <ion-card-content class="grid-bottom">
       <div class="user-wrap">
@@ -31,3 +32,15 @@
   </a>
 
 </ion-card>
+
+
+<input type="button"
+       (click)="doInfinite($event)"
+       class="buttonWrap button button-blue searchSubmitButton"
+       value="Load More"/>
+
+
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+  <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>

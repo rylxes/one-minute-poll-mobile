@@ -12,11 +12,13 @@ export class MyPollsPage implements OnInit {
   constructor() {
   }
 
+  doInfinite(event) {
+    console.log(event)
+  }
+
   ngOnInit() {
 
   }
-
-
 
 
 }

@@ -13,15 +13,17 @@ import {SearchComponent} from "../components/search/search.component";
 import {UserPollsPage} from "../components/user-polls/user-polls.page";
 import {MyPollsPageModule} from "../my-polls/my-polls.module";
 import {UserPollsPageModule} from "../components/user-polls/user-polls.module";
+import {SharedPollsPageModule} from "../components/shared-polls/shared-polls.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HomePageRoutingModule,
-    UserPollsPageModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        HomePageRoutingModule,
+        UserPollsPageModule,
+        SharedPollsPageModule
+    ],
   exports: [
     FooterComponent,
     HeaderComponent,
