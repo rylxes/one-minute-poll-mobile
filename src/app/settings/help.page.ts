@@ -11,6 +11,8 @@ import {UtilitiesService} from "../services/utilities.service";
 export class HelpPage implements OnInit {
   page = 'Help';
   toggleMode: any;
+  theeme = false;
+  defaultForm: any;
   public data: FormGroup;
 
   constructor(
@@ -26,6 +28,25 @@ export class HelpPage implements OnInit {
     });
   }
 
+  updateToggleTheme = (event) => {
+    let formData = {
+      ...this.data.value, ...{
+        THEME: event.detail.checked
+      }
+    }
+    this.data.setValue(formData);
+  }
+
+
+  updateToggleDecency = (event) => {
+    let formData = {
+      ...this.data.value, ...{
+        DECENCY_FILTER: event.detail.checked
+      }
+    }
+    this.data.setValue(formData);
+  }
+
   public onSubmitForm(data) {
     let form = {
       LOCATION: this.data.value.LOCATION,
@@ -33,6 +54,7 @@ export class HelpPage implements OnInit {
       DECENCY_FILTER: this.data.value.DECENCY_FILTER || 0,
       THEME: this.data.value.THEME || 0,
     }
+    console.log(this.data.value);
     console.log(form);
     this.usersService.settings(form).subscribe(res => {
       let formData = {};
@@ -76,13 +98,15 @@ export class HelpPage implements OnInit {
 
   ngOnInit() {
     let settings = this.utils.getValue('SETTINGS');
-    let form = {
+    let form = this.defaultForm  = {
       LOCATION: settings?.LOCATION || '',
       POLL_DURATION: settings?.POLL_DURATION || '',
       DECENCY_FILTER: settings?.DECENCY_FILTER || 0,
       THEME: settings?.THEME || 0,
     }
-    console.log(form)
+    this.defaultForm.THEME = (this.defaultForm.THEME == 1) ;
+    this.defaultForm.DECENCY_FILTER = (this.defaultForm.DECENCY_FILTER == 1) ;
+    console.log(this.defaultForm)
     this.data.setValue(form);
   }
 

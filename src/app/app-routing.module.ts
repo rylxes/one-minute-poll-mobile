@@ -84,6 +84,10 @@ const routes: Routes = [
     path: 'share-success/:id',
     loadChildren: () => import('./share-success/share-success.module').then( m => m.ShareSuccessPageModule)
   },
+  {
+    path: 'chart',
+    loadChildren: () => import('./components/chart/chart.module').then( m => m.ChartPageModule)
+  },
 ];
 
 @NgModule({

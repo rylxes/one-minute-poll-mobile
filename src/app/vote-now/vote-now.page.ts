@@ -10,7 +10,6 @@ import {VoteService} from "../services/vote.service";
 import {PollOptionsService} from "../services/poll-options.service";
 import {PollResultService} from "../services/poll-result.service";
 import {isNil} from 'lodash-es';
-import {Chart, registerables} from 'chart.js';
 
 @Component({
   selector: 'app-vote-now',
@@ -19,7 +18,6 @@ import {Chart, registerables} from 'chart.js';
 })
 
 export class VoteNowPage implements OnInit {
-  @ViewChild('barChart') barChart;
 
   page = 'Polls';
   theID: any;
@@ -30,8 +28,8 @@ export class VoteNowPage implements OnInit {
   sum: any = 0;
   public data: FormGroup;
 
-  bars: any;
-  colorArray: any;
+  // bars: any;
+  // colorArray: any;
 
   voteNow = {
     vote: '',
@@ -48,7 +46,6 @@ export class VoteNowPage implements OnInit {
     private pollOptionsService: PollOptionsService,
     private voteService: VoteService,
   ) {
-    Chart.register(...registerables);
     this.theID = this.route.snapshot.paramMap.get('id');
     this.data = this.formBuilder.group({
       vote: ['', [Validators.required]],
@@ -90,106 +87,12 @@ export class VoteNowPage implements OnInit {
 
   ngOnInit() {
     this.loadPoll();
-
   }
-
-
-  generateColorArray(num) {
-    this.colorArray = [];
-    for (let i = 0; i < num; i++) {
-      this.colorArray.push('#' + Math.floor(Math.random() * 16777215).toString(16));
-    }
-  }
-
-  createBarChart() {
-    this.generateColorArray(5)
-    // var keys = _.invert(this.poll.pollCounters, true);
-    let values = []
-    let theData = []
-    this.optionValues.forEach((value, key) => {
-      values.push(value.value)
-      theData.push(value.count)
-    })
-    // var keys = _.filter(this.poll.pollCounters);
-    // console.log(keys)
-
-    var options = {
-      //indexAxis: 'y',
-      segmentShowStroke: false,
-      scales: {
-        y: {
-          title: {
-            display: true,
-            text: 'Count'
-          },
-          min: 0,
-          ticks: {
-            stepSize: 1
-          }
-        }
-      },
-      elements: {
-        bar: {
-          borderWidth: 0,
-          borderColor: "#000000",
-          backgroundColor: "#000000"
-        }
-      }
-    }
-    // if (this.poll?.pollType?.id == 2) {
-    //   options['indexAxis'] = 'y';
-    //   options.scales['x'] = options.scales.y;
-    //   options.scales.y = null;
-    //   //options.scales.x
-    // }
-
-    var datasets1 = {
-      label: 'Poll Count',
-      data: theData,
-      backgroundColor: this.colorArray,
-      borderColor: [
-        "#E9DAC6",
-        "#CBCBCB",
-        "#D88569",
-        "#E4CDA2",
-        "#89BC21"
-      ],
-      borderWidth: [0, 0, 0, 0, 0],
-      //borderWidth: 0,
-      drawOnChartArea: false,
-      drawBorder: false,
-      drawTicks: false,
-      lineWidth: 0,
-      //drawBorder: false,
-      //drawOnChartArea: false,
-      //drawTicks: false,
-      // backgroundColor: 'rgb(38, 194, 129)', // array should have same number of elements as number of dataset
-      // // borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
-      // borderColor: 'rgba(0,0,0,0)',// array should have same number of elements as number of dataset
-      // borderWidth: 0,
-    }
-
-    this.bars = new Chart(this.barChart.nativeElement, {
-      type: 'bar',
-      options,
-      data: {
-        labels: values,
-        datasets: [
-          datasets1
-        ]
-      }
-    });
-    // Chart.defaults.global.elements.arc.borderWidth = 0;
-  }
-
-
   calculate = () => {
     if (!isNil(this.poll)) {
       this.pollResultService.calculate(this.poll);
       this.optionValues = this.pollResultService.optionValues;
       this.sum = this.pollResultService.sum;
-      this.createBarChart();
-
       if (!isNil(this.poll.close_date)) {
         const mydate = moment(this.poll.close_date).startOf('day');
         this.hasNotExpired = moment().startOf('day').isSameOrBefore(mydate);

@@ -9,6 +9,7 @@ import {VoteNowPageRoutingModule} from './vote-now-routing.module';
 import {VoteNowPage} from './vote-now.page';
 import {HomePageModule} from "../home/home.module";
 import {AddNewPageModule} from "../add-new/add-new.module";
+import {ChartPageModule} from "../components/chart/chart.module";
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import {AddNewPageModule} from "../add-new/add-new.module";
     ReactiveFormsModule,
     VoteNowPageRoutingModule,
     HomePageModule,
-    AddNewPageModule
+    AddNewPageModule,
+    ChartPageModule
   ],
   declarations: [VoteNowPage]
 })

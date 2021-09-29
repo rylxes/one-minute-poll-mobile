@@ -28,7 +28,6 @@ export class PollDetailsPage implements OnInit {
   }
 
   ngOnInit() {
-
     this.loadPoll();
     this.loadPollOptions();
   }
@@ -44,16 +43,14 @@ export class PollDetailsPage implements OnInit {
     console.log('dd')
     this.pollsService.getOne(this.theID).subscribe(data => {
       this.poll = data['data'];
-
       let udetails = this.utils.getValue('USER_DETAILS');
-
-      console.log(udetails?.id)
-      console.log(this.poll.user_id)
       this.canEdit = false;
       if(udetails?.id === this.poll.user_id){
         this.canEdit = true;
       }
-
+      if(this.utils.getValue('UUID') === this.poll.theuuid){
+        this.canEdit = true;
+      }
       console.log(this.poll);
     });
   }

@@ -22,6 +22,7 @@
 
           <!-- Poll summary table visible only to poll creator/admin -->
           <div class="poll-summary">
+
             <h4>Poll Summary</h4>
             <table class="table">
               <tbody>
@@ -57,7 +58,10 @@
             </table>
 
 
+
+            <app-chart [poll]="poll"></app-chart>
           </div>
+
 
           <div class="decoration"></div>
           <div *ngIf="canEdit" class="formSubmitButtonErrorsWrap">

@@ -29,7 +29,7 @@
                     <h4>Set Location of Interest</h4>
                   </div>
                   <div class="set-switch">
-                    <select formControlName="LOCATION"  class="form-control" id="LOCATION">
+                    <select formControlName="LOCATION" class="form-control" id="LOCATION">
                       <option value="">Select city</option>
                       <option value="Abuja">Abuja</option>
                       <option value="Lagos">Lagos</option>
@@ -48,24 +48,26 @@
                     <h4>Set Poll Duration (Days)</h4>
                   </div>
                   <div class="set-switch">
-                    <input class="form-control textField" formControlName="POLL_DURATION" type="number" id="poll_duration" step="1" placeholder="30"/>
+                    <input class="form-control textField" formControlName="POLL_DURATION" type="number"
+                           id="poll_duration" step="1" placeholder="30"/>
                   </div>
                 </div>
                 <div class="settings-group">
+
+
                   <div class="item-title">
                     <h4>Switch between Light or Dark Theme</h4>
                   </div>
                   <label class="set-switch">
-<!--                    <input type="checkbox"-->
-<!--                           [(ngModel)]="toggleMode"-->
-<!--                           (ngModelChange)="toggleChange($event)"-->
-<!--                    >-->
-                    <input formControlName="THEME" type="checkbox">
                     <div class="set-slider-wrap">
                       <span class="options">No</span>
-                      <span class="set-slider round"></span>
+                      <ion-toggle class="set-slider round"
+                                  [(ngModel)]="defaultForm.THEME"
+                                  (ionChange)="updateToggleTheme($event)" mode="ios"
+                                  formControlName="THEME"></ion-toggle>
                       <span class="options">Yes</span>
                     </div>
+
                   </label>
                 </div>
                 <div class="settings-group">
@@ -73,10 +75,12 @@
                     <h4>Enable/Disable Decency Filter</h4>
                   </div>
                   <label class="set-switch">
-                    <input formControlName="DECENCY_FILTER" type="checkbox">
                     <div class="set-slider-wrap">
                       <span class="options">No</span>
-                      <span class="set-slider round"></span>
+                      <ion-toggle class="set-slider round"
+                                  [(ngModel)]="defaultForm.DECENCY_FILTER"
+                                  (ionChange)="updateToggleDecency($event)"
+                                  mode="ios" formControlName="DECENCY_FILTER"></ion-toggle>
                       <span class="options">Yes</span>
                     </div>
                   </label>
