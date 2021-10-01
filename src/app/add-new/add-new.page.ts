@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {IonContent, MenuController} from '@ionic/angular';
 import {Observable} from 'rxjs';
@@ -81,9 +81,18 @@ export class AddNewPage implements OnInit {
     title: '',
     question: ''
   };
-  @ViewChild(IonContent, { static: false }) content: IonContent;
+  @ViewChild(IonContent, {static: false}) content: IonContent;
+  @ViewChild('panel3', {static: false}) panel3: ElementRef;
+
+  public ionScroll;
+  public panelPos3 : number;
+  public showButton = false;
+  public contentData = [];
+
+
   constructor(
     private formBuilder: FormBuilder,
+    public myElement: ElementRef,
     private route: ActivatedRoute,
     private router: Router,
     private pollsService: PollsService,
@@ -137,7 +146,7 @@ export class AddNewPage implements OnInit {
         this.utils.remove('theImage');
         this.utils.remove('showA2E');
         //this.utils.remove('pollTypesList');
-       // this.utils.remove('categoriesList');
+        // this.utils.remove('categoriesList');
         this.utils.remove('PHOTO_URL');
       }
     });
@@ -152,6 +161,12 @@ export class AddNewPage implements OnInit {
     //     console.log('previous url', events[0].urlAfterRedirects);
     //     console.log('current url', events[1].urlAfterRedirects);
     //   });
+
+  }
+
+  ionViewDidLoad(): void {
+
+    this.panelPos3 = this.panel3.nativeElement.getBoundingClientRect().top;
 
   }
 
@@ -179,7 +194,16 @@ export class AddNewPage implements OnInit {
   }
 
   ScrollToTop() {
-    this.content.scrollToTop(1500);
+   // this.content.scrollToTop(1500);
+    this.scrollTo(0, this.panelPos3, 750);
+  }
+
+  scrollTo(x         : number,
+           y         : number,
+           duration  : number) : void
+  {
+   // this.content.scrollTo(x, y, duration);
+    this.content.scrollToPoint(x, y, duration);
   }
 
   ScrollToPoint(X, Y) {
@@ -299,6 +323,11 @@ export class AddNewPage implements OnInit {
       });
     }
 
+  }
+
+  ionViewWillEnter() {
+    console.log('verri')
+    this.ScrollToTop();
   }
 
   ngOnInit() {

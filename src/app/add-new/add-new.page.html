@@ -1,14 +1,8 @@
 <app-header name="Add New Poll"></app-header>
 
 
-  <ion-content [scrollEvents]="true"
-               (ionScrollStart)="logScrollStart($event)"
-               (ionScroll)="logScrolling($event)"
-               (ionScrollEnd)="logScrollEnd($event)" class="left-sidebar">
-
-
-
-    <div class="all-elements" style="padding-bottom: 20%">
+  <ion-content class="left-sidebar">
+    <div class="all-elements">
     <div class="snap-drawers">
       <!--Search wrap -->
 
@@ -18,7 +12,7 @@
         <div class="content">
           <div class="header-clear"></div>
           <!--Page content goes here, fixed elements go above the all elements class-->
-          <div class="container">
+          <div class="container" #panel3>
             <div class="container no-bottom">
               <div class="add-new-form poll-form no-bottom">
                 <form [formGroup]="data" (ngSubmit)="onSubmit(pageForm)" #pageForm="ngForm" class="searchForm">
@@ -222,6 +216,7 @@
                        class="buttonWrap button button-red searchSubmitButton">Reset
                       Poll
                     </a>
+
 
 <!--                    <ion-button (click)="ScrollToTop()"> Scroll To Top </ion-button>-->
 
