@@ -48,28 +48,12 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    this.setHash();
     this.loadPoll();
     this.userDetails = this.utils.getValue('USER_DETAILS') || {};
     console.log(this.userDetails)
   }
 
-  setHash = () => {
-    let values = this.utils.getValue('UUID')
-    let deviceID = this.utils.getValue('DEVICE_ID')
-    if (isNil(values)) {
-      this.utils.setValue('UUID', uuidv4())
-    }
-    if (isNil(deviceID)) {
-      this.utils.setValue('DEVICE_ID', this.device.uuid)
-    }
-    console.log(values)
 
-
-    this.networkInterface.getCarrierIPAddress()
-      .then(address => console.info(`IP: ${address.ip}, Subnet: ${address.subnet}`))
-      .catch(error => console.error(`Unable to get IP: ${error}`));
-  }
 
   // loadPoll = () => {
   //   this.pollsService.list().subscribe(data => {
