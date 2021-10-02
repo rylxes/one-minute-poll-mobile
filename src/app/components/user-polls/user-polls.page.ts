@@ -2,10 +2,13 @@ import {Component, Input, OnInit} from '@angular/core';
 import {PollsService} from "../../services/polls.service";
 import {PollOptionsService} from "../../services/poll-options.service";
 import {SocialSharing} from '@ionic-native/social-sharing/ngx';
-import {AlertController} from "@ionic/angular";
+import {AlertController, PopoverController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {UtilitiesService} from "../../services/utilities.service";
 import {EventsService} from "../../events/events.service";
+import {ShareOptionsComponent} from "../share-options/share-options.component";
+import {ShareMenuPage} from "../share-menu/share-menu.page";
+import {Globals} from "../../../config/globals";
 
 @Component({
   selector: 'app-my-poll-list',
@@ -28,13 +31,32 @@ export class UserPollsPage implements OnInit {
   constructor(
     private socialSharing: SocialSharing,
     private router: Router,
+    private globals: Globals,
     private eventsService: EventsService,
     private utils: UtilitiesService,
     private pollsService: PollsService,
+    public popoverController: PopoverController,
     private alertCtrl: AlertController,
     private pollOptionsService: PollOptionsService,
   ) {
   }
+
+
+  async presentPopover(ev) {
+    const popover = await this.popoverController.create({
+      component: ShareOptionsComponent,
+      // componentProps: {
+      //
+      // },
+      event: ev,
+      showBackdrop: false,
+      translucent: true,
+      animated: false,
+      cssClass: 'bottom-sheet-popover'
+    });
+    await popover.present();
+  }
+
 
   sharePrompt = async (eachPoll) => {
     this.eachPoll = eachPoll;
@@ -57,8 +79,16 @@ export class UserPollsPage implements OnInit {
         },
         {
           text: 'Share',
+          cssClass: 'primary',
           handler: data => {
             this.onSubmit(data);
+          }
+        },
+        {
+          text: 'Share as Link',
+          cssClass: 'secondary',
+          handler: () => {
+            this.clickShare2();
           }
         }
       ]
@@ -86,14 +116,13 @@ export class UserPollsPage implements OnInit {
     });
   }
 
-  clickShare2(event) {
-    console.log(event)
+  clickShare2() {
     // this is the complete list of currently supported params you can pass to the plugin (all optional)
     var options = {
-      message: 'share this', // not supported on some apps (Facebook, Instagram)
+      message: 'Share this url', // not supported on some apps (Facebook, Instagram)
       subject: 'One Minute Poll', // fi. for email
       // files: ['', ''], // an array of filenames either locally or remotely
-      url: 'https://www.website.com/foo/#bar?a=b',
+      url: this.globals.shareURL + 'vote-now/' + this.eachPoll.id,
       chooserTitle: 'Pick an app', // Android only, you can override the default share sheet title
       // appPackageName: 'com.apple.social.facebook', // Android only, you can provide id of the App you want to share with
       iPadCoordinates: '0,0,0,0' //IOS only iPadCoordinates for where the popover should be point.  Format with x,y,width,height

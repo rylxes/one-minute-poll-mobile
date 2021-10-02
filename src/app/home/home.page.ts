@@ -63,6 +63,7 @@ export class HomePage implements OnInit {
     if (isNil(deviceID)) {
       this.utils.setValue('DEVICE_ID', this.device.uuid)
     }
+    console.log(values)
 
 
     this.networkInterface.getCarrierIPAddress()

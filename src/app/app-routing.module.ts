@@ -88,6 +88,10 @@ const routes: Routes = [
     path: 'chart',
     loadChildren: () => import('./components/chart/chart.module').then( m => m.ChartPageModule)
   },
+  {
+    path: 'share-menu',
+    loadChildren: () => import('./components/share-menu/share-menu.module').then( m => m.ShareMenuPageModule)
+  },
 ];
 
 @NgModule({

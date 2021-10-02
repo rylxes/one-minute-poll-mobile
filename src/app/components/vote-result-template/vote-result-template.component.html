@@ -1,9 +1,9 @@
 <div class="summary" *ngIf="poll">
   <div class="votes"><i class="las la-poll"></i> <span>{{poll?.counters?.value || 0}}</span></div>
 
-
   <div class="results">
 
+    <ion-button style="padding-left: 9em" (click)="clickShare()" color="primary">{{poll.code}}</ion-button>
     <div *ngIf="poll?.pollType?.id === 3">
       <span title="{{eachValue?.value}}" class="options" *ngFor="let eachValue of optionValues">
         <em>{{eachValue?.name}}</em> {{eachValue?.perc}}%
