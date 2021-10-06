@@ -1,5 +1,13 @@
-<ion-card>
+<!--<ion-card>-->
+<!--  <ion-card-content>-->
+<!--    <canvas #barChart></canvas>-->
+<!--  </ion-card-content>-->
+<!--</ion-card>-->
+
+
+<ion-card *ngIf="columnChart1" >
   <ion-card-content>
-    <canvas #barChart></canvas>
+    <google-chart [data]="columnChart1"></google-chart>
   </ion-card-content>
 </ion-card>
+

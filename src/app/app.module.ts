@@ -15,10 +15,13 @@ import {Device} from '@ionic-native/device/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NetworkInterface } from '@ionic-native/network-interface/ngx';
 import {SocialSharing} from "@ionic-native/social-sharing/ngx";
+import {Ng2GoogleChartsModule} from "ng2-google-charts";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, UserPollsPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule, UserPollsPageModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

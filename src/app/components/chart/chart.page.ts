@@ -4,6 +4,7 @@ import {PollResultService} from "../../services/poll-result.service";
 import * as moment from "moment";
 import {isNil} from 'lodash-es';
 import * as _ from "underscore";
+import {GoogleChartInterface, Ng2GoogleChartsModule} from 'ng2-google-charts';
 
 
 @Component({
@@ -18,14 +19,73 @@ export class ChartPage implements OnInit, OnChanges {
   optionValues: any = [];
   bars: any;
   sum = 0;
+  public barChartGG: GoogleChartInterface;
+  public columnChart1: GoogleChartInterface;
 
-  constructor(private pollResultService: PollResultService) {
+  constructor(
+    private pollResultService: PollResultService
+  ) {
     Chart.register(...registerables);
   }
 
   ngOnChanges() {
     this.chart();
   }
+
+
+  loadColumnChart() {
+
+    let fullData = []
+
+    let eachList = ['Count', 'Data'];
+    fullData.push(eachList)
+    let sum = 0;
+    this.optionValues.forEach((value, key) => {
+      let eachList = [value.value, value.count ];
+      sum = sum + value.count;
+      fullData.push(eachList)
+    })
+
+    console.log(fullData)
+
+    this.columnChart1 = {
+      chartType: 'ColumnChart',
+      // dataTable: [
+      //   ['City', '2010 Population'],
+      //   ['New York City, NY', 8175000],
+      //   ['Los Angeles, CA', 3792000],
+      //   ['Chicago, IL', 2695000],
+      //   ['Houston, TX', 2099000],
+      //   ['Philadelphia, PA', 1526000]
+      // ],
+
+      dataTable: fullData,
+      //opt_firstRowIsData: true,
+      options: {
+        title: 'Poll Count',
+       // height: 600,
+       // chartArea: { height: '400' },
+        hAxis: {
+          title: 'Data',
+          minValue: 0
+        },
+        vAxis: {
+          title: 'Count',
+          viewWindow: {
+            min: 0,
+            max: sum
+          },
+          minValue: 0,
+          gridlines: {
+            count: 1,
+            color: 'transparent'
+          },
+
+        }
+      },
+    };
+  }
+
 
   ngAfterViewInit(): void {
     //this.barChart.nativeElement.focus();
@@ -37,7 +97,8 @@ export class ChartPage implements OnInit, OnChanges {
       this.pollResultService.calculate(this.poll);
       this.optionValues = this.pollResultService.optionValues;
       this.sum = this.pollResultService.sum;
-      this.createBarChart();
+      //this.createBarChart();
+      this.loadColumnChart();
     }
   }
 
@@ -59,7 +120,15 @@ export class ChartPage implements OnInit, OnChanges {
     // var keys = _.invert(this.poll.pollCounters, true);
     let values = []
     let theData = []
+
+    let fullData = []
+    console.log(this.optionValues)
+
+    let eachList = ['City', '2010 Population'];
+    fullData.push(eachList)
     this.optionValues.forEach((value, key) => {
+      let eachList = [value.value, value.count ];
+      fullData.push(eachList)
       values.push(value.value)
       theData.push(value.count)
     })
