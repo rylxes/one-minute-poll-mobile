@@ -69,7 +69,7 @@
 
                       <ion-item class="form-radio" *ngFor="let eachType of pollTypesList">
                         <ion-radio slot="start" name="answer" [value]="eachType.id" checked></ion-radio>
-                        <ion-label (click)="clickOptions2(eachType)" class="c-label">{{eachType.name}}</ion-label>
+                        <ion-label (click)="clickOptions2(eachType)" class="c-label cs-label">{{eachType.name}}</ion-label>
                       </ion-item>
 
                     </ion-radio-group>
@@ -79,30 +79,30 @@
                   <div class="radio-wrap border-bottom" *ngIf="showA2E || myShowAE">
 
                     <ion-item>
-                      <ion-label position="stacked">A</ion-label>
-                      <ion-input autocapitalize="words" type="text" formControlName="A"></ion-input>
+                      <ion-label position="stacked">Option A Title</ion-label>
+                      <ion-input class="option-input" autocapitalize="words" type="text" formControlName="A"></ion-input>
                     </ion-item>
 
                     <ion-item>
-                      <ion-label position="stacked">B</ion-label>
-                      <ion-input autocapitalize="words" type="text" formControlName="B"></ion-input>
+                      <ion-label position="stacked">Option B Title</ion-label>
+                      <ion-input class="option-input" autocapitalize="words" type="text" formControlName="B"></ion-input>
                     </ion-item>
 
                     <ion-item>
-                      <ion-label position="stacked">C</ion-label>
-                      <ion-input autocapitalize="words" type="text" formControlName="C"></ion-input>
-                    </ion-item>
-
-
-                    <ion-item>
-                      <ion-label position="stacked">D</ion-label>
-                      <ion-input autocapitalize="words" type="text" formControlName="D"></ion-input>
+                      <ion-label position="stacked">Option C Title</ion-label>
+                      <ion-input class="option-input" autocapitalize="words" type="text" formControlName="C"></ion-input>
                     </ion-item>
 
 
                     <ion-item>
-                      <ion-label position="stacked">E</ion-label>
-                      <ion-input autocapitalize="words" type="text" formControlName="E"></ion-input>
+                      <ion-label position="stacked">Option D Title</ion-label>
+                      <ion-input class="option-input" autocapitalize="words" type="text" formControlName="D"></ion-input>
+                    </ion-item>
+
+
+                    <ion-item>
+                      <ion-label position="stacked">Option E Title</ion-label>
+                      <ion-input class="option-input" autocapitalize="words" type="text" formControlName="E"></ion-input>
                     </ion-item>
 
                     <br/>
@@ -154,7 +154,7 @@
                   </div>
 
 
-                  <ion-item lines="full">
+                  <ion-item lines="full" class="cs-item-block">
                     <ion-label position="stacked" style="padding-bottom: 20px">Close Date</ion-label>
                     <ion-datetime formControlName="closeDate" placeholder="Select Date"
                                   class="form-control textField"
