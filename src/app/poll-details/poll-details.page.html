@@ -7,6 +7,7 @@
       <div *ngIf="poll" id="content" class="snap-content">
         <div class="content">
           <div class="header-clear"></div>
+          <h4>Status : {{hasNotClosed ? 'Open' : 'Closed'}} </h4>
           <!--Page content goes here, fixed elements go above the all elements class-->
 
           <div class="vote-title full-width">

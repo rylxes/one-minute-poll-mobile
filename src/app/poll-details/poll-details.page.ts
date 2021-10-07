@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {PollsService} from "../services/polls.service";
 import {PollOptionsService} from "../services/poll-options.service";
 import {UtilitiesService} from "../services/utilities.service";
+import * as moment from "moment";
+import {isNil} from 'lodash-es';
 
 @Component({
   selector: 'app-poll-details',
@@ -16,6 +18,8 @@ export class PollDetailsPage implements OnInit {
   canEdit = false;
   poll: any;
   pollOptions: any;
+  hasNotClosed = true;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -45,11 +49,19 @@ export class PollDetailsPage implements OnInit {
       this.poll = data['data'];
       let udetails = this.utils.getValue('USER_DETAILS');
       this.canEdit = false;
-      if(udetails?.id === this.poll.user_id){
+      if (udetails?.id === this.poll.user_id) {
         this.canEdit = true;
       }
-      if(this.utils.getValue('UUID') === this.poll.theuuid){
+      if (this.utils.getValue('UUID') === this.poll.theuuid) {
         this.canEdit = true;
+      }
+      if(this.poll.hasVoted == 1){
+        this.canEdit = false;
+      }
+      if (!isNil(this.poll.close_date)) {
+        const mydate = moment(this.poll.close_date).startOf('day');
+        this.hasNotClosed = moment().startOf('day').isSameOrBefore(mydate);
+        console.log(mydate)
       }
       console.log(this.poll);
     });

@@ -11,6 +11,7 @@
 
           <div class="header-clear"></div>
           <h4>Created By: {{poll?.user?.name || poll?.UserUuid?.name || 'Guest'}} </h4>
+          <h4>Status : {{hasNotClosed ? 'Open' : 'Closed'}} </h4>
 
           <div class="vote-title full-width">
             <h2>{{poll?.title}}</h2>
@@ -132,9 +133,21 @@
               <input [disabled]="!pageForm.form.valid" type="submit"
                      *ngIf="hasNotExpired"
                      class="buttonWrap button button-blue searchSubmitButton" id="searchSubmitButton"
-                     value="Submit" data-formId="contactForm"/>
+                     value="Submit"/>
+
+
+              <input  type="button"
+                     *ngIf="hasNotExpired"
+                      (click)="clickShare2()"
+                     class="buttonWrap button button-blue searchSubmitButton"
+                     value="Share"/>
+
 
             </div>
+
+<!--            <div class="share-wrap" title="Share" (click)="clickShare2()">-->
+<!--              <em class="share show-submenu"></em>-->
+<!--            </div>-->
 
 
             <div class="bottom-fix"></div>
