@@ -23,6 +23,7 @@
 
           <!-- Poll summary table visible only to poll creator/admin -->
           <div class="poll-summary">
+            <app-chart [poll]="poll"></app-chart>
 
             <h4>Poll Summary</h4>
             <table class="table">
@@ -57,10 +58,6 @@
               </tr>
               </tbody>
             </table>
-
-
-
-            <app-chart [poll]="poll"></app-chart>
           </div>
 
 
