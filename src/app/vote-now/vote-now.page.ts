@@ -92,7 +92,7 @@ export class VoteNowPage implements OnInit {
 
   ngOnInit() {
     this.loadPoll();
- this.loadPollOptions();
+    this.loadPollOptions();
   }
 
   loadPollOptions = () => {

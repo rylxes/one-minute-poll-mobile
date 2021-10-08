@@ -1973,15 +1973,15 @@ i.report.no {
   transition: all ease-in .2s;
 }
 
-.poll-canvas .boundary .bars .true-bar .bar-track {
-  background: var(--sky-blue);
-  border: 0 solid var(--dark-blue);
+.poll-canvas .boundary .bars .true-bar:nth-child(1) .bar-track {
+  background: #2196F3;
+  border: 0 solid #1E437B;
   border-bottom: 0;
 }
 
-.poll-canvas .boundary .bars .false-bar .bar-track {
-  background: var(--light-red);
-  border: 0 solid var(--dark-red);
+.poll-canvas .boundary .bars .true-bar:nth-child(2) .bar-track {
+  background: #DD1111;
+  border: 0 solid #990000;
   border-bottom: 0;
 }
 
