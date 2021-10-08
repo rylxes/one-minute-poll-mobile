@@ -58,8 +58,12 @@
             </table>
 
 
-
-            <app-chart [poll]="poll"></app-chart>
+            <div class="poll-chart-wrap">
+              <div class="poll-chart-header">
+                <h4>{{poll?.pollType?.name}}</h4>
+              </div>
+              <app-chart [poll]="poll"></app-chart>
+            </div>
           </div>
 
 
