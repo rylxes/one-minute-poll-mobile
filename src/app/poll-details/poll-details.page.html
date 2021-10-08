@@ -7,6 +7,7 @@
       <div *ngIf="poll" id="content" class="snap-content">
         <div class="content">
           <div class="header-clear"></div>
+          <h4>Status : {{hasNotClosed ? 'Open' : 'Closed'}} </h4>
           <!--Page content goes here, fixed elements go above the all elements class-->
 
           <div class="vote-title full-width">
@@ -22,6 +23,7 @@
 
           <!-- Poll summary table visible only to poll creator/admin -->
           <div class="poll-summary">
+            <app-chart [poll]="poll"></app-chart>
 
             <h4>Poll Summary</h4>
             <table class="table">
@@ -56,14 +58,6 @@
               </tr>
               </tbody>
             </table>
-
-
-            <div class="poll-chart-wrap">
-              <div class="poll-chart-header">
-                <h4>{{poll?.pollType?.name}}</h4>
-              </div>
-              <app-chart [poll]="poll"></app-chart>
-            </div>
           </div>
 
 
