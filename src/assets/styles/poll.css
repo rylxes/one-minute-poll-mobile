@@ -1924,7 +1924,7 @@ i.report.no {
   display: block;
   position: relative;
   overflow: hidden;
-  width: 400px;
+  width: 100%;
   height: 300px;
   margin: 0 auto;
 }
@@ -2044,7 +2044,7 @@ i.report.no {
 }
 
 .fsh-bar-canvas .h-boundary {
-  width: 60px;
+  width: 40px;
   display: inline-block;
   overflow: hidden;
   position: relative;
@@ -2052,7 +2052,7 @@ i.report.no {
 }
 
 .fsh-bar-canvas .h-boundary .rate-item {
-  width: 60px;
+  width: 40px;
   display: block;
   height: 60px;
   text-align: right;
@@ -2061,7 +2061,7 @@ i.report.no {
 }
 
 .fsh-bar-canvas .h-boundary .rate-item span {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
 }
 
@@ -2141,12 +2141,12 @@ i.report.no {
 
 .fsv-bar-canvas .v-boundary .v-bars .fs-vbar {
   display: inline-block;
-  position: relative;
-  overflow: hidden;
-  width: 82.5px;
-  height: 240px;
-  margin: 0;
-  padding: 0;
+    position: relative;
+    overflow: hidden;
+    width: calc(20% - 10px);
+    height: 240px;
+    margin: 0 5px;
+    padding: 0;
 }
 
 .fsv-bar-canvas .v-boundary .v-bars .fs-vbar .vbar {
@@ -2169,24 +2169,44 @@ i.report.no {
   transition: all ease-in .2s;
 }
 
-.color-1 .vbar-track {
-  background: var(--color-1);
+.fs-vbar:nth-child(1) .vbar-track{
+  background: #4D4DFF;
 }
 
-.color-2 .vbar-track {
-  background: var(--color-2);
+.fs-vbar:nth-child(2) .vbar-track{
+  background: #FF4DFF;
 }
 
-.color-3 .vbar-track {
-  background: var(--color-3);
+.fs-vbar:nth-child(3) .vbar-track{
+  background: #FF4D4D;
 }
 
-.color-4 .vbar-track {
-  background: var(--color-4);
+.fs-vbar:nth-child(4) .vbar-track{
+  background: #D2FF4D;
 }
 
-.color-5 .vbar-track {
-  background: var(--color-5);
+.fs-vbar:nth-child(5) .vbar-track{
+  background: #4DFF4D;
+}
+
+.tv-vbar:nth-child(1) .tv-bar-item{
+  color: #4D4DFF;
+}
+
+.tv-vbar:nth-child(2) .tv-bar-item{
+  color: #FF4DFF;
+}
+
+.tv-vbar:nth-child(3) .tv-bar-item{
+  color: #FF4D4D;
+}
+
+.tv-vbar:nth-child(4) .tv-bar-item{
+  color: #D2FF4D;
+}
+
+.tv-vbar:nth-child(5) .tv-bar-item{
+  color: #4DFF4D;
 }
 
 .fsv-bar-canvas .v-boundary .v-bars .fs-vbar .vbar .vbar-track:hover {
@@ -2211,7 +2231,7 @@ i.report.no {
 }
 
 .fsv-bar-canvas .v-boundary-base .rate-item {
-  width: 82.5px;
+  width: 20%;
   display: inline-block;
   height: 60px;
   position: relative;
@@ -2226,23 +2246,23 @@ i.report.no {
 }
 
 .tf-bar-legend .color-1 {
-  color: var(--color-1);
+  color: #4D4DFF;
 }
 
 .tf-bar-legend .color-2 {
-  color: var(--color-2);
+  color: #FF4DFF;
 }
 
 .tf-bar-legend .color-3 {
-  color: var(--color-3);
+  color: #FF4D4D;
 }
 
 .tf-bar-legend .color-4 {
-  color: var(--color-4);
+  color: #D2FF4D;
 }
 
 .tf-bar-legend .color-5 {
-  color: var(--color-5);
+  color: #4DFF4D;
 }
 
 .tv-bar strong {
