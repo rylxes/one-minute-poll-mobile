@@ -15,6 +15,7 @@ import {GoogleChartInterface, Ng2GoogleChartsModule} from 'ng2-google-charts';
 export class ChartPage implements OnInit, OnChanges {
   @ViewChild('barChart',{ static: true }) barChart: any;
   @Input() poll: any;
+  @Input() pollOptions: any;
   colorArray: any;
   optionValues: any = [];
   bars: any;
@@ -29,7 +30,7 @@ export class ChartPage implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.chart();
+   // this.chart();
   }
 
 
@@ -91,6 +92,8 @@ export class ChartPage implements OnInit, OnChanges {
     //this.barChart.nativeElement.focus();
   }
 
+
+
   chart () {
     if (!_.isEmpty(this.poll)) {
       console.log(this.poll)
@@ -98,7 +101,7 @@ export class ChartPage implements OnInit, OnChanges {
       this.optionValues = this.pollResultService.optionValues;
       this.sum = this.pollResultService.sum;
       //this.createBarChart();
-      this.loadColumnChart();
+     // this.loadColumnChart();
     }
   }
 

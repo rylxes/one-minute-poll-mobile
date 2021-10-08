@@ -5,6 +5,7 @@ import {PollOptionsService} from "../services/poll-options.service";
 import {UtilitiesService} from "../services/utilities.service";
 import * as moment from "moment";
 import {isNil} from 'lodash-es';
+import {PollResultService} from "../services/poll-result.service";
 
 @Component({
   selector: 'app-poll-details',
@@ -19,10 +20,12 @@ export class PollDetailsPage implements OnInit {
   poll: any;
   pollOptions: any;
   hasNotClosed = true;
-
+  optionValues: any = [];
+  sum: any = 0;
 
   constructor(
     private route: ActivatedRoute,
+    private pollResultService: PollResultService,
     private utils: UtilitiesService,
     private pollOptionsService: PollOptionsService,
     private pollsService: PollsService,

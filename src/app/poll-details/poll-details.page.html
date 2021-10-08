@@ -4,7 +4,10 @@
   <div class="all-elements">
     <div class="snap-drawers">
 
+
+
       <div *ngIf="poll" id="content" class="snap-content">
+        <ion-button style="padding-left: 15em" color="primary">{{poll?.code}}</ion-button>
         <div class="content">
           <div class="header-clear"></div>
           <h4>Status : {{hasNotClosed ? 'Open' : 'Closed'}} </h4>
@@ -23,101 +26,7 @@
 
           <!-- Poll summary table visible only to poll creator/admin -->
           <div class="poll-summary">
-           <!-- <app-chart [poll]="poll"></app-chart>-->
-
-           <div *ngIf="poll?.pollType?.name=='A - E Options'">
-              <div class="poll-canvas-wrap canvas-bordered">
-              <h4> Poll Chart  </h4>
-                <div class="poll-canvas fsv-bar-canvas">
-                  <div class="v-boundary">
-                    <div data-totalVotes="{{poll?.counters?.value}}" class="v-bars">
-
-                      <div *ngFor="let eachType of pollOptions" class="fs-vbar">
-                        <div data-votes="{{ eachType?.counters?.value || 0 }}" data-poll="{{ ( eachType?.counters?.value/poll?.counters?.value ) * 100 }}" class="vbar">
-                          <span>{{ eachType?.counters?.value || 0 }}</span>
-                          <div id="vbar-child" class="vbar-track" style="height:{{ ( eachType?.counters?.value/poll?.counters?.value ) * 300 }}px;"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="v-boundary-base">
-                    <div class="rate-item"><span>A</span></div>
-                    <div class="rate-item"><span>B</span></div>
-                    <div class="rate-item"><span>C</span></div>
-                    <div class="rate-item"><span>D</span></div>
-                    <div class="rate-item"><span>E</span></div>
-                  </div>
-                </div>
-                <div *ngFor="let eachType of pollOptions" class="tf-bar-legend tv-bar">
-                  <p class="tv-bar-item">{{eachType.name}}</p>
-
-                  <div class="decoration"></div>
-                </div>
-
-                <div class="tf-bar-legend">
-                  <!--<p><strong>Total Views:</strong> 62,300</p>-->
-                  <p><strong>Total Votes:</strong> {{poll?.counters?.value}}</p>
-                </div>
-              </div>
-           </div>
-
-           <div *ngIf="poll?.pollType?.name=='1 - 5 Stars'">
-              <div class="poll-canvas-wrap canvas-bordered">
-               <h4> Poll Chart </h4>
-                <div class="poll-canvas fsh-bar-canvas">
-                  <div class="h-boundary">
-                    <div data-rate="5" class="rate-item"><span>5 Star</span></div>
-                    <div data-rate="4" class="rate-item"><span>4 Star</span></div>
-                    <div data-rate="3" class="rate-item"><span>3 Star</span></div>
-                    <div data-rate="2" class="rate-item"><span>2 Star</span></div>
-                    <div data-rate="1" class="rate-item"><span>1 Star</span></div>
-                  </div>
-                  <div data-totalVotes="{{poll?.counters?.value}}" class="rate-bars">
-                    <div *ngFor="let eachType of pollOptions" class="fs-hbar">
-                      <div data-votes="{{ eachType?.counters?.value || 0 }}" data-poll="{{ ( eachType?.counters?.value/poll?.counters?.value ) * 100 }}" class="hbar">
-                        <div id="hbar-child" class="hbar-track" style="width: {{ ( eachType?.counters?.value/poll?.counters?.value ) * 100 }}%;"></div>
-                        <span>{{ eachType?.counters?.value || 0 }}</span>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="tf-bar-legend">
-                  <!--<p><strong>Total Views:</strong> 123,941</p>-->
-                  <p><strong>Total Votes:</strong> {{poll?.counters?.value}}</p>
-                </div>
-              </div>
-           </div>
-
-           <div *ngIf="poll?.pollType?.name=='Yes / No'">
-              <div class="poll-canvas-wrap canvas-bordered">
-                <h4>Poll Chart </h4>
-                <div class="poll-canvas tf-bar-canvas">
-                  <div class="boundary">
-                    <div class="bars" data-totalVotes="{{poll?.counters?.value}}">
-                      <div *ngFor="let eachType of pollOptions" data-totalVotes="{{poll?.counters?.value}}"  id="bar" class="true-bar bar" data-poll="{{ eachType?.counters?.value || 0 }}" data-size="{{ ( eachType?.counters?.value/poll?.counters?.value ) * 100 }}">
-                        <div id="bar-child" class="bar-track" style="height:{{ ( eachType?.counters?.value/poll?.counters?.value ) * 300 }}px;"></div>
-                        <span>{{ eachType?.counters?.value || 0 }}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="labels">
-                    <div class="true-label label">
-                      <p>Yes</p>
-                    </div>
-                    <div class="false-label label">
-                      <p>No</p>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="tf-bar-legend">
-                  <!--<p><strong>Total Views:</strong> 11,688</p>-->
-                  <p><strong>Total Votes:</strong> {{poll?.counters?.value}}</p>
-                </div>
-              </div>
-           </div>
-
+            <app-chart [poll]="poll" [pollOptions]="pollOptions"></app-chart>
             <h4>Poll Summary</h4>
             <table class="table">
               <tbody>

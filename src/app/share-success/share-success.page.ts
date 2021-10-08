@@ -38,6 +38,7 @@ export class ShareSuccessPage implements OnInit {
 
   loadPoll = () => {
     this.pollsService.getOne(this.theID).subscribe(data => {
+      this.pollList = [];
       this.pollList.push(data['data']);
       console.log(this.pollList);
     });

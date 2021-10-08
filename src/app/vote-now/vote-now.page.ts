@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {PollsService} from "../services/polls.service";
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MenuController} from "@ionic/angular";
+import {AlertController, MenuController} from "@ionic/angular";
 import * as moment from "moment";
 import * as _ from "lodash";
 import {UtilitiesService} from "../services/utilities.service";
@@ -12,6 +12,7 @@ import {PollResultService} from "../services/poll-result.service";
 import {isNil} from 'lodash-es';
 import {Globals} from "../../config/globals";
 import {SocialSharing} from "@ionic-native/social-sharing/ngx";
+import {EventsService} from "../events/events.service";
 
 @Component({
   selector: 'app-vote-now',
@@ -40,6 +41,8 @@ export class VoteNowPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private eventsService: EventsService,
+    private alertCtrl: AlertController,
     private socialSharing: SocialSharing,
     private router: Router,
     private globals: Globals,
@@ -132,7 +135,66 @@ export class VoteNowPage implements OnInit {
     });
   }
 
-  clickShare2() {
+  prompt = async () => {
+    let alert = await this.alertCtrl.create({
+      header: "Share Poll with Friends",
+      subHeader: 'Enter email address of recipients (unregistered users will get an invite).',
+      inputs: [
+        {
+          name: 'emails',
+          placeholder: 'Emails separated with commas'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Share',
+          cssClass: 'primary',
+          handler: data => {
+            this.onSubmitPrompt(data);
+          }
+        },
+        {
+          text: 'Share as Link',
+          cssClass: 'secondary',
+          handler: () => {
+            this.clickShare();
+          }
+        }
+      ]
+    });
+    alert.present();
+  };
+
+
+  public onSubmitPrompt(data) {
+    console.log(this.poll)
+    console.log(data)
+
+    let toSubmit = {
+      'poll_id': this.poll.id,
+      'emails': data.emails,
+    }
+
+    this.pollsService.sharePolls(toSubmit).subscribe(res => {
+      console.log(res);
+      const response = res['data']
+      this.utils.showToast('Poll Shared !');
+      this.eventsService.publishSomeData({
+        pollResult: response
+      });
+      this.router.navigate(['/share-success', this.poll.id]);
+    });
+  }
+
+
+  clickShare() {
     // this is the complete list of currently supported params you can pass to the plugin (all optional)
     var options = {
       message: 'Share this url', // not supported on some apps (Facebook, Instagram)

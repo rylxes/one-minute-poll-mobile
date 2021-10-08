@@ -4,7 +4,7 @@
 </ion-refresher>
 <ion-card class="item grid" *ngFor="let eachPoll of pollList">
   <a>
-    <ion-card-header class="grid-top" [routerLink]="['/poll-details',eachPoll.id]">
+    <ion-card-header class="grid-top" [routerLink]="['/vote-now',eachPoll.id]">
 
       <div class="image-holder">
         <img *ngIf="eachPoll.url" [src]="eachPoll.url"/>
