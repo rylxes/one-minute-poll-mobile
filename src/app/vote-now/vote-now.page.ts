@@ -92,9 +92,15 @@ export class VoteNowPage implements OnInit {
 
   ngOnInit() {
     this.loadPoll();
-
+    this.loadPollOptions();
   }
 
+  loadPollOptions = () => {
+    this.pollOptionsService.byPoll(this.theID).subscribe(data => {
+      this.pollOptions = data['data'];
+      console.log(this.pollOptions);
+    });
+  }
 
 
   calculate = () => {
