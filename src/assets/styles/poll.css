@@ -2397,7 +2397,7 @@ input:checked + .set-slider-wrap .set-slider:before {
   font-family: Roboto, sans-serif !important;
   font-size: 18px;
   font-weight: 600;
-  
+
 }
 .option-input > input {
   border: 1px solid #d7d7d7 !important;

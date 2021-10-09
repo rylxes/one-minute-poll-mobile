@@ -15,7 +15,7 @@ import {GoogleChartInterface, Ng2GoogleChartsModule} from 'ng2-google-charts';
 export class ChartPage implements OnInit, OnChanges {
   @ViewChild('barChart',{ static: true }) barChart: any;
   @Input() poll: any;
-  @Input() pollOptions: any;
+  @Input() pollOptions: any = [];
   colorArray: any;
   optionValues: any = [];
   bars: any;
@@ -30,7 +30,7 @@ export class ChartPage implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-   // this.chart();
+   this.chart();
   }
 
 

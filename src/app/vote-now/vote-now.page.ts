@@ -27,6 +27,7 @@ export class VoteNowPage implements OnInit {
   hasNotExpired = true;
   hasNotClosed = true;
   poll: any = {};
+  canEdit = false;
   pollOptions: any = {};
   optionValues: any = [];
   sum: any = 0;
@@ -116,6 +117,20 @@ export class VoteNowPage implements OnInit {
         this.hasNotClosed = this.hasNotExpired = moment().startOf('day').isSameOrBefore(mydate);
         console.log(mydate)
       }
+
+      let udetails = this.utils.getValue('USER_DETAILS');
+      if (udetails?.id === this.poll.user_id) {
+        this.canEdit = true;
+      }
+      if (this.utils.getValue('UUID') === this.poll.theuuid) {
+        this.canEdit = true;
+      }
+      if (this.poll.hasVoted == 1) {
+        this.hasNotExpired = false;
+      }
+      if (this.poll.hasAnyVoted == 1) {
+        this.canEdit = false;
+      }
       console.log(this.poll)
 
 
@@ -126,12 +141,14 @@ export class VoteNowPage implements OnInit {
 
   loadPoll = () => {
     this.pollsService.getOne(this.theID).subscribe(data => {
+      this.canEdit = false;
       this.poll = data['data'];
-      if(this.poll.hasVoted == 1){
+      if (this.poll.hasVoted == 1) {
         this.hasNotExpired = false;
       }
       this.calculate();
-      console.log(this.poll);
+      console.log(this.hasNotExpired, this.poll);
+      // console.log({test: this.poll.hasVoted == 1});
     });
   }
 

@@ -94,6 +94,11 @@ export class SharedPollsPage implements OnInit {
     }
   }
 
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter')
+    this.ngOnInit();
+  }
+
   loadPoll = () => {
     this.pollsService.sharedWithMe().subscribe(data => {
       this.pollList = data['data'];

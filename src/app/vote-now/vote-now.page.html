@@ -8,11 +8,11 @@
 
       <div id="content" class="snap-content">
         <div *ngIf="poll" class="content">
-          <ion-button style="padding-left: 15em" color="primary">{{poll?.code}}</ion-button>
+          <ion-button style="padding-left: 15em" color="{{hasNotClosed ? 'primary' : 'danger'}}">Status : {{hasNotClosed ? 'Open' : 'Closed'}}</ion-button>
 
           <div class="header-clear"></div>
           <h4>Created By: {{poll?.user?.name || poll?.UserUuid?.name || 'Guest'}} </h4>
-          <h4>Status : {{hasNotClosed ? 'Open' : 'Closed'}} </h4>
+<!--          <h4>Status : {{hasNotClosed ? 'Open' : 'Closed'}} </h4>-->
 
           <div class="vote-title full-width">
             <h2>{{poll?.title}}</h2>
@@ -132,7 +132,7 @@
               <input [disabled]="!pageForm.form.valid" type="submit"
                      *ngIf="hasNotExpired"
                      class="buttonWrap button button-blue searchSubmitButton" id="searchSubmitButton"
-                     value="Submit"/>
+                     value="Vote"/>
 
 
               <input type="button"
@@ -142,7 +142,16 @@
                      value="Share"/>
 
 
+              <input type="button"
+                     *ngIf="canEdit"
+                     [routerLink]="['/add-new', poll.id]"
+                     class="buttonWrap button button-blue searchSubmitButton"
+                     value="Edit Poll"/>
+
+
+
             </div>
+
 
             <!--            <div class="share-wrap" title="Share" (click)="clickShare2()">-->
             <!--              <em class="share show-submenu"></em>-->

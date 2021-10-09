@@ -38,7 +38,7 @@ export class HomePage implements OnInit {
 
   }
 
-  doRefresh(event) {
+  doRefresh2(event) {
     console.log('Begin async operation');
     this.pollsService.list().subscribe(data => {
       this.pollList = data['data'];
@@ -47,10 +47,39 @@ export class HomePage implements OnInit {
     });
   }
 
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.ionLoader.show();
+    this.geolocation.getCurrentPosition().then((resp) => {
+      console.log(resp)
+      this.long = resp.coords.longitude
+      this.lat = resp.coords.latitude
+      let cord = {
+        lat: this.lat,
+        long: this.long,
+      }
+      this.pollsService.listAll(cord).subscribe(data => {
+        this.pollList = data['data'];
+        event.target.complete();
+        console.log(this.pollList);
+      });
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    }).finally(() => {
+      this.ionLoader.hide();
+    });
+  }
+
   ngOnInit() {
     this.loadPoll();
     this.userDetails = this.utils.getValue('USER_DETAILS') || {};
     console.log(this.userDetails)
+  }
+
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter')
+    this.ngOnInit();
   }
 
 
