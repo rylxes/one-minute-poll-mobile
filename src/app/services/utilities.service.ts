@@ -184,6 +184,17 @@ export class UtilitiesService {
     await toast.present();
   }
 
+  async showToastWithDuration(text, duration) {
+    const toast = await this.toastController.create({
+      color: 'primary',
+      duration: duration,
+      message: text,
+      //showCloseButton: true
+    });
+
+    await toast.present();
+  }
+
   public async showError(text) {
     const alert = await this.alertCtrl.create({
       header: 'Whoops!',

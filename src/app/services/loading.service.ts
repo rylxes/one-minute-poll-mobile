@@ -45,8 +45,6 @@ export class LoadingService {
 
   constructor(private loadingController: LoadingController) {
     const l$ = this.loading$.pipe(distinctUntilChanged(), debounceTime(200));
-
-
     l$.pipe(filter(l => l.type === LoadingTypeEnum.show)).subscribe(l => this.showLoading(l.data));
     l$.pipe(filter(l => l.type === LoadingTypeEnum.hide)).subscribe(l => this.hideLoading());
     l$.pipe(filter(l => l.type === LoadingTypeEnum.message)).subscribe(l => this.messageLoading(l.data));

@@ -12,6 +12,7 @@ export class HelpPage implements OnInit {
   page = 'Help';
   toggleMode: any;
   theeme = false;
+  isAuth = false;
   defaultForm: any;
   public data: FormGroup;
 
@@ -97,15 +98,17 @@ export class HelpPage implements OnInit {
   }
 
   ngOnInit() {
+    this.isAuth = this.utils.getValue('IS_AUTH') || false;
     let settings = this.utils.getValue('SETTINGS');
-    let form = this.defaultForm  = {
+    let form = this.defaultForm = {
       LOCATION: settings?.LOCATION || '',
-      POLL_DURATION: settings?.POLL_DURATION || '',
+      //POLL_DURATION: settings?.POLL_DURATION || (!this.isAuth) ? "2",
+      POLL_DURATION: (!this.isAuth) ? 2 : settings?.POLL_DURATION || '',
       DECENCY_FILTER: settings?.DECENCY_FILTER || 0,
       THEME: settings?.THEME || 0,
     }
-    this.defaultForm.THEME = (this.defaultForm.THEME == 1) ;
-    this.defaultForm.DECENCY_FILTER = (this.defaultForm.DECENCY_FILTER == 1) ;
+    this.defaultForm.THEME = (this.defaultForm.THEME == 1);
+    this.defaultForm.DECENCY_FILTER = (this.defaultForm.DECENCY_FILTER == 1);
     console.log(this.defaultForm)
     this.data.setValue(form);
   }

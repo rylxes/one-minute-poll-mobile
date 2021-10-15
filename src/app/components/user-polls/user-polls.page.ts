@@ -21,7 +21,7 @@ export class UserPollsPage implements OnInit {
   @Input() name: any;
   pollOptions: any;
   eachPoll: any;
-
+  isAuth = false;
 
   url: string;
   itemListData = [];
@@ -59,9 +59,14 @@ export class UserPollsPage implements OnInit {
 
 
   sharePrompt = async (eachPoll) => {
+    if (!this.isAuth) {
+      this.utils.showInfoError("Authenticate your email to enable this option");
+      return;
+    }
     this.eachPoll = eachPoll;
     let alert = await this.alertCtrl.create({
       header: "Share Poll with Friends",
+      cssClass: 'sharePrompt',
       subHeader: 'Enter email address of recipients (unregistered users will get an invite).',
       inputs: [
         {
@@ -79,14 +84,14 @@ export class UserPollsPage implements OnInit {
         },
         {
           text: 'Share',
-          cssClass: 'primary',
+          //cssClass: 'primary',
           handler: data => {
             this.onSubmit(data);
           }
         },
         {
           text: 'Share as Link',
-          cssClass: 'secondary',
+          //cssClass: 'secondary',
           handler: () => {
             this.clickShare2();
           }
@@ -108,7 +113,17 @@ export class UserPollsPage implements OnInit {
     this.pollsService.sharePolls(toSubmit).subscribe(res => {
       console.log(res);
       const response = res['data']
-      this.utils.showToast('Poll Shared !');
+
+      let shared = "";
+      if (response.shared.length > 0) {
+        shared = "Successfully shared with: " + response.shared + "\n\n"
+      }
+      if (response.unregistered.length > 0) {
+        shared = shared + "Unregistered emails were sent invitations: " + response.unregistered
+      }
+
+      this.utils.showToastWithDuration(shared, 5000);
+      console.log(response)
       this.eventsService.publishSomeData({
         pollResult: response
       });
@@ -175,6 +190,7 @@ export class UserPollsPage implements OnInit {
       this.loadPoll();
       //this.loadPollOptions();
     }
+    this.isAuth = this.utils.getValue('IS_AUTH') || false;
   }
 
   loadPoll = () => {

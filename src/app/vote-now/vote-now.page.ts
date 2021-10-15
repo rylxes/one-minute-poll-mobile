@@ -13,6 +13,7 @@ import {isNil} from 'lodash-es';
 import {Globals} from "../../config/globals";
 import {SocialSharing} from "@ionic-native/social-sharing/ngx";
 import {EventsService} from "../events/events.service";
+import {PreviousURLService} from "../services/previous-url.service";
 
 @Component({
   selector: 'app-vote-now',
@@ -25,6 +26,7 @@ export class VoteNowPage implements OnInit {
   page = 'Polls';
   theID: any;
   hasNotExpired = true;
+  isAuth = false;
   hasNotClosed = true;
   poll: any = {};
   canEdit = false;
@@ -52,6 +54,7 @@ export class VoteNowPage implements OnInit {
     private utils: UtilitiesService,
     private pollsService: PollsService,
     private pollResultService: PollResultService,
+    private previousURLService: PreviousURLService,
     private pollOptionsService: PollOptionsService,
     private voteService: VoteService,
   ) {
@@ -60,6 +63,13 @@ export class VoteNowPage implements OnInit {
       vote: ['', [Validators.required]],
     });
     this.menuCTL.enable(true);
+
+
+  }
+
+  ionViewWillEnter() {
+    const prevUrl = this.previousURLService.getPreviousUrl();
+    console.log(prevUrl);
   }
 
 
@@ -97,6 +107,7 @@ export class VoteNowPage implements OnInit {
   ngOnInit() {
     this.loadPoll();
     this.loadPollOptions();
+    this.isAuth = this.utils.getValue('IS_AUTH') || false;
   }
 
   loadPollOptions = () => {
@@ -131,6 +142,10 @@ export class VoteNowPage implements OnInit {
       if (this.poll.hasAnyVoted == 1) {
         this.canEdit = false;
       }
+
+      if (!this.canEdit) {
+        this.page = 'Home';
+      }
       console.log(this.poll)
 
 
@@ -153,6 +168,10 @@ export class VoteNowPage implements OnInit {
   }
 
   prompt = async () => {
+    if (!this.isAuth) {
+      this.utils.showInfoError("Authenticate your email to enable this option");
+      return;
+    }
     let alert = await this.alertCtrl.create({
       header: "Share Poll with Friends",
       subHeader: 'Enter email address of recipients (unregistered users will get an invite).',

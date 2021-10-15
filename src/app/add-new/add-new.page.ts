@@ -18,6 +18,7 @@ import {isNil} from 'lodash-es';
 import {PollsService} from "../services/polls.service";
 import {PollCreatedService} from "../events/poll-created.service";
 import {Content} from "@angular/compiler/src/render3/r3_ast";
+import {LoadingService} from "../services/loading.service";
 
 export interface imgFile {
   name: string;
@@ -50,8 +51,20 @@ export class AddNewPage implements OnInit {
   stage: any;
   poll: any;
   pollTypesList: any;
+  openList: any = [
+    {
+      id: true,
+      name: "Yes",
+    },
+    {
+      id: false,
+      name: "No (Only friends you share with)",
+    }
+  ];
+  settings: any;
   categoriesList: any;
   category: any;
+  userDetails: any;
   public showSpinner = false;
   public showA2E = false;
   public myShowAE = false;
@@ -85,7 +98,7 @@ export class AddNewPage implements OnInit {
   @ViewChild('panel3', {static: false}) panel3: ElementRef;
 
   public ionScroll;
-  public panelPos3 : number;
+  public panelPos3: number;
   public showButton = false;
   public contentData = [];
 
@@ -102,6 +115,7 @@ export class AddNewPage implements OnInit {
     private categoriesService: CategoriesService,
     private previousURLService: PreviousURLService,
     private readonly sanitizer: DomSanitizer,
+    private loading: LoadingService,
     private loadingEventService: LoadingEventService,
     private utils: UtilitiesService,
     public menuCTL: MenuController
@@ -194,15 +208,14 @@ export class AddNewPage implements OnInit {
   }
 
   ScrollToTop() {
-   // this.content.scrollToTop(1500);
+    // this.content.scrollToTop(1500);
     this.scrollTo(0, this.panelPos3, 750);
   }
 
-  scrollTo(x         : number,
-           y         : number,
-           duration  : number) : void
-  {
-   // this.content.scrollTo(x, y, duration);
+  scrollTo(x: number,
+           y: number,
+           duration: number): void {
+    // this.content.scrollTo(x, y, duration);
     this.content.scrollToPoint(x, y, duration);
   }
 
@@ -232,6 +245,33 @@ export class AddNewPage implements OnInit {
     }
     this.data.setValue(formData);
     // this.clickOptions(eachType)
+  }
+
+  radioGroupChange = (event, eachType) => {
+    event.preventDefault()
+    // this.clickOpenList(eachType);
+  }
+
+  clickOpenList = (eachType) => {
+    console.log(eachType)
+
+    if (!this.isAuth && eachType.id === false) {
+      this.utils.showInfoError("Authenticate your email to enable this option");
+      let formData = {
+        ...this.data.value, ...{
+          openToAll: true
+        }
+      }
+      this.data.setValue(formData);
+    } else {
+      let formData = {
+        ...this.data.value, ...{
+          openToAll: eachType.id
+        }
+      }
+      this.data.setValue(formData);
+    }
+
   }
 
   clickOptions2 = (eachType) => {
@@ -294,12 +334,15 @@ export class AddNewPage implements OnInit {
       console.log(this.theID)
       this.pollsService.getOne(this.theID).subscribe(data => {
         this.poll = data['data'];
+
+
         console.log(this.poll);
 
         let form = {
           title: this.poll.title,
           answerType: this.poll.poll_type_id,
           closeDate: this.poll.close_date,
+          // closeDate:  moment(this.data.value.closeDate).format('YYYY-MM-DD'),
           question: this.poll.question,
           image: this.poll.url,
           category: this.poll.category?.id,
@@ -330,12 +373,46 @@ export class AddNewPage implements OnInit {
     this.ScrollToTop();
   }
 
+  defaults = () => {
+    this.settings = this.utils.getValue('SETTINGS');
+    this.userDetails = this.utils.getValue('USER_DETAILS') || {};
+    let duration = parseInt(this.settings.POLL_DURATION);
+    var new_date = moment(moment(), "YYYY-MM-DD").add(duration, 'days').format("YYYY-MM-DD")
+
+    let formData = {
+      ...this.data.value, ...{
+        closeDate: new_date,
+        emailField: this.userDetails.email || null,
+        openToAll: true
+      }
+    }
+    console.log(formData)
+    this.data.setValue(formData);
+
+
+    // this.openList = [
+    //   {
+    //     id: true,
+    //     name: "Yes",
+    //   },
+    //   {
+    //     id: false,
+    //     name: "No",
+    //   }
+    // ]
+  }
+
   ngOnInit() {
+    //console.log(moment().format('YYYY-MM-DD'))
+
+
+    this.defaults()
     this.loadPoll()
     this.loadPollType();
     this.loadCategories();
     this.editForm();
     this.isAuth = this.utils.getValue('IS_AUTH');
+
   }
 
   public onSubmit(data) {
@@ -343,9 +420,22 @@ export class AddNewPage implements OnInit {
     if ((this.data.value.closeDate)) {
       mydate = moment(this.data.value.closeDate).format('YYYY-MM-DD') || '';
     }
+
+
+
+
+
     this.data.value.closeDate = mydate;
     this.data.value.image = this.utils.getValue('thePhoto');
-    this.utils.setValue('toSubmit', this.data.value);
+
+
+    let formData = {
+      ...this.data.value, ...{
+        openToAll: !this.isAuth ? true : this.data.value.openToAll
+      }
+    }
+    this.data.setValue(formData);
+    this.utils.setValue('toSubmit', formData);
     this.utils.setValue('showA2E', this.showA2E);
     this.pollCreatedService.publish({
       form: this.data.value,
