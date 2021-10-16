@@ -376,13 +376,13 @@ export class AddNewPage implements OnInit {
   defaults = () => {
     this.settings = this.utils.getValue('SETTINGS');
     this.userDetails = this.utils.getValue('USER_DETAILS') || {};
-    let duration = parseInt(this.settings.POLL_DURATION);
+    let duration = parseInt(this.settings?.POLL_DURATION || 2);
     var new_date = moment(moment(), "YYYY-MM-DD").add(duration, 'days').format("YYYY-MM-DD")
 
     let formData = {
       ...this.data.value, ...{
         closeDate: new_date,
-        emailField: this.userDetails.email || null,
+        emailField: this.userDetails?.email || null,
         openToAll: true
       }
     }
