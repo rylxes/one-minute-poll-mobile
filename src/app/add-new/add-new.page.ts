@@ -291,6 +291,14 @@ export class AddNewPage implements OnInit {
       this.showA2E = true;
     }
   }
+
+  clickOpenToAll = (ev, eachType) => {
+    ev.preventDefault();
+    ev.stopImmediatePropagation();
+    ev.cancelBubble = true;
+    ev.stopPropagation();
+    this.clickOpenList(eachType);
+  }
   loadPollType = () => {
     this.pollTypeService.list().subscribe(data => {
       this.pollTypesList = data['data'];
@@ -420,9 +428,6 @@ export class AddNewPage implements OnInit {
     if ((this.data.value.closeDate)) {
       mydate = moment(this.data.value.closeDate).format('YYYY-MM-DD') || '';
     }
-
-
-
 
 
     this.data.value.closeDate = mydate;

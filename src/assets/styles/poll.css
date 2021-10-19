@@ -2494,10 +2494,10 @@ input:checked + .set-slider-wrap .set-slider:before {
 
 
 
-/** remove this when you are done **/
-.sc-ion-loading-md-h{
-  display: none !important;
-}
+/*!** remove this when you are done **!*/
+/*.sc-ion-loading-md-h{*/
+/*  display: none !important;*/
+/*}*/
 
 
 

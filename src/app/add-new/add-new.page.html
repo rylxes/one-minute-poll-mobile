@@ -143,13 +143,13 @@
 
                   <ion-item lines="full" class="radio-wrap border-bottom">
 
-                    <ion-radio-group lines="full" formControlName="openToAll">
+                    <ion-radio-group  lines="full" formControlName="openToAll">
                       <ion-list-header>
                         <ion-label><p>Open to Everyone?</p></ion-label>
                       </ion-list-header>
 
                       <ion-item class="form-radio" *ngFor="let eachType of openList">
-                        <ion-radio slot="start" name="openToAll" [value]="eachType.id"></ion-radio>
+                        <ion-radio (click)="clickOpenToAll($event , eachType)" slot="start" name="openToAll" [value]="eachType.id"></ion-radio>
                         <ion-label (click)="clickOpenList(eachType)"
                                    class="c-label cs-label">{{eachType.name}}</ion-label>
                       </ion-item>

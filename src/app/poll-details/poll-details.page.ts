@@ -50,7 +50,7 @@ export class PollDetailsPage implements OnInit {
     console.log('dd')
     this.pollsService.getOne(this.theID).subscribe(data => {
       this.poll = data['data'];
-      let udetails = this.utils.getValue('USER_DETAILS');
+      let udetails = this.utils.getValue('USER_DETAILS') || {};
       this.canEdit = false;
       if (udetails?.id === this.poll.user_id) {
         this.canEdit = true;

@@ -129,7 +129,7 @@ export class VoteNowPage implements OnInit {
         console.log(mydate)
       }
 
-      let udetails = this.utils.getValue('USER_DETAILS');
+      let udetails =this.utils.getValue('USER_DETAILS') || {};
       if (udetails?.id === this.poll.user_id) {
         this.canEdit = true;
       }

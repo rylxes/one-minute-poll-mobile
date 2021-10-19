@@ -103,8 +103,11 @@ export class UtilitiesService {
 
   saveKeys = (key) => {
     const keys = this.getValue('APP_KEYS') || [];
-    keys.push(key);
-    localStorage.setItem('APP_KEYS', JSON.stringify(keys));
+    let k = keys.find((val) => val === key)
+    if (!k) {
+      keys.push(key);
+      localStorage.setItem('APP_KEYS', JSON.stringify(keys));
+    }
   };
 
   deleteAll = () => {

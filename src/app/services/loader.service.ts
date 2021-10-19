@@ -21,6 +21,7 @@ export class LoaderService {
 
     this.loadingController.create({
       message: 'This Loader Will Auto Hide in 2 Seconds',
+      cssClass:'loader',
       duration: 2000
     }).then((res) => {
       res.present();
@@ -35,9 +36,12 @@ export class LoaderService {
   // Show the loader for infinite time
   showLoader() {
     this.loadingController.create({
+      cssClass:'loader',
       message: 'Please wait...'
     }).then((res) => {
       res.present();
+    }).catch(e => {
+      console.error(e)
     });
 
   }
