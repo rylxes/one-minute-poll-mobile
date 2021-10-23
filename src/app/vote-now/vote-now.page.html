@@ -8,7 +8,7 @@
 
       <div id="content" class="snap-content">
         <div *ngIf="poll" class="content">
-          <ion-button style="padding-left: 15em" color="{{hasNotClosed ? 'primary' : 'danger'}}">Status : {{hasNotClosed ? 'Open' : 'Closed'}}</ion-button>
+          <ion-button style="padding-left: 15em;height: 5em" color="{{hasNotClosed ? 'primary' : 'danger'}}">Status : {{hasNotClosed ? 'Open' : 'Closed'}}</ion-button>
 
           <div class="header-clear"></div>
           <h4>Created By: {{poll?.user?.name || poll?.UserUuid?.name || 'Guest'}} </h4>
@@ -136,7 +136,6 @@
 
 
               <input type="button"
-                     *ngIf="hasNotExpired"
                      (click)="prompt()"
                      class="buttonWrap button button-blue searchSubmitButton"
                      value="Share"/>

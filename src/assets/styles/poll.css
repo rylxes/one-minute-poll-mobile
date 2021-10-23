@@ -2052,7 +2052,7 @@ i.report.no {
 }
 
 .fsh-bar-canvas .h-boundary .rate-item {
-  width: 40px;
+  width: 45px;
   display: block;
   height: 60px;
   text-align: right;
@@ -2494,10 +2494,10 @@ input:checked + .set-slider-wrap .set-slider:before {
 
 
 
-/** remove this when you are done **/
-.sc-ion-loading-md-h{
-  display: none !important;
-}
+/*!** remove this when you are done **!*/
+/*.sc-ion-loading-md-h{*/
+/*  display: none !important;*/
+/*}*/
 
 
 

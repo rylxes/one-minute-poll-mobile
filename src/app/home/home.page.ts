@@ -3,8 +3,6 @@ import {v4 as uuidv4} from 'uuid';
 import {NavigationEnd, Router, RoutesRecognized} from "@angular/router";
 import {UtilitiesService} from "../services/utilities.service";
 import {PollsService} from "../services/polls.service";
-import {PreviousURLService} from "../services/previous-url.service";
-import {isNil} from 'lodash-es';
 import {Device} from '@ionic-native/device/ngx';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {NetworkInterface} from '@ionic-native/network-interface/ngx';
@@ -31,7 +29,6 @@ export class HomePage implements OnInit {
     private networkInterface: NetworkInterface,
     private device: Device,
     private pollsService: PollsService,
-    private previousURLService: PreviousURLService,
     private geolocation: Geolocation,
     private utils: UtilitiesService
   ) {

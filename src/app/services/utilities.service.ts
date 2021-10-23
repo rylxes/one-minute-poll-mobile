@@ -103,8 +103,11 @@ export class UtilitiesService {
 
   saveKeys = (key) => {
     const keys = this.getValue('APP_KEYS') || [];
-    keys.push(key);
-    localStorage.setItem('APP_KEYS', JSON.stringify(keys));
+    let k = keys.find((val) => val === key)
+    if (!k) {
+      keys.push(key);
+      localStorage.setItem('APP_KEYS', JSON.stringify(keys));
+    }
   };
 
   deleteAll = () => {
@@ -177,6 +180,17 @@ export class UtilitiesService {
     const toast = await this.toastController.create({
       color: 'primary',
       duration: 2000,
+      message: text,
+      //showCloseButton: true
+    });
+
+    await toast.present();
+  }
+
+  async showToastWithDuration(text, duration) {
+    const toast = await this.toastController.create({
+      color: 'primary',
+      duration: duration,
       message: text,
       //showCloseButton: true
     });

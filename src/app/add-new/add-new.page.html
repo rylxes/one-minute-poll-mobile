@@ -1,13 +1,13 @@
 <app-header name="Add New Poll"></app-header>
 
 
-  <ion-content class="left-sidebar">
-    <div class="all-elements">
+<ion-content class="left-sidebar">
+  <div class="all-elements">
     <div class="snap-drawers">
       <!--Search wrap -->
 
       <div id="content" class="snap-content">
-<!--        <ion-button (click)="scrollToLabel('searchSubmitButton')"> Scroll To Point Left </ion-button>-->
+        <!--        <ion-button (click)="scrollToLabel('searchSubmitButton')"> Scroll To Point Left </ion-button>-->
 
         <div class="content">
           <div class="header-clear"></div>
@@ -69,7 +69,8 @@
 
                       <ion-item class="form-radio" *ngFor="let eachType of pollTypesList">
                         <ion-radio slot="start" name="answer" [value]="eachType.id" checked></ion-radio>
-                        <ion-label (click)="clickOptions2(eachType)" class="c-label cs-label">{{eachType.name}}</ion-label>
+                        <ion-label (click)="clickOptions2(eachType)"
+                                   class="c-label cs-label">{{eachType.name}}</ion-label>
                       </ion-item>
 
                     </ion-radio-group>
@@ -80,29 +81,34 @@
 
                     <ion-item>
                       <ion-label position="stacked">Option A Title</ion-label>
-                      <ion-input class="option-input" autocapitalize="words" type="text" formControlName="A"></ion-input>
+                      <ion-input class="option-input" autocapitalize="words" type="text"
+                                 formControlName="A"></ion-input>
                     </ion-item>
 
                     <ion-item>
                       <ion-label position="stacked">Option B Title</ion-label>
-                      <ion-input class="option-input" autocapitalize="words" type="text" formControlName="B"></ion-input>
+                      <ion-input class="option-input" autocapitalize="words" type="text"
+                                 formControlName="B"></ion-input>
                     </ion-item>
 
                     <ion-item>
                       <ion-label position="stacked">Option C Title</ion-label>
-                      <ion-input class="option-input" autocapitalize="words" type="text" formControlName="C"></ion-input>
+                      <ion-input class="option-input" autocapitalize="words" type="text"
+                                 formControlName="C"></ion-input>
                     </ion-item>
 
 
                     <ion-item>
                       <ion-label position="stacked">Option D Title</ion-label>
-                      <ion-input class="option-input" autocapitalize="words" type="text" formControlName="D"></ion-input>
+                      <ion-input class="option-input" autocapitalize="words" type="text"
+                                 formControlName="D"></ion-input>
                     </ion-item>
 
 
                     <ion-item>
                       <ion-label position="stacked">Option E Title</ion-label>
-                      <ion-input class="option-input" autocapitalize="words" type="text" formControlName="E"></ion-input>
+                      <ion-input class="option-input" autocapitalize="words" type="text"
+                                 formControlName="E"></ion-input>
                     </ion-item>
 
                     <br/>
@@ -134,30 +140,48 @@
                     </div>
                   </ion-item>
 
-                  <div class="formFieldWrap border-bottom">
-                    <p>Open to Everyone?</p>
-                    <span class="tooltip show-submenu"><i class="las la-question-circle"></i></span>
-                    <div class="submenu tooltip-info">
-                      Email verification required to edit this item.
-                    </div>
-                    <div class="form-group check-wrap">
 
-                      <!--                          <input type="checkbox" checked="checked" name="polltype_open_to_all"-->
-                      <!--                                                         class="checkbox"/>-->
+                  <ion-item lines="full" class="radio-wrap border-bottom">
 
-                      <ion-checkbox [(ngModel)]="checked" class="checkbox" color="primary"
-                                    formControlName="openToAll"></ion-checkbox>
-                      <label (click)="openClick()" class="c-label">Yes
-                        <!--                          <span class="checkmark"></span>-->
-                      </label>
-                    </div>
-                  </div>
+                    <ion-radio-group  lines="full" formControlName="openToAll">
+                      <ion-list-header>
+                        <ion-label><p>Open to Everyone?</p></ion-label>
+                      </ion-list-header>
+
+                      <ion-item class="form-radio" *ngFor="let eachType of openList">
+                        <ion-radio (click)="clickOpenToAll($event , eachType)" slot="start" name="openToAll" [value]="eachType.id"></ion-radio>
+                        <ion-label (click)="clickOpenList(eachType)"
+                                   class="c-label cs-label">{{eachType.name}}</ion-label>
+                      </ion-item>
+
+                    </ion-radio-group>
+                  </ion-item>
+
+                  <!--                  <div class="formFieldWrap border-bottom">-->
+                  <!--                    <p>Open to Everyone?</p>-->
+                  <!--                    <span class="tooltip show-submenu"><i class="las la-question-circle"></i></span>-->
+                  <!--                    <div class="submenu tooltip-info">-->
+                  <!--                      Email verification required to edit this item.-->
+                  <!--                    </div>-->
+                  <!--                    <div class="form-group check-wrap">-->
+
+                  <!--                      &lt;!&ndash;                          <input type="checkbox" checked="checked" name="polltype_open_to_all"&ndash;&gt;-->
+                  <!--                      &lt;!&ndash;                                                         class="checkbox"/>&ndash;&gt;-->
+
+                  <!--                      <ion-checkbox [(ngModel)]="checked" class="checkbox" color="primary"-->
+                  <!--                                    formControlName="openToAll"></ion-checkbox>-->
+                  <!--                      <label (click)="openClick()" class="c-label">Yes-->
+                  <!--                        &lt;!&ndash;                          <span class="checkmark"></span>&ndash;&gt;-->
+                  <!--                      </label>-->
+                  <!--                    </div>-->
+                  <!--                  </div>-->
 
 
                   <ion-item lines="full" class="cs-item-block">
                     <ion-label position="stacked" style="padding-bottom: 20px">Close Date</ion-label>
                     <ion-datetime formControlName="closeDate" placeholder="Select Date"
                                   class="form-control textField"
+                                  [readonly]="!isAuth"
                                   displayFormat="YYYY-MM-DD"></ion-datetime>
                   </ion-item>
 
@@ -173,10 +197,10 @@
                       <p class="triggerRegister anchor">Register to save the results permanently and access other
                         features.</p>
                     </div>
-                    <div class="formFieldWrap" *ngIf="!isAuth">
+                    <div class="formFieldWrap">
                       <ion-label position="stacked"><p>Your Email Address</p></ion-label>
 
-<!--                      <ion-label position="stacked" style="padding-bottom: 20px">Your Email Address</ion-label>-->
+                      <!--                      <ion-label position="stacked" style="padding-bottom: 20px">Your Email Address</ion-label>-->
                       <span class="tooltip show-submenu"><i class="las la-question-circle"></i></span>
                       <div class="submenu tooltip-info">
                         Email verification required to edit this item.
@@ -188,6 +212,7 @@
                       <!--                        </ion-item>-->
 
                       <ion-input type="text"
+                                 [readonly]="isAuth"
                                  placeholder="you@yourdomain.com"
                                  formControlName="emailField" class="contactField textField"></ion-input>
 
@@ -218,7 +243,7 @@
                     </a>
 
 
-<!--                    <ion-button (click)="ScrollToTop()"> Scroll To Top </ion-button>-->
+                    <!--                    <ion-button (click)="ScrollToTop()"> Scroll To Top </ion-button>-->
 
 
                   </div>

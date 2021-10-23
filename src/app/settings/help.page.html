@@ -48,7 +48,9 @@
                     <h4>Set Poll Duration (Days)</h4>
                   </div>
                   <div class="set-switch">
-                    <input class="form-control textField" formControlName="POLL_DURATION" type="number"
+                    <input class="form-control textField"
+                           formControlName="POLL_DURATION" type="number"
+                           [readonly]="!isAuth"
                            id="poll_duration" step="1" placeholder="30"/>
                   </div>
                 </div>

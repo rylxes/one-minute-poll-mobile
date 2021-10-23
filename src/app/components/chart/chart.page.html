@@ -55,18 +55,23 @@
     <h4> Poll Chart </h4>
     <div class="poll-canvas fsh-bar-canvas">
       <div class="h-boundary">
+<<<<<<< HEAD
         <div data-rate="5" class="rate-item"><span>1 Star</span></div>
         <div data-rate="4" class="rate-item"><span>2 Star</span></div>
         <div data-rate="3" class="rate-item"><span>3 Star</span></div>
         <div data-rate="2" class="rate-item"><span>4 Star</span></div>
         <div data-rate="1" class="rate-item"><span>5 Star</span></div>
+=======
+        <div *ngFor="let eachType of pollOptions" attr.data-rate="{{eachType.name}}" class="rate-item"><span>{{eachType.value}}</span></div>
+>>>>>>> bcac99899ecb077cf3d70917ed526cc4317dd498
       </div>
-      <div  attr.data-totalVotes="{{poll?.counters?.value}}" class="rate-bars">
+      <div attr.data-totalVotes="{{sum}}" class="rate-bars">
+
         <div *ngFor="let eachType of pollOptions" class="fs-hbar">
           <div attr.data-votes="{{ eachType?.counters?.value || 0 }}"
-               attr.data-poll="{{ ( eachType?.counters?.value/poll?.counters?.value ) * 100 }}" class="hbar">
+               attr.data-poll="{{ ( eachType?.counters?.value / sum ) * 100 }}" class="hbar">
             <div id="hbar-child" class="hbar-track"
-                 style="width: {{ ( eachType?.counters?.value/poll?.counters?.value ) * 100 }}%;"></div>
+                 style="width: {{ ( eachType?.counters?.value/sum ) * 100 }}%;"></div>
             <span>{{ eachType?.counters?.value || 0 }}</span>
           </div>
         </div>
@@ -76,6 +81,7 @@
     <div class="tf-bar-legend">
       <!--<p><strong>Total Views:</strong> 123,941</p>-->
       <p><strong>Total Votes:</strong> {{sum}}</p>
+      <p><strong>Total Votes:</strong> {{poll?.counters?.value}}</p>
     </div>
   </div>
 </div>
