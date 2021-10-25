@@ -55,7 +55,15 @@
     <h4> Poll Chart </h4>
     <div class="poll-canvas fsh-bar-canvas">
       <div class="h-boundary">
+<!--<<<<<<< HEAD-->
+        <div data-rate="5" class="rate-item"><span>1 Star</span></div>
+        <div data-rate="4" class="rate-item"><span>2 Star</span></div>
+        <div data-rate="3" class="rate-item"><span>3 Star</span></div>
+        <div data-rate="2" class="rate-item"><span>4 Star</span></div>
+        <div data-rate="1" class="rate-item"><span>5 Star</span></div>
+<!--=======-->
         <div *ngFor="let eachType of pollOptions" attr.data-rate="{{eachType.name}}" class="rate-item"><span>{{eachType.value}}</span></div>
+<!-- >>>>>>> bcac99899ecb077cf3d70917ed526cc4317dd498-->
       </div>
       <div attr.data-totalVotes="{{sum}}" class="rate-bars">
 

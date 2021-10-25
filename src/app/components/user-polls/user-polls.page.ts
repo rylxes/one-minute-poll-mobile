@@ -76,22 +76,23 @@ export class UserPollsPage implements OnInit {
       ],
       buttons: [
         {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
           text: 'Share',
-          //cssClass: 'primary',
+          cssClass: 'btn btn-primary btn-share',
           handler: data => {
             this.onSubmit(data);
           }
         },
         {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'btn btn-primary btn-cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
           text: 'Share as Link',
-          //cssClass: 'secondary',
+          cssClass: 'inline-link',
           handler: () => {
             this.clickShare2();
           }
