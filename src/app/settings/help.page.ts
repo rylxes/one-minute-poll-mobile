@@ -22,10 +22,10 @@ export class HelpPage implements OnInit {
     private utils: UtilitiesService,
   ) {
     this.data = this.formBuilder.group({
-      LOCATION: [''],
+     // LOCATION: [''],
       POLL_DURATION: [''],
       DECENCY_FILTER: [''],
-      THEME: [''],
+     // THEME: [''],
     });
   }
 
@@ -50,10 +50,10 @@ export class HelpPage implements OnInit {
 
   public onSubmitForm(data) {
     let form = {
-      LOCATION: this.data.value.LOCATION,
+      //LOCATION: this.data.value.LOCATION,
       POLL_DURATION: this.data.value.POLL_DURATION,
       DECENCY_FILTER: this.data.value.DECENCY_FILTER || 0,
-      THEME: this.data.value.THEME || 0,
+      //THEME: this.data.value.THEME || 0,
     }
     console.log(this.data.value);
     console.log(form);
@@ -101,13 +101,12 @@ export class HelpPage implements OnInit {
     this.isAuth = this.utils.getValue('IS_AUTH') || false;
     let settings = this.utils.getValue('SETTINGS');
     let form = this.defaultForm = {
-      LOCATION: settings?.LOCATION || '',
-      //POLL_DURATION: settings?.POLL_DURATION || (!this.isAuth) ? "2",
+      //LOCATION: settings?.LOCATION || '',
       POLL_DURATION: (!this.isAuth) ? 2 : settings?.POLL_DURATION || '',
       DECENCY_FILTER: settings?.DECENCY_FILTER || 0,
-      THEME: settings?.THEME || 0,
+     // THEME: settings?.THEME || 0,
     }
-    this.defaultForm.THEME = (this.defaultForm.THEME == 1);
+    //this.defaultForm.THEME = (this.defaultForm.THEME == 1);
     this.defaultForm.DECENCY_FILTER = (this.defaultForm.DECENCY_FILTER == 1);
     console.log(this.defaultForm)
     this.data.setValue(form);

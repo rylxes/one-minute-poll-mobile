@@ -22,6 +22,7 @@ export class UserPollsPage implements OnInit {
   pollOptions: any;
   eachPoll: any;
   isAuth = false;
+  showMore = true;
 
   url: string;
   itemListData = [];
@@ -39,6 +40,11 @@ export class UserPollsPage implements OnInit {
     private alertCtrl: AlertController,
     private pollOptionsService: PollOptionsService,
   ) {
+    this.isAuth = this.utils.getValue('IS_AUTH') || false;
+  }
+
+  ionViewWillEnter() {
+    this.isAuth = this.utils.getValue('IS_AUTH') || false;
   }
 
 
@@ -201,6 +207,21 @@ export class UserPollsPage implements OnInit {
     this.pollsService.mine(page).subscribe(data => {
       this.pollList = data['data'];
       this.page_number = 2;
+      this.showMore = true;
+      console.log(this.pollList);
+    });
+  }
+
+
+  loadMorePoll = () => {
+    let page = {
+      page: 1,
+      size: 15,
+    }
+    this.pollsService.mine(page).subscribe(data => {
+      this.pollList = data['data'];
+      this.page_number = 2;
+      this.showMore = false;
       console.log(this.pollList);
     });
   }

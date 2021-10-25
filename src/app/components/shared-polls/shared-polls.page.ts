@@ -37,12 +37,14 @@ export class SharedPollsPage implements OnInit {
         {
           text: 'Cancel',
           role: 'cancel',
+          cssClass: 'btn btn-primary btn-cancel',
           handler: data => {
             console.log('Cancel clicked');
           }
         },
         {
           text: 'Share',
+          cssClass: 'btn btn-primary btn-share',
           handler: data => {
             this.onSubmit(data);
           }

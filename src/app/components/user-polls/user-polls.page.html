@@ -35,10 +35,17 @@
 </ion-card>
 
 
-<input type="button"
-       (click)="doInfinite($event)"
+<input type="button" *ngIf="showMore"
+       (click)="loadMorePoll()"
        class="buttonWrap button button-blue searchSubmitButton"
        value="Show More"/>
+
+
+
+<input type="button" *ngIf="!showMore"
+       (click)="loadPoll()"
+       class="buttonWrap button button-blue searchSubmitButton"
+       value="Show Less"/>
 
 
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

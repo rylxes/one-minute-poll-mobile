@@ -142,12 +142,14 @@ export class MyProfilePage implements OnInit {
         {
           text: 'Cancel',
           role: 'cancel',
+         // cssClass: 'btn btn-primary btn-cancel',
           handler: data => {
             console.log('Cancel clicked');
           }
         },
         {
           text: 'Authenticate',
+         // cssClass: 'btn btn-primary btn-share',
           handler: data => {
             this.onSubmit(data);
           }
