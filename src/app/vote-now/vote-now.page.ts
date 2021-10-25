@@ -174,6 +174,7 @@ export class VoteNowPage implements OnInit {
     }
     let alert = await this.alertCtrl.create({
       header: "Share Poll with Friends",
+      cssClass: 'sharePrompt',
       subHeader: 'Enter email address of recipients (unregistered users will get an invite).',
       inputs: [
         {
@@ -183,22 +184,23 @@ export class VoteNowPage implements OnInit {
       ],
       buttons: [
         {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
           text: 'Share',
-          cssClass: 'primary',
+          cssClass: 'btn btn-primary btn-share',
           handler: data => {
             this.onSubmitPrompt(data);
           }
         },
         {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'btn btn-primary btn-cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
           text: 'Share as Link',
-          cssClass: 'secondary',
+          cssClass: 'inline-link',
           handler: () => {
             this.clickShare();
           }
