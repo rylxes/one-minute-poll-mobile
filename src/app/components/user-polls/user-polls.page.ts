@@ -17,7 +17,7 @@ import {Globals} from "../../../config/globals";
 })
 export class UserPollsPage implements OnInit {
 
-  @Input() pollList: any;
+  @Input() pollList: any = [];
   @Input() name: any;
   pollOptions: any;
   eachPoll: any;
@@ -40,11 +40,11 @@ export class UserPollsPage implements OnInit {
     private alertCtrl: AlertController,
     private pollOptionsService: PollOptionsService,
   ) {
-    this.isAuth = this.utils.getValue('IS_AUTH') || false;
+    //this.isAuth = this.utils.getValue('IS_AUTH') || false;
   }
 
   ionViewWillEnter() {
-    this.isAuth = this.utils.getValue('IS_AUTH') || false;
+    //this.isAuth = this.utils.getValue('IS_AUTH') || false;
   }
 
 
@@ -65,6 +65,7 @@ export class UserPollsPage implements OnInit {
 
 
   sharePrompt = async (eachPoll) => {
+    this.isAuth = this.utils.getValue('IS_AUTH') || false;
     if (!this.isAuth) {
       this.utils.showInfoError("Authenticate your email to enable this option");
       return;
@@ -197,7 +198,7 @@ export class UserPollsPage implements OnInit {
       this.loadPoll();
       //this.loadPollOptions();
     }
-    this.isAuth = this.utils.getValue('IS_AUTH') || false;
+    //this.isAuth = this.utils.getValue('IS_AUTH') || false;
   }
 
   loadPoll = () => {

@@ -11,9 +11,10 @@ import {PollOptionsService} from "../../services/poll-options.service";
 })
 export class SharedPollsPage implements OnInit {
 
-  @Input() pollList: any;
+  @Input() pollList: any = [];
   @Input() name: any;
   pollOptions: any;
+  showMore = true;
 
   constructor(
     private socialSharing: SocialSharing,
@@ -81,9 +82,13 @@ export class SharedPollsPage implements OnInit {
   }
 
   doRefresh(event) {
+    let page = {
+      page: 1
+    }
     console.log('Begin async operation');
-    this.pollsService.sharedWithMe().subscribe(data => {
+    this.pollsService.sharedWithMe(page).subscribe(data => {
       this.pollList = data['data'];
+      this.showMore = true;
       event.target.complete();
       console.log(this.pollList);
     });
@@ -102,8 +107,25 @@ export class SharedPollsPage implements OnInit {
   }
 
   loadPoll = () => {
-    this.pollsService.sharedWithMe().subscribe(data => {
+    let page = {
+      page: 1
+    }
+    this.pollsService.sharedWithMe(page).subscribe(data => {
       this.pollList = data['data'];
+      this.showMore = true;
+      console.log(this.pollList);
+    });
+  }
+
+
+  loadMorePoll = () => {
+    let page = {
+      page: 1,
+      size: 15,
+    }
+    this.pollsService.sharedWithMe(page).subscribe(data => {
+      this.pollList = data['data'];
+      this.showMore = false;
       console.log(this.pollList);
     });
   }

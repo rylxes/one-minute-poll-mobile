@@ -80,7 +80,7 @@ export class PollsService {
       catchError(this.utils.handleError(this.logName, []))
     );
 
-  sharedWithMe = () => this.http.post(this.globals.url + 'polls/sharedWithMe', {}, this.httpOptions)
+  sharedWithMe = data => this.http.post(this.globals.url + 'polls/sharedWithMe', data, this.httpOptions)
     .pipe(
       take(1),
       tap(_ => this.utils.log(this.logName)),

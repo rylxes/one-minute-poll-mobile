@@ -35,14 +35,14 @@
 </ion-card>
 
 
-<input type="button" *ngIf="showMore"
+<input type="button" *ngIf="showMore && pollList.length > 0"
        (click)="loadMorePoll()"
        class="buttonWrap button button-blue searchSubmitButton"
        value="Show More"/>
 
 
 
-<input type="button" *ngIf="!showMore"
+<input type="button" *ngIf="!showMore && pollList.length > 0"
        (click)="loadPoll()"
        class="buttonWrap button button-blue searchSubmitButton"
        value="Show Less"/>
