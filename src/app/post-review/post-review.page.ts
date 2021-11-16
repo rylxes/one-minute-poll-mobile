@@ -62,7 +62,7 @@ export class PostReviewPage implements OnInit {
       uuid: this.utils.getValue('UUID'),
       category_id: this.pollList.category,
       poll_type_id: this.pollList.answerType,
-      open_to_everyone: this.pollList.openToAll,
+      open_to_everyone: this.pollList.openToAll || true,
       question: this.pollList.question,
       close_date: this.pollList.closeDate,
       file: this.photo?.changingThisBreaksApplicationSecurity,

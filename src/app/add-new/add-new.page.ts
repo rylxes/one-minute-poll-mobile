@@ -188,11 +188,6 @@ export class AddNewPage implements OnInit {
     return this.data.controls;
   }
 
-  ionViewDidLoad(): void {
-
-    this.panelPos3 = this.panel3.nativeElement.getBoundingClientRect().top;
-
-  }
 
   logScrollStart(event) {
     console.log("logScrollStart : When Scroll Starts", event);
@@ -344,6 +339,10 @@ export class AddNewPage implements OnInit {
 
       this.category = this.categoriesList.find(input => input.id == this.data.value.category);
       this.photo = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64, ' + this.image.base64String);
+    } else {
+      if (isNil(this.theID)) {
+        this.data.reset();
+      }
     }
   };
 
@@ -386,10 +385,12 @@ export class AddNewPage implements OnInit {
 
   }
 
-  ionViewWillEnter() {
-    console.log('verri')
-    this.ScrollToTop();
+  ionViewDidLoad(): void {
+
+    this.panelPos3 = this.panel3.nativeElement.getBoundingClientRect().top;
+
   }
+
 
   defaults = () => {
     this.settings = this.utils.getValue('SETTINGS');
@@ -422,8 +423,6 @@ export class AddNewPage implements OnInit {
 
   ngOnInit() {
     //console.log(moment().format('YYYY-MM-DD'))
-
-
     this.defaults()
     this.loadPoll()
     this.loadPollType();
@@ -431,6 +430,11 @@ export class AddNewPage implements OnInit {
     this.editForm();
     this.isAuth = this.utils.getValue('IS_AUTH');
 
+  }
+
+  ionViewWillEnter() {
+    this.ScrollToTop();
+    this.ngOnInit();
   }
 
   public onSubmit(data) {
