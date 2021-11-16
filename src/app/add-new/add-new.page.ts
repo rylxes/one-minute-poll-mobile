@@ -102,6 +102,8 @@ export class AddNewPage implements OnInit {
   public showButton = false;
   public contentData = [];
 
+  submitted = false;
+  isSubmitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -176,6 +178,14 @@ export class AddNewPage implements OnInit {
     //     console.log('current url', events[1].urlAfterRedirects);
     //   });
 
+  }
+
+  get title() {
+    return this.data.get('title');
+  }
+
+  get errorControl() {
+    return this.data.controls;
   }
 
   ionViewDidLoad(): void {
@@ -424,34 +434,45 @@ export class AddNewPage implements OnInit {
   }
 
   public onSubmit(data) {
-    let mydate = '';
-    if ((this.data.value.closeDate)) {
-      mydate = moment(this.data.value.closeDate).format('YYYY-MM-DD') || '';
-    }
-
-
-    this.data.value.closeDate = mydate;
-    this.data.value.image = this.utils.getValue('thePhoto');
-
-
-    let formData = {
-      ...this.data.value, ...{
-        openToAll: !this.isAuth ? true : this.data.value.openToAll
-      }
-    }
-    this.data.setValue(formData);
-    this.utils.setValue('toSubmit', formData);
-    this.utils.setValue('showA2E', this.showA2E);
-    this.pollCreatedService.publish({
-      form: this.data.value,
-    });
-    if (!isNil(this.theID)) {
-      this.router.navigate(['/post-review', this.theID]);
+    this.isSubmitted = true;
+    if (!this.data.valid) {
+      this.utils.showErrorToast("There are some errors in your form")
+      console.log('All fields are required.')
+      return false;
     } else {
-      this.router.navigate(['/post-review']);
+      console.log(this.data.value)
+
+
+      let mydate = '';
+      if ((this.data.value.closeDate)) {
+        mydate = moment(this.data.value.closeDate).format('YYYY-MM-DD') || '';
+      }
+
+
+      this.data.value.closeDate = mydate;
+      this.data.value.image = this.utils.getValue('thePhoto');
+
+
+      let formData = {
+        ...this.data.value, ...{
+          openToAll: !this.isAuth ? true : this.data.value.openToAll
+        }
+      }
+      this.data.setValue(formData);
+      this.utils.setValue('toSubmit', formData);
+      this.utils.setValue('showA2E', this.showA2E);
+      this.pollCreatedService.publish({
+        form: this.data.value,
+      });
+      if (!isNil(this.theID)) {
+        this.router.navigate(['/post-review', this.theID]);
+      } else {
+        this.router.navigate(['/post-review']);
+      }
+
+      console.log(this.data.value);
     }
 
-    console.log(this.data.value);
   }
 
   private async getPhoto(source: CameraSource) {

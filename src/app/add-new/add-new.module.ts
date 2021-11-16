@@ -9,6 +9,7 @@ import {AddNewPageRoutingModule} from './add-new-routing.module';
 import {AddNewPage} from './add-new.page';
 import {HomePageModule} from "../home/home.module";
 import {FormatFileSizePipe} from "../pipe/format-file-size.pipe";
+import {NgxErrorsModule} from "@ngspot/ngx-errors";
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import {FormatFileSizePipe} from "../pipe/format-file-size.pipe";
     IonicModule,
     ReactiveFormsModule,
     AddNewPageRoutingModule,
+    NgxErrorsModule,
     HomePageModule,
   ],
   exports: [],

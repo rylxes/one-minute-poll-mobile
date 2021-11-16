@@ -15,7 +15,11 @@
           <div class="container" #panel3>
             <div class="container no-bottom">
               <div class="add-new-form poll-form no-bottom">
-                <form [formGroup]="data" (ngSubmit)="onSubmit(pageForm)" #pageForm="ngForm" class="searchForm">
+                <form [formGroup]="data"
+                      (ngSubmit)="onSubmit(pageForm)"
+                      #pageForm="ngForm" class="searchForm"
+                      novalidate
+                >
                   <ion-item class="formFieldWrap" lines="full">
                     <ion-label position="stacked" style="padding-bottom: 20px">Title</ion-label>
                     <ion-input class="contactField textField titleField"
@@ -28,17 +32,25 @@
                     <div>
                       {{numberOfTitleCharacters}} / {{maxNumberOfTitleCharacters}}
                     </div>
+                    <span class="notice-danger contactField" *ngIf="isSubmitted && errorControl.title.errors?.required">
+                      Title is required.
+                    </span>
                   </ion-item>
 
 
                   <ion-item class="formFieldWrap" lines="full">
                     <ion-label position="stacked" style="padding-bottom: 20px">Select Category</ion-label>
                     <ion-select placeholder="{{category?.name}}" value="brown" okText="Select"
+                                required
                                 formControlName="category" class="contactField selectField" cancelText="Cancel">
                       <ion-select-option [value]="">Select Category</ion-select-option>
                       <ion-select-option class="form-radio" *ngFor="let eachCategory of categoriesList"
                                          value="{{eachCategory.id}}">{{eachCategory.name}}</ion-select-option>
                     </ion-select>
+                    <span class="notice-danger contactField"
+                          *ngIf="isSubmitted && errorControl.category.errors?.required">
+                      Please select a category.
+                    </span>
                   </ion-item>
 
 
@@ -57,6 +69,10 @@
                     <div>
                       {{numberOfQuestionCharacters}} / {{maxNumberOfQuestionCharacters}}
                     </div>
+                    <span class="notice-danger contactField"
+                          *ngIf="isSubmitted && errorControl.question.errors?.required">
+                      Question is required.
+                    </span>
                   </ion-item>
 
 
@@ -74,6 +90,14 @@
                       </ion-item>
 
                     </ion-radio-group>
+
+
+                  </ion-item>
+                  <ion-item class="formFieldWrap" lines="full">
+                     <span class="notice-danger contactField"
+                           *ngIf="isSubmitted && errorControl.answerType.errors?.required">
+                      Please click an Option.
+                    </span>
                   </ion-item>
 
 
@@ -143,13 +167,14 @@
 
                   <ion-item lines="full" class="radio-wrap border-bottom">
 
-                    <ion-radio-group  lines="full" formControlName="openToAll">
+                    <ion-radio-group lines="full" formControlName="openToAll">
                       <ion-list-header>
                         <ion-label><p>Open to Everyone?</p></ion-label>
                       </ion-list-header>
 
                       <ion-item class="form-radio" *ngFor="let eachType of openList">
-                        <ion-radio (click)="clickOpenToAll($event , eachType)" slot="start" name="openToAll" [value]="eachType.id"></ion-radio>
+                        <ion-radio (click)="clickOpenToAll($event , eachType)" slot="start" name="openToAll"
+                                   [value]="eachType.id"></ion-radio>
                         <ion-label (click)="clickOpenList(eachType)"
                                    class="c-label cs-label">{{eachType.name}}</ion-label>
                       </ion-item>
@@ -232,7 +257,7 @@
 
                   <!--                  </div>-->
                   <div class="formSubmitButtonErrorsWrap">
-                    <input [disabled]="!pageForm.form.valid" type="submit"
+                    <input type="submit" #submitBtn
                            class="buttonWrap button button-blue searchSubmitButton" id="searchSubmitButton"
                            value="Preview" data-formId="contactForm"/>
 

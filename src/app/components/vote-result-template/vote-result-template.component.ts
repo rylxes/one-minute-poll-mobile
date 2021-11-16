@@ -55,15 +55,18 @@ export class VoteResultTemplateComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.calculate();
+  }
+
+  ngOnChanges() {
+    this.ngOnInit();
   }
 
   calculate = () => {
     this.pollResultService.calculate(this.poll);
     this.optionValues = this.pollResultService.optionValues;
-    console.log(this.poll)
     console.log(this.optionValues)
   }
 
+  findOptions = (type) => this.optionValues.find((val) => val.value === type);
 }

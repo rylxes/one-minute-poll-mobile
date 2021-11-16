@@ -1138,7 +1138,7 @@ input:checked ~ .checkmark {
 }
 
 .recent-polls .item.grid .summary .results .options i {
-  font-size: 25px;
+  font-size: 14px;
 }
 
 .recent-polls .item.grid .grid-bottom {
@@ -1713,12 +1713,12 @@ i.report {
   margin-top: 2px;
 }
 
-i.report.yes {
+i.report.Yes {
   background: var(--sky-blue);
   color: #ffffff !important;
 }
 
-i.report.no {
+i.report.No {
   background: var(--light-red);
   color: #ffffff !important;
 }
