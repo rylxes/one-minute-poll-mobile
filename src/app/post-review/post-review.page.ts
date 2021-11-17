@@ -7,7 +7,7 @@ import {PollsService} from "../services/polls.service";
 import {EventsService} from "../events/events.service";
 import {isNil} from 'lodash-es';
 import {PollCreatedService} from "../events/poll-created.service";
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-post-review',
@@ -62,7 +62,8 @@ export class PostReviewPage implements OnInit {
       uuid: this.utils.getValue('UUID'),
       category_id: this.pollList.category,
       poll_type_id: this.pollList.answerType,
-      open_to_everyone: this.pollList.openToAll || true,
+      //open_to_everyone: this.pollList.openToAll || true,
+      open_to_everyone: isNil(this.pollList.openToAll) ? true : this.pollList.openToAll,
       question: this.pollList.question,
       close_date: this.pollList.closeDate,
       file: this.photo?.changingThisBreaksApplicationSecurity,
