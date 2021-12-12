@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {IonContent, MenuController} from '@ionic/angular';
+import {IonContent, MenuController, NavController} from '@ionic/angular';
 import {Observable} from 'rxjs';
 import {filter, finalize, pairwise, tap} from 'rxjs/operators';
 import * as moment from 'moment';
@@ -119,6 +119,7 @@ export class AddNewPage implements OnInit {
     private readonly sanitizer: DomSanitizer,
     private loading: LoadingService,
     private loadingEventService: LoadingEventService,
+    private navCtrl: NavController,
     private utils: UtilitiesService,
     public menuCTL: MenuController
   ) {
@@ -147,8 +148,6 @@ export class AddNewPage implements OnInit {
     this.loadingEventService.getObservable().subscribe((data) => {
       this.loadCategoriesEvent = data.loadCategories;
       this.loadPollTypeEvent = data.loadPollType;
-      console.log(this.loadPollTypeEvent);
-      console.log(this.loadCategoriesEvent);
       if (this.loadCategoriesEvent && this.loadPollTypeEvent) {
         this.hideLoader();
       }
@@ -178,6 +177,12 @@ export class AddNewPage implements OnInit {
     //     console.log('current url', events[1].urlAfterRedirects);
     //   });
 
+  }
+
+  ionViewDidEnter(){
+    // document.querySelector('app-add-new').querySelector('ion-content').scrollToTop();
+    this.panel3.nativeElement.scrollIntoView();
+    console.log('ff')
   }
 
   get title() {
@@ -385,11 +390,7 @@ export class AddNewPage implements OnInit {
 
   }
 
-  ionViewDidLoad(): void {
 
-    this.panelPos3 = this.panel3.nativeElement.getBoundingClientRect().top;
-
-  }
 
 
   defaults = () => {
@@ -432,8 +433,19 @@ export class AddNewPage implements OnInit {
 
   }
 
+
+
+  scrollToTopd() {
+    this.content.scrollToTop();
+  }
+
+  ionViewDidLoad(): void {
+
+    //this.panelPos3 = this.panel3.nativeElement.getBoundingClientRect().top;
+
+  }
   ionViewWillEnter() {
-    this.ScrollToTop();
+   // this.ScrollToTop();
     this.ngOnInit();
   }
 
