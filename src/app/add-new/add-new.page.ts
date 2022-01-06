@@ -51,6 +51,7 @@ export class AddNewPage implements OnInit {
   stage: any;
   poll: any;
   pollTypesList: any;
+  defaultDate: any;
   openList: any = [
     {
       id: true,
@@ -182,7 +183,6 @@ export class AddNewPage implements OnInit {
   ionViewDidEnter(){
     // document.querySelector('app-add-new').querySelector('ion-content').scrollToTop();
     this.panel3.nativeElement.scrollIntoView();
-    console.log('ff')
   }
 
   get title() {
@@ -397,7 +397,7 @@ export class AddNewPage implements OnInit {
     this.settings = this.utils.getValue('SETTINGS');
     this.userDetails = this.utils.getValue('USER_DETAILS') || {};
     let duration = parseInt(this.settings?.POLL_DURATION || 2);
-    var new_date = moment(moment(), "YYYY-MM-DD").add(duration, 'days').format("YYYY-MM-DD")
+    var new_date = this.defaultDate =  moment(moment(), "YYYY-MM-DD").add(duration, 'days').format("YYYY-MM-DD")
 
     let formData = {
       ...this.data.value, ...{

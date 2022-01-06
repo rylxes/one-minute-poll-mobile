@@ -211,7 +211,12 @@
                     <ion-datetime formControlName="closeDate" placeholder="Select Date"
                                   class="form-control textField"
                                   [readonly]="!isAuth"
+                                  *ngIf="isAuth"
                                   displayFormat="YYYY-MM-DD"></ion-datetime>
+                    <ion-input
+                      *ngIf="!isAuth"
+                      readonly value="{{defaultDate}}"
+                      type="text"></ion-input>
                   </ion-item>
 
 
